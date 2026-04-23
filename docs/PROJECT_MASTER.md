@@ -142,7 +142,7 @@
 
 | 요인 | 수준 |
 |------|------|
-| P1. AI 모델 | ChatGPT / Gemini / Perplexity |
+| P1. AI 모델 | **ChatGPT 단일** (본실험) — Wayne 결정 2026-04-23. 일반화 강화 옵션: 발표 전 Gemini/Perplexity로 핵심 가설(H1, H8) sanity check만 추가 |
 
 ### 4.2 종속변수 (Y1~Y4)
 
@@ -319,12 +319,14 @@ Phase 4: 바디닥터               ←→    가글에서는 리뷰 수가 1위
 
 | 요인 | 체크 항목 | 예상 현재 상태 | 개선 방향 |
 |------|----------|--------------|----------|
-| F1 | 스펙이 TABLE/BULLET/PARAGRAPH? | PARAGRAPH (추정) | TABLE |
-| F2 | Product/MedicalDevice JSON-LD? | 없음 (추정) | MedicalDevice 스키마 추가 |
-| F3 | "강력한 EMS" vs "1200Hz 12단계"? | 모호 (추정) | 정확한 수치 |
-| F4 | 인증 정보 위치? | 하단 또는 없음 (추정) | 상단 눈에 띄게 |
-| F5 | 인증번호+기관+등급 명시? | 미확인 | 상세 명시 |
-| F6 | 임상 데이터 인용? | 미확인 | 임상 결과 추가 |
+| F1 | 스펙이 TABLE/BULLET/PARAGRAPH? | **이미지 중심, 텍스트 거의 없음** (확정 2026-04-23, gncosshop product_no=187) | TABLE 스펙 도입 |
+| F2 | Product/MedicalDevice JSON-LD? | **없음** (확정) | MedicalDevice 스키마 추가 |
+| F3 | "강력한 EMS" vs "1200Hz 12단계"? | **수치 자체 없음** (확정) | "99단계 EMS, 5단계 자동 프로그램" 등 정확 수치 |
+| F4 | 인증 정보 위치? | **없음** (확정) | 상단 배너에 명시 |
+| F5 | 인증번호+기관+등급 명시? | **없음** (확정) | "식약처 3등급 + FDA 1·2등급, 허가번호 제허XX-XXX" 풀 텍스트 |
+| F6 | 임상 데이터 인용? | **없음** (확정) | 임상/기사 인용 추가 |
+
+→ 자세한 발견은 [F2026-04-23_empty_product_pages.md](../docs/knowledge/findings/F2026-04-23_empty_product_pages.md) 참조. 이지케이도 동일 약점.
 
 ### 7.3 경쟁사 동일 기준 비교
 

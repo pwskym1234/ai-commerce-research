@@ -4,7 +4,7 @@
 > 모든 발견을 한 줄씩. 상세는 `findings/`, `competitors/`, `methods/` 참조.
 > 이 파일이 항상 최신이면, Claude는 이것만 읽고도 작업 가능. (Ragless 핵심)
 
-**마지막 갱신**: 2026-04-23 (가글 4종 stub 보강 + 식약처 API endpoint 미해결)
+**마지막 갱신**: 2026-04-23 (LLM=1 결정 + 단독 페이지 정밀 진단 + 가상 페이지 method + 데마 크롤러 골격 작동 확인)
 
 ---
 
@@ -20,7 +20,9 @@
 | 지표 | 값 | 출처 | 갱신일 |
 |------|-----|------|--------|
 | 가상 페이지 제작 수 | 0 / 36 (L36 확정) | methods/orthogonal_array_L36.md | 2026-04-23 |
-| 본실험 API 호출 수 (예정) | 0 / 8,640 (36×4×20×3) | methods/sample_size_justification.md | 2026-04-23 |
+| 본실험 API 호출 수 (예정) | 0 / 2,880 (36×4×20×1, ChatGPT만) | methods/sample_size_justification.md | 2026-04-23 |
+| 크롤링한 SKU 수 | 4 (gncosshop 바디닥터 핵심) | crawler/scripts/scrape_gncosshop.py | 2026-04-23 |
+| 추출한 피처 수 | 1차 EDA 가능 수준 (text length, JSON-LD, 인증/임상 키워드, 수치 비율, 가격) | data/processed/features.jsonl | 2026-04-23 |
 | 비교군 N | 의료기기 6 / 가글 6 (확정) | F2026-04-23_same_grade_competition + methods/sample_size_justification | 2026-04-23 |
 | 크롤링 SKU 수 (의료기기) | 0 (경쟁사 stub 3개 작성됨) | competitors/ | 2026-04-23 |
 | 크롤링 SKU 수 (가글) | 0 (경쟁사 stub 5개 작성됨) | competitors/ | 2026-04-23 |
@@ -80,6 +82,7 @@
 
 > 최신 5개만. 전체는 `findings/` 디렉토리.
 
+- 2026-04-23: [F2026-04-23_empty_product_pages.md](findings/F2026-04-23_empty_product_pages.md) — ★★★ 바디닥터·이지케이 단독 페이지에 등급/허가번호/임상 모두 없음. 컨설팅 임팩트 결정타. (단, 크롤러 검증 후 정정: 텍스트는 있지만 의료기기 특화 정보 없음)
 - 2026-04-23: [F2026-04-23_same_grade_competition.md](findings/F2026-04-23_same_grade_competition.md) — ★★ 바디닥터·이지케이 모두 식약처 3등급. H5/H6/H7의 진짜 의미가 "같은 3등급 안에서 페이지 표기 방식이 추천에 영향" 으로 정밀화. 본실험 비교군 N=6 권고.
 - 2026-04-23: [F2026-04-23_competitor_initial_research.md](findings/F2026-04-23_competitor_initial_research.md) — 1차 경쟁사 조사 + 의료기기 시장 2층 구조 발견 + 바디닥터 인증 등급 정정 (식약처 3등급 + FDA 1+2)
 
@@ -101,7 +104,8 @@
 > `methods/`에 정착된 재사용 절차들.
 
 - [orthogonal_array_L36.md](methods/orthogonal_array_L36.md) — 본실험 가상 페이지 36개 설계 표 (Taguchi L36). L18/L26과의 비용·효용 비교.
-- [sample_size_justification.md](methods/sample_size_justification.md) — N=6 + 반복 20회 표본 정당화 근거. 발표 대응 스크립트 포함.
+- [sample_size_justification.md](methods/sample_size_justification.md) — N=6 + 반복 20회 + LLM=1 (2,880 호출) 표본 정당화. 발표 대응 스크립트 포함.
+- [synthetic_pages_design.md](methods/synthetic_pages_design.md) — 가상 페이지 36개 제작 표준 가이드. F1~F6 수준별 마크업 패턴 + Jinja2 템플릿 골격 + 검증 체크리스트.
 
 ---
 

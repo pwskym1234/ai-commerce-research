@@ -24,16 +24,21 @@ if not API_KEY:
 
 # 식약처 OpenAPI 표준 호스트
 HOST = "https://apis.data.go.kr/1471000"
+SERVICE = "MdlpPrdlstPrmisnInfoService05"  # Wayne 제공: 의료기기 품목허가 정보
 
-# 시도할 endpoint 후보 (15057456 = 의료기기 품목허가 정보)
-# 식약처 OpenAPI는 보통 {Service}/{operation} 구조
-ENDPOINT_CANDIDATES = [
-    "MdcInQrySrvc/getItem",
-    "MedDevPrmsnInfoService/getMedDevPrmsnInfo",
-    "MdeqPrmsnInfoService01/getMdeqPrmsnInfoInq01",
-    "MdeqInfoService01/getMdeqInfoInq01",
-    "MdeqMnftPrmsnDtlInfoService02/getMdeqMnftPrmsnDtlInfoInq02",
-    "MdeqStdCdPrdtInfoService03/getMdeqStdCdPrdtInfoInq03",  # 표준코드별 — 다른 데이터셋이지만 작동 확인용
+# 일반 식약처 패턴: getXxxInfo / getXxxInfoInq05 등
+OPERATION_CANDIDATES = [
+    "getMdlpPrdlstPrmisnDtlInq05",   # Dtl (Detail) 패턴
+    "getMdlpPrdlstPrmisnDtlInq",
+    "getMdlpPrdlstPrmisnInq",
+    "getMdlpPrdlstPrmisnDtl",
+    "getMdlpPrdlstInq05",
+    "getMdlpPrdlstInq",
+    "getMdlpPrdlst05",
+    "getMdlp05",
+    "list",
+    "search",
+    "",  # operation 없이 service URL만 (메뉴 출력 가능성)
 ]
 
 QUERY_KEYWORDS = [
@@ -43,42 +48,50 @@ QUERY_KEYWORDS = [
 ]
 
 
-def try_endpoint(endpoint: str, **params) -> dict:
-    """endpoint 1개 시도. 응답 미리보기 반환."""
-    url = f"{HOST}/{endpoint}"
+def try_operation(operation: str, **params) -> dict:
+    """operation 1개 시도. 응답 미리보기 반환."""
+    url = f"{HOST}/{SERVICE}/{operation}"
     base_params = {
         "serviceKey": API_KEY,
         "type": "json",
         "pageNo": 1,
-        "numOfRows": 5,
+        "numOfRows": 3,
     }
     base_params.update(params)
     try:
         r = requests.get(url, params=base_params, timeout=30)
         return {
-            "endpoint": endpoint,
+            "operation": operation,
             "status": r.status_code,
-            "url": r.url[:200],
-            "preview": r.text[:600],
+            "url": r.url[:250],
+            "preview": r.text[:1000],
         }
     except Exception as e:
-        return {"endpoint": endpoint, "status": "error", "error": str(e)}
+        return {"operation": operation, "status": "error", "error": str(e)}
 
 
 def main():
-    print(f"API 키 끝 4자리: ...{API_KEY[-4:]}\n")
+    print(f"API 키 끝 4자리: ...{API_KEY[-4:]}")
+    print(f"Service: {SERVICE}\n")
     print("=" * 80)
-    print("Step 1: endpoint 후보 탐색")
+    print("Step 1: operation 이름 탐색")
     print("=" * 80)
-    for ep in ENDPOINT_CANDIDATES:
-        result = try_endpoint(ep)
+    working_op = None
+    for op in OPERATION_CANDIDATES:
+        result = try_operation(op)
         status = result.get("status")
         marker = "✅" if status == 200 else "❌"
-        print(f"\n{marker} [{status}] {ep}")
-        print(f"   URL: {result.get('url')}")
+        print(f"\n{marker} [{status}] {op}")
         preview = result.get("preview", "")
         if preview:
-            print(f"   응답: {preview[:300]}")
+            print(f"   응답: {preview[:400]}")
+        # 성공 또는 작동하는 응답 패턴 발견 시 저장
+        if status == 200 and preview and "INFO-" not in preview[:200]:
+            working_op = op
+            break
+        if status == 200 and "INFO-" in preview[:200]:
+            # INFO-200 = success but no data, INFO-NO-DATA 등도 성공
+            working_op = op
 
 
 if __name__ == "__main__":

@@ -4,7 +4,7 @@
 > 모든 발견을 한 줄씩. 상세는 `findings/`, `competitors/`, `methods/` 참조.
 > 이 파일이 항상 최신이면, Claude는 이것만 읽고도 작업 가능. (Ragless 핵심)
 
-**마지막 갱신**: 2026-04-23 (1차 경쟁사 조사 + 바디닥터 인증 등급 확정)
+**마지막 갱신**: 2026-04-23 (이지케이 = 알파메딕 제조, 제허15-329호, 3등급 확정 — 바디닥터와 같은 등급)
 
 ---
 
@@ -54,11 +54,11 @@
 
 | 브랜드 | F1 HTML | F2 JSON-LD | F3 수치 | F4 인증위치 | F5 인증상세 | F6 근거 | 본실험 우선순위 |
 |--------|--------|-----------|--------|------------|------------|--------|------------|
-| [바디닥터](competitors/bodydoctor.md) (우리, 식약처 3등급+FDA 1+2) | paragraph(추정) | none | partial(99단계) | bottom/none | none | marketing | anchor |
-| [이지케이](competitors/easyk.md) | ? | ? | partial | ? | partial (GMP만) | user_reviews | 필수 |
-| (식약처 API로 OEM 1~2종 추출) | — | — | — | — | — | — | 강 권장 |
-| [애플힙](competitors/applehip.md) (노이즈) | ? | ? | ambiguous | ? | none(추정) | — | 옵션 (별도 분석) |
-| (해외 1종, Elvie/Kegel8 권장) | — | — | — | — | — | — | Wayne 결정 |
+| [바디닥터](competitors/bodydoctor.md) (우리) | paragraph(추정) | none | partial(99단계) | bottom/none | none | marketing | anchor (식약처 3등급, FDA 1+2) |
+| [이지케이/EASY-K](competitors/easyk.md) (알파메딕 제조) | unknown | unknown | explicit (99단+5단) | unknown | partial | user_reviews+celeb | 필수 (식약처 3등급, 제허15-329호) |
+| (식약처 API로 OEM 2종 추출) | — | — | — | — | — | — | 강 권장 (인증 받은 표본 확보) |
+| [애플힙](competitors/applehip.md) (노이즈) | ? | ? | ambiguous | ? | none(추정) | — | 옵션 (EXPLORATORY_NEW1 검정용) |
+| (해외 1종, Elvie 권장) | — | — | — | — | — | — | 권장 (글로벌 학습 편향 측정) |
 
 ### 가글 버티컬
 
@@ -77,7 +77,8 @@
 
 > 최신 5개만. 전체는 `findings/` 디렉토리.
 
-- 2026-04-23: [F2026-04-23_competitor_initial_research.md](findings/F2026-04-23_competitor_initial_research.md) — 1차 경쟁사 조사 + 의료기기 시장 2층 구조(의료기기 vs 비의료기기 운동도구) 발견 + 바디닥터 인증 등급 마스터와 불일치 (★ Wayne 검증 필요)
+- 2026-04-23: [F2026-04-23_same_grade_competition.md](findings/F2026-04-23_same_grade_competition.md) — ★★ 바디닥터·이지케이 모두 식약처 3등급. H5/H6/H7의 진짜 의미가 "같은 3등급 안에서 페이지 표기 방식이 추천에 영향" 으로 정밀화. 본실험 비교군 N=6 권고.
+- 2026-04-23: [F2026-04-23_competitor_initial_research.md](findings/F2026-04-23_competitor_initial_research.md) — 1차 경쟁사 조사 + 의료기기 시장 2층 구조 발견 + 바디닥터 인증 등급 정정 (식약처 3등급 + FDA 1+2)
 
 ---
 
@@ -86,8 +87,8 @@
 > 두 발견이 충돌하는 경우 여기 표시. 다음 의식 때 결정.
 
 - ✅ **해결: 바디닥터 인증 등급** (2026-04-23): 식약처 **3등급** 조합 의료기기, FDA **1+2등급** 모두 등록으로 확정. 마스터 §2.2 정정 완료. 출처: 서울신문 2024-12-26 + GN코스몰 카테고리. 단, 정확한 식약처 허가번호는 공공데이터 API로 별도 조회 예정.
-- **이지케이 공식 사이트 접근**: easyk.kr 현재 fetch 실패 (ECONNREFUSED). HTTPS 미지원 또는 일시적. Wayne 브라우저로 검증 후 결과 공유.
-- **"닥터케이" 정체 미확정**: Wayne 본인이 [PROJECT_MASTER.md §5.1](../PROJECT_MASTER.md)에 작성한 이름. 검색해도 단일 브랜드로 안 잡힘. Wayne이 어디서 그 이름을 들었는지 기억 → 확정 또는 마스터에서 제거.
+- ✅ **해결: 이지케이 = 알파메딕 EASY-K** (2026-04-23): coreatech-rental.com이 운영사. 제조 ㈜알파메딕, 유통 ㈜코리아테크, 자사몰 easyk.kr. 식약처 3등급, 허가번호 제허15-329호. easyk.kr 이전 fetch 실패는 일시적/HTTPS 미지원이었던 듯 — 자사몰 직접 fetch는 다음 task.
+- **"닥터케이" 정체 미확정**: 마스터 §5.1을 "알파메딕 EASY-K + OEM 1~2종"으로 수정 완료. Wayne 기억 확인 후 별도 브랜드로 추가하거나 정리 마감.
 
 ---
 
@@ -104,11 +105,13 @@
 | 항목 | 책임 | 마감 | 상태 |
 |------|------|------|----|
 | ✅ 바디닥터 인증 등급 확정 (식약처 3등급 + FDA 1+2) + 마스터 §2.2 정정 | Claude | 2026-04-23 | 🟢 완료 |
-| 식약처 공공데이터 API로 OEM 후보 추출 (data.go.kr/data/15057456) | Claude (다음 task) | 1주차 內 | ⏳ |
-| "닥터케이" Wayne 기억 확인 또는 마스터 §5.1에서 제거 | Wayne | 1주차 內 | ⏳ |
-| 본실험 비교군에 해외 1종씩 포함 여부 결정 (의료기기: Elvie, 가글: 콜게이트/테라브레스) | Wayne | 1주차 內 | ⏳ |
-| EXPLORATORY_NEW1/2를 H10/H11로 사전 등록 격상 여부 결정 | Wayne | 1주차 內 | ⏳ |
-| 직교배열 L18(+F1×F2 보충) vs L36 결정 | Wayne | 1주차 內 | ⏳ |
+| Wayne data.go.kr 가입 + 의료기기 품목허가 OpenAPI 키 발급 → Claude가 OEM 풀 추출 | Wayne → Claude | 1주차 內 | ⏳ |
+| "닥터케이" Wayne 기억 확인 (출처/URL/스크린샷) — 없으면 마무리 | Wayne | 1주차 內 | ⏳ |
+| 본실험 비교군 N=6 확정 (권고: 의료기기 6 = 우리+이지케이+OEM 2+노이즈 1+해외 1 / 가글 6 = 우리+리스테린+가그린+2080+페리오+해외 1) | Wayne | 1주차 內 | ⏳ |
+| EXPLORATORY_NEW1/2를 H10/H11로 사전 등록 격상 (권장) | Wayne | 1주차 內 | ⏳ |
+| 직교배열 L18+F1×F2 보충 8개(=26) vs L36 결정 | Wayne | 1주차 內 | ⏳ |
+| easyk.kr 자사몰 직접 fetch + F1~F6 정밀 진단 | Claude (다음 task) | 1주차 內 | ⏳ |
+| 바디닥터 단독 모델 가격 + 자사몰 상세 페이지 fetch | Claude (다음 task) | 1주차 內 | ⏳ |
 | 의료기기 경쟁사 본실험 최종 리스트 확정 (권고: 바디닥터+이지케이+OEM 1~2종) | Wayne | 1주차 금요일 | ⏳ |
 | 가글 경쟁사 본실험 최종 리스트 확정 (권고: 프로폴린스+리스테린+가그린+2080+페리오) | Wayne | 1주차 금요일 | ⏳ |
 | EXPLORATORY_NEW1/2 (의료기기 vs 비의료기기 구분 가설) 산공통 사전 가설 추가 여부 | Wayne | 1주차 內 | ⏳ |

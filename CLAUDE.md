@@ -300,8 +300,96 @@ def run_query(config: ExperimentConfig, query: str, products: list[Product]) -> 
 
 ---
 
-## 13. 변경 이력
+## 14. 토큰 효율 & 컨텍스트 자산 운영
+
+> 배경: [docs/trends_2026/APPLICATION.md](docs/trends_2026/APPLICATION.md). 글의 핵심 — "프롬프트 → 컨텍스트 엔지니어링".
+> 매주 같은 설명을 다시 안 하기 위해, *복리로 쌓이는 자산*을 미리 깔아둔다.
+
+### 14.1 매 작업 시작 시 어디부터 읽나
+
+**기본 루프**: `CLAUDE.md` → [`docs/knowledge/DIGEST.md`](docs/knowledge/DIGEST.md) → 작업별로 필요한 것만 추가 Read.
+
+[`docs/knowledge/DIGEST.md`](docs/knowledge/DIGEST.md)는 항상 최신이라는 가정 하에 운영. 이 한 파일이 "프로젝트의 지금"을 한눈에 보여주는 컨트롤 룸. **마스터 문서를 매번 풀로 안 읽어도 DIGEST + 필요한 섹션만으로 작업 가능**.
+
+### 14.2 캐시 친화 문서 작성
+
+Anthropic 프롬프트 캐시 5분 TTL → 매 세션 시작 시 시스템 프롬프트 + `CLAUDE.md`를 다시 읽음.
+
+- ✅ **자주 바뀌는 내용은 파일 끝**, 안정된 원칙은 앞
+- ✅ `CLAUDE.md` §0~§7 안정 → 캐시 적중
+- ✅ 진행 상황·발견은 `DIGEST.md`로 분리해서 작은 영역만 미스
+- ❌ `CLAUDE.md` 앞부분 빈번 수정 → 매번 풀 재처리
+
+### 14.3 raw 데이터는 절대 메인 컨텍스트에 안 들어옴
+
+| 종류 | 위치 | 메인 Read? |
+|------|------|----------|
+| raw 크롤링 HTML | `data/raw/` | ❌ |
+| API 응답 jsonl | `experiments/api_runs/<run>/responses.jsonl` | ❌ (필요 시 offset/limit) |
+| ML 모델 아티팩트 | `ml/models/` | ❌ |
+| **요약 다이제스트** | `experiments/api_runs/<run>/SUMMARY.md` | ✅ |
+
+자세한 jsonl 스키마와 SUMMARY.md 자동 생성 규칙: [experiments/_RUNNER_SPEC.md](experiments/_RUNNER_SPEC.md)
+
+### 14.4 서브에이전트 위임 = 컨텍스트 보호
+
+큰 탐색·다중 파일 검색은 메인이 직접 하지 말고 위임:
+
+| 작업 | 처리 |
+|------|------|
+| 경쟁사 5곳 페이지 구조 조사 | `general-purpose` 5개 병렬 (한 메시지에 5 Agent 호출), 보고서만 받음 |
+| 100개 jsonl raw 응답 패턴 분석 | `Explore` agent에 "패턴 요약" 요청 |
+| 코드베이스 특정 함수 grep | 메인에서 Bash로 직접 (위임 오버헤드가 더 큼) |
+
+판단: **결과만 알면 되는 일** = 위임. **코드를 직접 쓰는 일** = 메인.
+
+자세한 매핑: [docs/AGENTS_AND_SKILLS.md](docs/AGENTS_AND_SKILLS.md)
+
+### 14.5 워크플로우 = 재사용 프롬프트
+
+같은 작업을 두 번 이상 할 거라면 [`docs/workflows/`](docs/workflows/)에 템플릿화. 매번 처음부터 설명 X.
+
+현재 정의된 워크플로우:
+- [new_competitor.md](docs/workflows/new_competitor.md) — 경쟁사 추가
+- [new_hypothesis.md](docs/workflows/new_hypothesis.md) — 가설 추가/검정
+- [pilot_run.md](docs/workflows/pilot_run.md) — 파일럿 실험
+- [weekly_digest_update.md](docs/workflows/weekly_digest_update.md) — 매주 금요일 갱신 의식
+
+호출 패턴: "워크플로우 `<name>.md`대로 X 실행해줘"
+
+### 14.6 지식베이스 (Karpathy-style 위키)
+
+`docs/knowledge/`는 **팀 공유 위키**. 메모리(`~/.claude/.../memory/`)는 Wayne 개인용.
+- 매 발견·경쟁사 진단·재사용 가능한 방법은 여기 적층
+- **매주 금요일 갱신 의식** 무조건 ([weekly_digest_update.md](docs/workflows/weekly_digest_update.md))
+- 본 프로젝트의 RAG 전략은 **Ragless** — 코퍼스 작고 수동 유지 가능
+
+자세한 구조: [docs/knowledge/README.md](docs/knowledge/README.md)
+
+### 14.7 응답 캐시는 토큰 효율의 1순위
+
+LLM API 호출은 곧 돈. 같은 호출 두 번 부르는 게 가장 큰 낭비.
+- 캐시 키: `sha256(provider + model_version + system_prompt + user_prompt + seed + temperature)`
+- 위치: `experiments/api_runs/_cache/`
+- `.gitignore`로 git 제외, 로컬에서만 운영
+- 본실험은 cold cache 시작, 분석 단계에선 재실행해도 무료
+
+상세: [experiments/_RUNNER_SPEC.md §5](experiments/_RUNNER_SPEC.md)
+
+### 14.8 의식적으로 안 하는 것
+
+- ❌ 벡터 DB / 임베딩 검색 (코퍼스 작음)
+- ❌ 풀 GraphRAG (frontmatter로 충분)
+- ❌ 자동 위키 컴파일러 (주간 의식이 충분)
+- ❌ 멀티에이전트 자동 오케스트레이션 (Claude Code 서브에이전트로 충분)
+
+배경: [docs/trends_2026/APPLICATION.md §8](docs/trends_2026/APPLICATION.md)
+
+---
+
+## 15. 변경 이력
 
 CLAUDE.md 변경은 PR로. 큰 변경(원칙 수정)은 ADR 동반.
 
 - 2026-04-23: 초안 작성. 마스터 문서 v1 기반.
+- 2026-04-23: §14 토큰 효율 & 컨텍스트 자산 운영 추가. 지식베이스/워크플로우/러너 스펙 신설.

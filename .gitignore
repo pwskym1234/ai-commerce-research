@@ -1,0 +1,63 @@
+# 시크릿 / 환경
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+secrets/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+ENV/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+*-checkpoint.ipynb
+
+# 데이터 — raw HTML이 너무 크면 외부 스토리지로
+data/raw/**/*.html
+data/raw/**/*.json
+data/raw/**/*.csv
+!data/raw/.gitkeep
+!data/raw/**/sample_*
+
+# 큰 모델 아티팩트
+ml/models/*.pkl
+ml/models/*.joblib
+ml/models/*.bin
+!ml/models/.gitkeep
+
+# API 응답 (큰 jsonl)
+experiments/api_runs/**/*.jsonl
+!experiments/api_runs/.gitkeep
+!experiments/api_runs/**/sample_*
+
+# 크롤러 임시 출력
+crawler/output/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# 로그
+*.log
+logs/

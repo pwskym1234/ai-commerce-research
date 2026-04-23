@@ -4,7 +4,7 @@
 > 모든 발견을 한 줄씩. 상세는 `findings/`, `competitors/`, `methods/` 참조.
 > 이 파일이 항상 최신이면, Claude는 이것만 읽고도 작업 가능. (Ragless 핵심)
 
-**마지막 갱신**: 2026-04-23 (Wayne 결정: N=6 / L36 / H10·H11 사전등록 확정 + 표기 통일)
+**마지막 갱신**: 2026-04-23 (가글 4종 stub 보강 + 식약처 API endpoint 미해결)
 
 ---
 
@@ -68,10 +68,10 @@
 | 브랜드 | F1 HTML | F2 JSON-LD | F3 수치 | F6 근거 | 본실험 우선순위 |
 |--------|--------|-----------|--------|--------|------------|
 | [프로폴린스](competitors/propolinse.md) (우리) | image_heavy | none | explicit | visual_demo (텍스트 약) | anchor |
-| [리스테린](competitors/listerine.md) | ? | ? | explicit (4 oils) | brand_authority | 필수 |
-| [가그린](competitors/garglin.md) | ? | ? | ambiguous(추정) | legacy(1982 국내 최초) | 필수 |
-| [2080](competitors/2080.md) | ? | ? | ambiguous(추정) | brand_recognition | 필수 |
-| [페리오](competitors/perio.md) | ? | ? | ambiguous(추정) | total_oral_care | 권장 |
+| [리스테린](competitors/listerine.md) | ? (listerine.kr fetch 차단) | ? | **explicit** (99.9%/30초/12hr/4성분) | brand_authority + 5배 비교 인용 | 필수 |
+| [가그린](competitors/garglin.md) | PARAGRAPH 50% / BULLET 30% | none | ambiguous (CPC·불소 명시, 함량 X) | legacy(1982 최초, 갤럽 No.1) | 필수 |
+| [2080](competitors/2080.md) | 자사몰 약함 (마트 분산) | none(추정) | partial (무SLS/무파라벤) | 가성비 + 마케팅 중심 | 필수 |
+| [페리오](competitors/perio.md) | PARAGRAPH 위주 | none | ambiguous (12hr 단일 수치) | 치약 중심, 가글 약함 | 권장 |
 | (해외 1종, 콜게이트/테라브레스 권장) | — | — | — | — | Wayne 결정 |
 
 ---
@@ -90,8 +90,9 @@
 > 두 발견이 충돌하는 경우 여기 표시. 다음 의식 때 결정.
 
 - ✅ **해결: 바디닥터 인증 등급** (2026-04-23): 식약처 **3등급** 조합 의료기기, FDA **1+2등급** 모두 등록으로 확정. 마스터 §2.2 정정 완료. 출처: 서울신문 2024-12-26 + GN코스몰 카테고리. 단, 정확한 식약처 허가번호는 공공데이터 API로 별도 조회 예정.
-- ✅ **해결: 이지케이 = 알파메딕 EASY-K** (2026-04-23): coreatech-rental.com이 운영사. 제조 ㈜알파메딕, 유통 ㈜코리아테크, 자사몰 easyk.kr. 식약처 3등급, 허가번호 제허15-329호. easyk.kr 이전 fetch 실패는 일시적/HTTPS 미지원이었던 듯 — 자사몰 직접 fetch는 다음 task.
-- **"닥터케이" 정체 미확정**: 마스터 §5.1을 "알파메딕 EASY-K + OEM 1~2종"으로 수정 완료. Wayne 기억 확인 후 별도 브랜드로 추가하거나 정리 마감.
+- ✅ **해결: 이지케이 = 알파메딕 EASY-K** (2026-04-23)
+- ✅ **해결: "닥터케이" = "바디닥터K" 약어 중복** (2026-04-23) — Wayne 추측 수용, 마스터 표기 통일 완료
+- ⚠️ **식약처 OpenAPI endpoint 미해결**: 키는 발급됨(.env). 5개 추정 endpoint(MdcInQrySrvc, MedDevPrmsnInfoService 등) 모두 500 "Unexpected errors". 식약처 통합정보시스템(udiportal)은 OAuth2 별도 인증. → Wayne이 [data.go.kr 마이페이지](https://www.data.go.kr) → 활용신청 내역 → 데이터셋 15057456 상세 → "샘플 코드/가이드 다운로드"에서 정확한 endpoint 추출 필요
 
 ---
 
@@ -113,7 +114,8 @@
 | ✅ 직교배열 L36 확정 | Wayne | 2026-04-23 | 🟢 완료 |
 | ✅ EXPLORATORY → H10/H11 사전등록 | Wayne | 2026-04-23 | 🟢 완료 |
 | ✅ "닥터케이" = "바디닥터K" 약어 중복 추정 → 마스터 표기 통일 (모두 "바디닥터") | Wayne | 2026-04-23 | 🟢 완료 |
-| Wayne data.go.kr 가입 + 의료기기 품목허가 OpenAPI 키 발급 → Claude가 OEM 풀 추출 | Wayne → Claude | 1주차 內 | ⏳ |
+| ✅ data.go.kr API 키 발급 + .env 저장 | Wayne | 2026-04-23 | 🟢 완료 |
+| ⚠️ data.go.kr **마이페이지에서 정확한 endpoint URL 확인 필요** (5개 추정 endpoint 모두 500. 식약처 통합정보시스템(udiportal)은 OAuth2 인증 별도) | Wayne | 1주차 內 | 🔴 진행 |
 | 반복 횟수 20 vs 30 결정 (파일럿 후) | Wayne | 3주차 (파일럿 후) | ⏳ |
 | 해외 1종 후보 결정 (의료기기 Elvie 권장 / 가글 콜게이트 또는 테라브레스) | Wayne | 1주차 內 | ⏳ |
 | easyk.kr 자사몰 직접 fetch + F1~F6 정밀 진단 | Claude (다음 task) | 1주차 內 | ⏳ |

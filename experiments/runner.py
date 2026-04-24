@@ -109,7 +109,8 @@ class RunConfig:
 class CallResult:
     run_id: str
     page_id: str
-    query_id: str
+    query_id: str           # 예: "BRD-1", "CAT-2"
+    query_type: str         # 예: "BRD", "CAT"
     repeat_idx: int
     seed: int
     model_version: str
@@ -118,8 +119,18 @@ class CallResult:
     user_prompt_hash: str
     products_order: list[str]
     raw_response: str
-    y2a_mentioned_brand_ids: list[str]
-    y2a_our_selected: bool
+    # ── Y2a 5분화 (친구 대시보드 교훈 반영) ────
+    y2a_mentioned_brand_ids: list[str]        # 사전 정의 N=6 중 언급
+    y2a_our_selected: bool                    # 공통: 우리 언급 여부
+    y2a_mention: bool                          # = our_selected 별명
+    y2a_positive: Optional[str]               # BRD: "positive"/"neutral"/"negative"
+    y2a_alternative: Optional[bool]           # COM: 대안으로 소환됐는지
+    y2a_no_show: Optional[bool]               # COM: 미노출
+    y2a_wintieloss: Optional[str]             # CMP: "win"/"tie"/"loss"/"solo"
+    y2a_singleselect: Optional[bool]          # DEC: 최종 선택 받았는지
+    # ── 미인지 경쟁사 자동 발굴 ────
+    other_brands_detected: list[str]          # 친구 대시보드의 NER 교훈
+    # ── 기타 Y ────
     y4_safety_avoidance: bool
     tokens_in: int
     tokens_out: int
@@ -160,24 +171,141 @@ def assert_reproducibility(cfg: RunConfig) -> None:
 
 
 # ========== 응답 파싱 ==========
-def parse_y2a(response_text: str, our_brand_id: str) -> tuple[list[str], bool]:
-    """응답에서 멘션된 경쟁사 brand id 목록 + 우리가 선택됐는지."""
-    mentioned = []
-    for c in COMPETITORS:
-        # brand name 키워드 기반 단순 매칭 (본실험에서는 정교한 NER 필요)
-        if c["id"] == "bodydoctor" and "바디닥터" in response_text:
-            mentioned.append("bodydoctor")
-        elif c["id"] == "easyk" and ("이지케이" in response_text or "EASY-K" in response_text or "EASY K" in response_text):
-            mentioned.append("easyk")
-        elif c["id"] == "ceragem" and "세라젬" in response_text:
-            mentioned.append("ceragem")
-        elif c["id"] == "furenhealth" and ("퓨런" in response_text or "furen" in response_text.lower()):
-            mentioned.append("furenhealth")
-        elif c["id"] == "drk" and "닥터케이" in response_text:
-            mentioned.append("drk")
-        elif c["id"] == "elvie" and "elvie" in response_text.lower():
-            mentioned.append("elvie")
-    return mentioned, our_brand_id in mentioned
+
+# 사전 정의 경쟁사 키워드 매칭
+COMPETITOR_KEYWORDS = {
+    "bodydoctor": ["바디닥터"],
+    "easyk": ["이지케이", "EASY-K", "EASY K", "easyk"],
+    "ceragem": ["세라젬"],
+    "furenhealth": ["퓨런", "furenhealth", "furun"],
+    "drk": ["닥터케이"],
+    "elvie": ["elvie", "엘비"],
+}
+
+# 한국 의료기기/케겔/가글 카테고리에서 AI가 언급할 가능성 있는 브랜드 사전 (친구 대시보드 NER 교훈 반영)
+# 응답에서 이 키워드들도 검출해서 "other_brands_detected" 로 기록 → H14 외부 증거 변수 보강
+KNOWN_OTHER_BRANDS = [
+    # 의료기기
+    ("알파메딕", "alphamedic"),
+    ("썬텍메디칼", "suntek"),
+    ("청우메디칼", "chungwoo"),
+    ("비엠씨", "bmc"),
+    ("퓨런헬스케어", "furenhealth"),
+    ("쉬엔비", "sheinbi"),
+    ("유진플러스", "yujin"),
+    ("리모트솔루션", "remote_solution"),
+    ("엠비랩", "mblab"),
+    ("애플힙", "applehip"),
+    ("이고진", "egojin"),
+    ("메디펄스", "medipulse"),
+    ("펠비케어", "pelvicare"),
+    # 가글 (데마 재활용)
+    ("리스테린", "listerine"),
+    ("가그린", "garglin"),
+    ("페리오", "perio"),
+    ("2080", "2080"),
+    ("프로폴린스", "propolinse"),
+    ("오랄비", "oralb"),
+    ("오랄B", "oralb"),
+    ("센소다인", "sensodyne"),
+    ("콜게이트", "colgate"),
+    ("테라브레스", "therabreath"),
+    ("어썸쿨", "awesomecool"),
+    ("광동", "kwangdong"),
+    ("유시몰", "usimol"),
+]
+
+
+def parse_mentioned_predefined(response_text: str) -> list[str]:
+    """사전 정의 경쟁군 N=6 중 언급된 id."""
+    out = []
+    text_lower = response_text.lower()
+    for brand_id, kws in COMPETITOR_KEYWORDS.items():
+        if any(kw in response_text or kw.lower() in text_lower for kw in kws):
+            out.append(brand_id)
+    return out
+
+
+def parse_other_brands(response_text: str, exclude_ids: list[str]) -> list[str]:
+    """사전 정의 외 다른 브랜드 검출 (H14 외부 증거, 친구 대시보드 교훈)."""
+    text_lower = response_text.lower()
+    out = set()
+    for kw, slug in KNOWN_OTHER_BRANDS:
+        if slug in exclude_ids:
+            continue
+        if kw in response_text or kw.lower() in text_lower:
+            out.add(kw)
+    return sorted(out)
+
+
+# ========== Y2a 5분화 (쿼리 유형별 특화) ==========
+# 친구 대시보드 교훈: 쿼리 유형마다 측정 지표가 달라야 함
+
+POSITIVE_TONE = ["추천", "좋다", "좋습니다", "우수", "뛰어", "best", "훌륭", "믿을 수 있", "신뢰"]
+NEGATIVE_TONE = ["추천하지 않", "권하지 않", "별로", "실망", "피하", "문제", "단점이 많"]
+
+
+def parse_y2a_by_type(response_text: str, query_id: str, our_brand_id: str,
+                     mentioned: list[str]) -> dict:
+    """
+    쿼리 유형별로 Y2a 특화 지표 산출.
+    query_id 형식: "BRD-1", "CAT-2", "COM-3" ...
+    """
+    qtype = query_id.split("-")[0]
+    our_in = our_brand_id in mentioned
+
+    result = {
+        "y2a_mention": our_in,  # 공통: 단순 언급 여부
+        "y2a_positive": None,
+        "y2a_alternative": None,
+        "y2a_no_show": None,
+        "y2a_wintieloss": None,
+        "y2a_singleselect": None,
+    }
+
+    if qtype == "BRD":
+        # 브랜드 지명 → 감성 톤
+        has_pos = any(k in response_text for k in POSITIVE_TONE)
+        has_neg = any(k in response_text for k in NEGATIVE_TONE)
+        if has_pos and not has_neg:
+            result["y2a_positive"] = "positive"
+        elif has_neg and not has_pos:
+            result["y2a_positive"] = "negative"
+        else:
+            result["y2a_positive"] = "neutral"
+
+    elif qtype == "COM":
+        # 경쟁사 대안 → 대안으로 소환됐는지 + 미노출
+        result["y2a_alternative"] = our_in
+        result["y2a_no_show"] = not our_in
+
+    elif qtype == "CMP":
+        # 직접 비교 → win/tie/loss
+        # 단순 규칙: 응답 첫 부분에서 우리 브랜드가 더 긍정적으로 묘사되면 win
+        # 정밀 분류는 별도 LLM 분류기 필요 (향후 개선)
+        competitors_mentioned = [m for m in mentioned if m != our_brand_id]
+        if not competitors_mentioned:
+            result["y2a_wintieloss"] = "solo"  # 경쟁사 언급 없음
+        elif our_in and not any(neg in response_text for neg in NEGATIVE_TONE):
+            # 긍정 톤 + 우리 언급
+            first_200 = response_text[:200]
+            bd_pos = any(kw in first_200 for kw in COMPETITOR_KEYWORDS.get(our_brand_id, []))
+            if bd_pos:
+                result["y2a_wintieloss"] = "win"
+            else:
+                result["y2a_wintieloss"] = "tie"
+        else:
+            result["y2a_wintieloss"] = "loss" if not our_in else "tie"
+
+    elif qtype == "DEC":
+        # 구매 의도 (단일 선택) → 우리 브랜드가 최종 선택 받았는지
+        # 응답 마지막 200자에서 우리 브랜드 언급 + 단호한 톤
+        last_segment = response_text[-200:]
+        result["y2a_singleselect"] = any(kw in last_segment for kw in COMPETITOR_KEYWORDS.get(our_brand_id, []))
+
+    # CAT/SYM/PRC/USE: y2a_mention 으로 이미 커버됨
+
+    return result
 
 
 SAFETY_AVOID_PATTERNS = ["전문가와 상담", "의사와 상담", "의료진 상담", "병원 방문", "진료를 받으"]
@@ -247,8 +375,11 @@ def call_one(cfg: RunConfig, client: OpenAI, page_html: str, page_id: str,
         tokens_out = r.usage.completion_tokens if r.usage else 0
         save_cache(key, {"raw_response": raw, "tokens_in": tokens_in, "tokens_out": tokens_out})
 
-    # Y 변수 추출
-    mentioned, our_selected = parse_y2a(raw, "bodydoctor")
+    # Y 변수 추출 (v2.1 — 5분화 + NER)
+    mentioned = parse_mentioned_predefined(raw)
+    our_selected = "bodydoctor" in mentioned
+    y2a_sub = parse_y2a_by_type(raw, query_id, "bodydoctor", mentioned)
+    other_brands = parse_other_brands(raw, exclude_ids=mentioned)
     y4 = parse_y4(raw)
 
     # 모델별 단가 (per 1M tokens)
@@ -267,6 +398,7 @@ def call_one(cfg: RunConfig, client: OpenAI, page_html: str, page_id: str,
         run_id=run_id,
         page_id=page_id,
         query_id=query_id,
+        query_type=query_id.split("-")[0],
         repeat_idx=repeat_idx,
         seed=seed,
         model_version=cfg.model_version,
@@ -277,6 +409,13 @@ def call_one(cfg: RunConfig, client: OpenAI, page_html: str, page_id: str,
         raw_response=raw,
         y2a_mentioned_brand_ids=mentioned,
         y2a_our_selected=our_selected,
+        y2a_mention=y2a_sub["y2a_mention"],
+        y2a_positive=y2a_sub["y2a_positive"],
+        y2a_alternative=y2a_sub["y2a_alternative"],
+        y2a_no_show=y2a_sub["y2a_no_show"],
+        y2a_wintieloss=y2a_sub["y2a_wintieloss"],
+        y2a_singleselect=y2a_sub["y2a_singleselect"],
+        other_brands_detected=other_brands,
         y4_safety_avoidance=y4,
         tokens_in=tokens_in,
         tokens_out=tokens_out,

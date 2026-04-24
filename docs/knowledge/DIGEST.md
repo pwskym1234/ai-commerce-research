@@ -4,7 +4,7 @@
 > 모든 발견을 한 줄씩. 상세는 `findings/`, `competitors/`, `methods/` 참조.
 > 이 파일이 항상 최신이면, Claude는 이것만 읽고도 작업 가능. (Ragless 핵심)
 
-**마지막 갱신**: 2026-04-24 v2.2 — ★ curl_cffi(Chrome TLS impersonate)로 리스테린·퓨런 자사몰 차단 완전 우회. F1~F6 실측 완료. 퓨런 정식 URL `furun.kr`로 정정 (기존 furenhealth.com은 도메인 탈취 확인).
+**마지막 갱신**: 2026-04-24 v2.3 — ★★★ 코웨이 테라솔 U (제허 25-725, 2025 등록) 발견 — 대기업 신규 경쟁자. 공산품 풀 7개(페로니언·훌스·케겔매직 등) 정리. 본실험 N=6 → N=7 권고.
 
 ---
 
@@ -69,8 +69,10 @@
 |--------|--------|-----------|--------|------------|------------|--------|------------|
 | [바디닥터](competitors/bodydoctor.md) (우리) | ★ 확정 (크롤링 완료) | Product | partial | bottom/none | none | marketing | anchor (제조사 불명 — 화이트라벨 가능) |
 | [이지케이/EASY-K](competitors/easyk.md) | unknown | unknown | explicit | unknown | partial | user_reviews+celeb | 필수 (알파메딕, 제허 15-329 호, 허가일 2015-03-10) |
+| [**코웨이 테라솔 U**](competitors/coway_therasol.md) ★★ 신규 | unknown | unknown | unknown | unknown | unknown | unknown | **필수 (제허 25-725, 2025 등록 대기업 — 가장 위협적 경쟁자)** |
 | [**(주)세라젬**](competitors/_medical_device_oem_pool.md) | unknown | unknown | unknown | unknown | unknown | unknown | 권고 (제허 23-785 호, 대기업) |
-| [**(주)퓨런헬스케어**](competitors/furun.md) ★실측 | BULLET | **none** | machine_spec_only (0.375) | **bottom** (0.807) | **CE+GMP만, 식약처/제허 언급 0** | none | EXPLORATORY (소비자 자사몰 X, H5/H6 관찰증거) |
+| [**(주)퓨런헬스케어**](competitors/furun.md) ★실측 | BULLET | **none** | machine_spec_only (0.375) | **bottom** (0.807) | **CE+GMP만, 식약처/제허 언급 0** | none | 제외 검토 (코웨이 추가 시) |
+| [**공산품 노이즈 풀**](competitors/_non_medical_products_pool.md) ★ | — | — | — | — | — | — | 페로니언 or 닥터케이 1종 (H10 검정 노이즈) |
 | [애플힙](competitors/applehip.md) (노이즈) | ? | ? | ambiguous | ? | none(추정) | — | 옵션 (H10 검정용) |
 | (해외 1종, Elvie 권장) | — | — | — | — | — | — | 권장 (글로벌 학습 편향 측정) |
 

@@ -152,10 +152,14 @@
     <div class="product-info">
       <h1>{{ product.name }}</h1>
       <p class="tagline">{{ product.tagline }}</p>
+      {# hero rating: F6=Reviews 일 때만 표시 (옵션 C, 2026-04-24 Wayne 결정) #}
+      {# F6=None/Clinical 페이지는 리뷰 수치 자체가 페이지에 없어야 F6 효과 순수 측정 가능 #}
+      {% if f6_evidence == "Reviews" %}
       <div class="rating">
         <span class="stars">★★★★★ {{ product.rating }}</span>
         <span class="count">({{ product.review_count }}개 리뷰)</span>
       </div>
+      {% endif %}
       <div class="price-box">
         <span class="price-retail">정가 {{ "{:,}".format(product.price_retail) }}원</span>
         <span class="price-discount">-{{ product.discount_rate }}%</span>

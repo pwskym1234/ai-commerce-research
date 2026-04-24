@@ -4,7 +4,7 @@
 > 모든 발견을 한 줄씩. 상세는 `findings/`, `competitors/`, `methods/` 참조.
 > 이 파일이 항상 최신이면, Claude는 이것만 읽고도 작업 가능. (Ragless 핵심)
 
-**마지막 갱신**: 2026-04-24 v2.5 — 닥터케이 파일 전부 삭제 + 추가 크롤링 (페로니언 11st 344KB / 애플힙 kakao 309KB / 코웨이 674KB). Sixthshop 공산품 3종(75/73/73) 모두 의료기기(바디닥터 59) 상회 — H10 검정 강한 사전 신호 재확인.
+**마지막 갱신**: 2026-04-24 v2.6 — 데마+컨설팅 우선 체제로 전환. Phase A(데이터 보강) 완료: 47 SKU 크롤(코웨이 테라솔 P 51점, 훌스 하이리빙 우회 31점, Elvie Shopify 57점 추가) + brand-level 집계(18 브랜드) + NAVER 외부증거 수집기 준비(Wayne 키 대기). 산공통 L54/본실험은 보류.
 
 ---
 
@@ -19,17 +19,16 @@
 
 | 지표 | 값 | 출처 | 갱신일 |
 |------|-----|------|--------|
-| 가상 페이지 제작 수 | 0 / **54 (L54 확정 v2)** | methods/experiment_design_v2.md | 2026-04-24 |
-| 본실험 API 호출 수 (예정) | 0 / **8,640** (54×8×20×1, gpt-5.4) | methods/experiment_design_v2.md | 2026-04-24 |
-| 본실험 예상 비용 | **$108** (gpt-5.4 $2.50/15 input/output MTok) | experiment_design_v2 §5 | 2026-04-24 |
-| Sixthshop 점수 (바디닥터 gncosshop) | **59/100** (A25/B13/C6/D15) | sixthshop_scores.jsonl | 2026-04-24 |
-| Sixthshop 점수 (프로폴린스 자사몰) | **36/100** (A0/B13/C15/D8) — JSON-LD 없음이 치명적 | sixthshop_scores.jsonl | 2026-04-24 |
-| Sixthshop 최고 (2080 SSG) | **82/100** — 이커머스 플랫폼 효과 | sixthshop_scores.jsonl | 2026-04-24 |
-| 크롤링한 SKU 수 | **15** (정적 4 + Playwright rendered 11: 의료기기 3 + 가글 6 + bot차단 2) | crawler/scripts/scrape_*.py | 2026-04-24 |
-| 추출한 피처 수 | 1차 EDA 가능 수준 (text length, JSON-LD, 인증/임상 키워드, 수치 비율, 가격) | data/processed/features.jsonl | 2026-04-23 |
-| 비교군 N | 의료기기 6 / 가글 6 (확정) | F2026-04-23_same_grade_competition + methods/sample_size_justification | 2026-04-23 |
-| 크롤링 SKU 수 (의료기기) | 0 (경쟁사 stub 3개 작성됨) | competitors/ | 2026-04-23 |
-| 크롤링 SKU 수 (가글) | 0 (경쟁사 stub 5개 작성됨) | competitors/ | 2026-04-23 |
+| **현재 우선순위** | 데마 + 컨설팅 (Phase A~D). 산공통 L54/본실험 **보류** | 2026-04-24 v2.6 결정 | 2026-04-24 |
+| 크롤링한 SKU 수 | **47** (의료기기 13브랜드 + 가글 5브랜드 + 바디닥터 anchor) | data/processed/sixthshop_scores.jsonl | 2026-04-24 |
+| 경쟁군 브랜드 수 | **18 브랜드** 집계 완료 | brand_aggregated_features.jsonl | 2026-04-24 |
+| Sixthshop 바디닥터 (gncosshop) | **59/100** (A25/B13/C6/D15) | sixthshop_scores.jsonl | 2026-04-24 |
+| Sixthshop Top 3 (의료기기) | 페로니언 11st **73**, 애플힙 kakao **75**, 코웨이 테라솔 P **51** | 2026-04-24 |
+| Sixthshop Top 3 (가글) | 2080 SSG **82**, 가글린 dmall **74**, 리스테린 gum-care **43** | 2026-04-24 |
+| Sixthshop 신규 (이번 세션) | 훌스 하이리빙 **31**, Elvie Shopify **57**, 코웨이 테라솔 P **51** | 2026-04-24 |
+| 가상 페이지 제작 수 (산공통) | 54/54 생성됨 (hero rating C 재렌더 필요 확인) | experiments/synthetic_pages/ | 2026-04-24 |
+| 본실험 예정 비용 (산공통 보류 중) | $27 (gpt-5.4-nano 25,920 호출) | experiment_design_v2 | — |
+| 외부 증거(H14) 수집 상태 | **Wayne NAVER API 키 대기** (스크립트 준비됨) | crawler/scripts/collect_external_evidence.py | 2026-04-24 |
 | 바디닥터K 카테고리 추천율 (Before) | 14.5% | 사전 추정치 | — |
 | 바디닥터K 카테고리 추천율 (After) | — | 미측정 | — |
 

@@ -4,7 +4,7 @@
 > 모든 발견을 한 줄씩. 상세는 `findings/`, `competitors/`, `methods/` 참조.
 > 이 파일이 항상 최신이면, Claude는 이것만 읽고도 작업 가능. (Ragless 핵심)
 
-**마지막 갱신**: 2026-04-24 (★ 식약처 API 해결 — 13개 OEM 풀 확보 + 바디닥터 DB 미등록 발견)
+**마지막 갱신**: 2026-04-24 (Playwright 도입 + 양 버티컬 경쟁사 크롤링 + 피처 실측 비교 — 바디닥터·프로폴린스 모두 경쟁사 대비 AiEO 취약 확인)
 
 ---
 
@@ -21,7 +21,7 @@
 |------|-----|------|--------|
 | 가상 페이지 제작 수 | 0 / 36 (L36 확정) | methods/orthogonal_array_L36.md | 2026-04-23 |
 | 본실험 API 호출 수 (예정) | 0 / 2,880 (36×4×20×1, ChatGPT만) | methods/sample_size_justification.md | 2026-04-23 |
-| 크롤링한 SKU 수 | 4 (gncosshop 바디닥터 핵심) | crawler/scripts/scrape_gncosshop.py | 2026-04-23 |
+| 크롤링한 SKU 수 | **15** (정적 4 + Playwright rendered 11: 의료기기 3 + 가글 6 + bot차단 2) | crawler/scripts/scrape_*.py | 2026-04-24 |
 | 추출한 피처 수 | 1차 EDA 가능 수준 (text length, JSON-LD, 인증/임상 키워드, 수치 비율, 가격) | data/processed/features.jsonl | 2026-04-23 |
 | 비교군 N | 의료기기 6 / 가글 6 (확정) | F2026-04-23_same_grade_competition + methods/sample_size_justification | 2026-04-23 |
 | 크롤링 SKU 수 (의료기기) | 0 (경쟁사 stub 3개 작성됨) | competitors/ | 2026-04-23 |
@@ -83,6 +83,7 @@
 
 > 최신 5개만. 전체는 `findings/` 디렉토리.
 
+- 2026-04-24: [F2026-04-24_feature_comparison.md](findings/F2026-04-24_feature_comparison.md) — ★★★ Playwright 크롤링 + 11+ 피처 실측 비교. 의료기기: 이지케이가 바디닥터보다 text 4배·explicit num 무한배 우위. 가글: 프로폴린스가 가그린·2080 대비 JSON-LD 없음. 바디닥터/프로폴린스 자사몰 AiEO 최적화 필요.
 - 2026-04-24: [F2026-04-24_mfds_oem_pool.md](findings/F2026-04-24_mfds_oem_pool.md) — ★★★ 식약처 API endpoint 확정 + 13개 OEM 전체 추출. 바디닥터 DB 미등록 → 화이트라벨 가능성. 본실험 경쟁군: 알파메딕+세라젬+퓨런헬스케어 권고
 - 2026-04-23: [F2026-04-23_empty_product_pages.md](findings/F2026-04-23_empty_product_pages.md) — ★★★ 바디닥터·이지케이 단독 페이지에 등급/허가번호/임상 모두 없음. 컨설팅 임팩트 결정타. (단, 크롤러 검증 후 정정: 텍스트는 있지만 의료기기 특화 정보 없음)
 - 2026-04-23: [F2026-04-23_same_grade_competition.md](findings/F2026-04-23_same_grade_competition.md) — ★★ 바디닥터·이지케이 모두 식약처 3등급. H5/H6/H7의 진짜 의미가 "같은 3등급 안에서 페이지 표기 방식이 추천에 영향" 으로 정밀화. 본실험 비교군 N=6 권고.

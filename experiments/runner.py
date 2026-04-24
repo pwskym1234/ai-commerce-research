@@ -247,8 +247,17 @@ def call_one(cfg: RunConfig, client: OpenAI, page_html: str, page_id: str,
     mentioned, our_selected = parse_y2a(raw, "bodydoctor")
     y4 = parse_y4(raw)
 
-    # 비용 ($2.50 input / $15 output per 1M)
-    cost = tokens_in * 2.5 / 1_000_000 + tokens_out * 15 / 1_000_000
+    # 모델별 단가 (per 1M tokens)
+    # gpt-5.4: $2.50 / $15
+    # gpt-5.4-mini: $0.75 / $4.50
+    # gpt-5.4-nano: $0.20 / $1.25
+    model_prices = {
+        "gpt-5.4": (2.5, 15.0),
+        "gpt-5.4-mini": (0.75, 4.5),
+        "gpt-5.4-nano": (0.2, 1.25),
+    }
+    in_rate, out_rate = model_prices.get(cfg.model_version, (2.5, 15.0))
+    cost = tokens_in * in_rate / 1_000_000 + tokens_out * out_rate / 1_000_000
 
     return CallResult(
         run_id=run_id,
@@ -369,8 +378,11 @@ def main():
     if args.dry_run:
         print(json.dumps(asdict(cfg), ensure_ascii=False, indent=2))
         est_calls = (27 if args.mode == "pilot" else 54) * (2 if args.mode == "pilot" else 8) * n_repeat
+        # 평균 토큰 2,000 input + 500 output 기준 호출당 비용
+        prices = {"gpt-5.4": 0.0125, "gpt-5.4-mini": 0.00375, "gpt-5.4-nano": 0.001025}
+        per_call = prices.get(cfg.model_version, 0.0125)
         print(f"예상 호출: {est_calls}")
-        print(f"예상 비용 (gpt-5.4): ${est_calls * 0.0125:.2f}")
+        print(f"예상 비용 ({cfg.model_version}): ${est_calls * per_call:.2f}")
         return
 
     run_experiment(cfg)

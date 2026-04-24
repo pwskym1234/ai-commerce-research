@@ -75,14 +75,28 @@ def load_queries() -> list[tuple[str, str, str]]:
     return items
 
 
-# ========== 경쟁군 N=6 (의료기기) ==========
+# ========== 경쟁군 N=14 (2026-04-24 v3 — Wayne 결정: 공산품 포함, 닥터케이 제거) ==========
+# 식약처 등록 여부는 메타 라벨이지 경쟁군 포함 기준 아님.
+# AI가 실제 추천에서 섞어 언급하는 모든 브랜드 포함.
 COMPETITORS = [
-    {"id": "bodydoctor", "name": "바디닥터 요실금치료기", "brand": "GN그룹"},
-    {"id": "easyk", "name": "이지케이 EASY-K", "brand": "알파메딕"},
-    {"id": "ceragem", "name": "세라젬 요실금치료기", "brand": "세라젬"},
-    {"id": "furenhealth", "name": "퓨런헬스케어 요실금치료기", "brand": "퓨런헬스케어"},
-    {"id": "drk", "name": "닥터케이 저주파 EMS 케겔운동기", "brand": "닥터케이 (공산품)"},
-    {"id": "elvie", "name": "Elvie Trainer", "brand": "Elvie (해외)"},
+    # 우리 anchor
+    {"id": "bodydoctor", "name": "바디닥터 요실금치료기", "brand": "GN그룹", "category": "medical_device"},
+    # 의료기기 (식약처 3등급 등록)
+    {"id": "easyk", "name": "이지케이 EASY-K", "brand": "알파메딕", "category": "medical_device"},
+    {"id": "coway_therasol", "name": "코웨이 테라솔 U", "brand": "코웨이", "category": "medical_device"},
+    {"id": "ceragem", "name": "세라젬 요실금치료기", "brand": "세라젬", "category": "medical_device"},
+    {"id": "furenhealth", "name": "퓨런헬스케어 요실금치료기", "brand": "퓨런헬스케어", "category": "medical_device"},
+    # 공산품 (식약처 미등록, 동일 키워드로 경쟁)
+    {"id": "peronian", "name": "페로니언 케겔 훈련기", "brand": "페로니언", "category": "consumer_product"},
+    {"id": "hools", "name": "훌스 음파방석", "brand": "HOOL'S", "category": "consumer_product"},
+    {"id": "wavecare", "name": "웨이브케어 V8 포 맨/우먼", "brand": "웨이브케어", "category": "consumer_product"},
+    {"id": "stopyo", "name": "스탑요 자동 케겔 운동기구", "brand": "스탑요", "category": "consumer_product"},
+    {"id": "ems_vital", "name": "EMS케겔휘트니스 비틀", "brand": "EMS케겔휘트니스", "category": "consumer_product"},
+    {"id": "kegel_magic", "name": "케겔매직", "brand": "케겔매직", "category": "consumer_product"},
+    {"id": "huonsen", "name": "휴온센 EMS 레깅스", "brand": "휴온센", "category": "consumer_product"},
+    {"id": "applehip", "name": "애플힙 2026년형 케겔자동운동기구", "brand": "애플힙", "category": "consumer_product"},
+    # 해외
+    {"id": "elvie", "name": "Elvie Trainer", "brand": "Elvie", "category": "foreign"},
 ]
 
 
@@ -172,13 +186,21 @@ def assert_reproducibility(cfg: RunConfig) -> None:
 
 # ========== 응답 파싱 ==========
 
-# 사전 정의 경쟁사 키워드 매칭
+# 사전 정의 경쟁사 키워드 매칭 (N=14, 2026-04-24 v3)
 COMPETITOR_KEYWORDS = {
     "bodydoctor": ["바디닥터"],
     "easyk": ["이지케이", "EASY-K", "EASY K", "easyk"],
+    "coway_therasol": ["코웨이 테라솔", "테라솔 U", "테라솔U", "Coway Therasol"],
     "ceragem": ["세라젬"],
     "furenhealth": ["퓨런", "furenhealth", "furun"],
-    "drk": ["닥터케이"],
+    "peronian": ["페로니언", "Peronian"],
+    "hools": ["훌스", "HOOL", "hool"],
+    "wavecare": ["웨이브케어"],
+    "stopyo": ["스탑요"],
+    "ems_vital": ["EMS케겔휘트니스", "비틀"],
+    "kegel_magic": ["케겔매직"],
+    "huonsen": ["휴온센"],
+    "applehip": ["애플힙"],
     "elvie": ["elvie", "엘비"],
 }
 

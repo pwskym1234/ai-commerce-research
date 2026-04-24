@@ -40,6 +40,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
+import yaml
 from dotenv import load_dotenv
 from openai import OpenAI
 
@@ -58,17 +59,20 @@ CACHE_DIR = EXP_DIR / "api_runs" / "_cache"
 CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
 
-# ========== 쿼리 8유형 ==========
-QUERIES = {
-    "BRD": "바디닥터 요실금치료기에 대해 어떻게 생각해?",
-    "CAT": "케겔운동기 추천해줘.",
-    "SYM": "출산 후 요실금 있는데 어떤 제품이 좋을까?",
-    "CMP": "바디닥터와 이지케이 중 어느 게 좋아?",
-    "COM": "이지케이 말고 다른 케겔운동기 추천해줘.",
-    "PRC": "300만원 이하의 가정용 요실금치료기 추천",
-    "USE": "출산 후 6개월 회복에 쓸 수 있는 기기 추천",
-    "DEC": "케겔운동 의료기기 딱 하나만 골라줘. 근거도 같이.",
-}
+# ========== 쿼리 로드 (YAML, 8유형 × 3개) ==========
+QUERIES_YAML = EXP_DIR / "prompts" / "queries.yaml" if False else Path(__file__).resolve().parent / "prompts" / "queries.yaml"
+
+def load_queries() -> list[tuple[str, str, str]]:
+    """Returns list of (query_id, query_type, query_text).
+       query_id 예: BRD-1, BRD-2, BRD-3, CAT-1, ...
+    """
+    with QUERIES_YAML.open("r", encoding="utf-8") as f:
+        data = yaml.safe_load(f)
+    items = []
+    for qtype, qlist in data.items():
+        for i, text in enumerate(qlist, start=1):
+            items.append((f"{qtype}-{i}", qtype, text))
+    return items
 
 
 # ========== 경쟁군 N=6 (의료기기) ==========
@@ -303,18 +307,19 @@ def run_experiment(cfg: RunConfig) -> dict:
     with matrix_path.open("r", encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
 
-    # pilot: L27 (첫 27개) × 쿼리 2 × 반복 5
-    # main: L54 전체 × 쿼리 8 × 반복 20
+    # 쿼리 8유형 × 3개 = 24개 (YAML 로드)
+    all_queries = load_queries()  # [(qid, qtype, text), ...]
     if cfg.mode == "pilot":
         rows = rows[:27]
-        query_ids = ["BRD", "CAT"]
+        # 파일럿: BRD-1, CAT-1, SYM-1 (유형당 1개만)
+        query_items = [q for q in all_queries if q[0].endswith("-1")][:3]
     else:
-        query_ids = list(QUERIES.keys())
+        query_items = all_queries  # 전체 24개
 
     jsonl_path = out_dir / "responses.jsonl"
-    total = len(rows) * len(query_ids) * cfg.n_repeat
+    total = len(rows) * len(query_items) * cfg.n_repeat
     print(f"🎬 run_id={run_id}, 총 호출: {total}")
-    print(f"   페이지={len(rows)}, 쿼리={len(query_ids)}, 반복={cfg.n_repeat}, 모델={cfg.model_version}")
+    print(f"   페이지={len(rows)}, 쿼리={len(query_items)}, 반복={cfg.n_repeat}, 모델={cfg.model_version}")
 
     done = 0
     total_cost = 0.0
@@ -323,8 +328,7 @@ def run_experiment(cfg: RunConfig) -> dict:
         for row in rows:
             page_id = row["page_id"]
             page_html = (PAGES_DIR / f"{page_id}.html").read_text(encoding="utf-8")
-            for qid in query_ids:
-                query = QUERIES[qid]
+            for qid, qtype, query in query_items:
                 for rep in range(cfg.n_repeat):
                     result = call_one(cfg, client, page_html, page_id, qid, query, rep, run_id)
                     f.write(result.to_jsonl() + "\n")
@@ -342,7 +346,7 @@ def run_experiment(cfg: RunConfig) -> dict:
         "cache_hits": cache_hits,
         "total_cost_usd": round(total_cost, 4),
         "n_pages": len(rows),
-        "n_queries": len(query_ids),
+        "n_queries": len(query_items),
         "n_repeat": cfg.n_repeat,
         "model_version": cfg.model_version,
         "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -377,7 +381,9 @@ def main():
 
     if args.dry_run:
         print(json.dumps(asdict(cfg), ensure_ascii=False, indent=2))
-        est_calls = (27 if args.mode == "pilot" else 54) * (2 if args.mode == "pilot" else 8) * n_repeat
+        n_queries = 3 if args.mode == "pilot" else 24  # pilot: 3개, main: 8유형×3=24개
+        n_pages = 27 if args.mode == "pilot" else 54
+        est_calls = n_pages * n_queries * n_repeat
         # 평균 토큰 2,000 input + 500 output 기준 호출당 비용
         prices = {"gpt-5.4": 0.0125, "gpt-5.4-mini": 0.00375, "gpt-5.4-nano": 0.001025}
         per_call = prices.get(cfg.model_version, 0.0125)

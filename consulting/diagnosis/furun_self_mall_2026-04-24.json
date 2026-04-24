@@ -1,0 +1,392 @@
+{
+  "brand": "furun",
+  "vertical": "medical_device",
+  "channel": "self_mall",
+  "fetched_date": "2026-04-24",
+  "generated_at": "2026-04-24T03:31:43.530171+00:00",
+  "pages": [
+    {
+      "sku_id": "about_certificates_cffi_eb4d65bad6ef8a21_cffi",
+      "raw_path": "data/raw/medical_device/furun/self_mall/2026-04-24/about_certificates_cffi_eb4d65bad6ef8a21_cffi.html",
+      "html_length": 70616,
+      "text_length": 1017,
+      "table_count": 0,
+      "ul_count": 22,
+      "li_count": 84,
+      "p_count": 0,
+      "section_count": 11,
+      "spec_format_dominant": "BULLET",
+      "jsonld_scripts": 1,
+      "jsonld_types": [],
+      "jsonld_has_product": false,
+      "jsonld_has_aggregate_rating": false,
+      "jsonld_field_count": 2,
+      "jsonld_sample": {
+        "@context": "https://schema.org",
+        "@graph": "list"
+      },
+      "explicit_numbers": [],
+      "explicit_number_count": 0,
+      "ambiguous_term_count": 0,
+      "numeric_specificity_ratio": 0.0,
+      "cert_keyword_count": 3,
+      "cert_keywords_found": [
+        "CE×2",
+        "GMP×1"
+      ],
+      "cert_first_position_ratio": 0.807,
+      "clinical_keyword_count": 0,
+      "brand_authority_count": 0,
+      "user_review_count": 0,
+      "f6_dominant_evidence": "none",
+      "review_widget_hints": [],
+      "aggregate_rating_value": null,
+      "aggregate_rating_count": null
+    },
+    {
+      "sku_id": "about_company_cffi_9b5d35864951384e_cffi",
+      "raw_path": "data/raw/medical_device/furun/self_mall/2026-04-24/about_company_cffi_9b5d35864951384e_cffi.html",
+      "html_length": 60848,
+      "text_length": 2403,
+      "table_count": 0,
+      "ul_count": 22,
+      "li_count": 84,
+      "p_count": 0,
+      "section_count": 16,
+      "spec_format_dominant": "BULLET",
+      "jsonld_scripts": 1,
+      "jsonld_types": [],
+      "jsonld_has_product": false,
+      "jsonld_has_aggregate_rating": false,
+      "jsonld_field_count": 2,
+      "jsonld_sample": {
+        "@context": "https://schema.org",
+        "@graph": "list"
+      },
+      "explicit_numbers": [],
+      "explicit_number_count": 0,
+      "ambiguous_term_count": 0,
+      "numeric_specificity_ratio": 0.0,
+      "cert_keyword_count": 0,
+      "cert_keywords_found": [],
+      "cert_first_position_ratio": -1.0,
+      "clinical_keyword_count": 0,
+      "brand_authority_count": 1,
+      "user_review_count": 0,
+      "f6_dominant_evidence": "brand_authority",
+      "review_widget_hints": [],
+      "aggregate_rating_value": null,
+      "aggregate_rating_count": null
+    },
+    {
+      "sku_id": "cs_purchase_cffi_d944fa81d2b898ee_cffi",
+      "raw_path": "data/raw/medical_device/furun/self_mall/2026-04-24/cs_purchase_cffi_d944fa81d2b898ee_cffi.html",
+      "html_length": 61346,
+      "text_length": 1232,
+      "table_count": 0,
+      "ul_count": 24,
+      "li_count": 81,
+      "p_count": 3,
+      "section_count": 11,
+      "spec_format_dominant": "BULLET",
+      "jsonld_scripts": 1,
+      "jsonld_types": [],
+      "jsonld_has_product": false,
+      "jsonld_has_aggregate_rating": false,
+      "jsonld_field_count": 2,
+      "jsonld_sample": {
+        "@context": "https://schema.org",
+        "@graph": "list"
+      },
+      "explicit_numbers": [],
+      "explicit_number_count": 0,
+      "ambiguous_term_count": 0,
+      "numeric_specificity_ratio": 0.0,
+      "cert_keyword_count": 0,
+      "cert_keywords_found": [],
+      "cert_first_position_ratio": -1.0,
+      "clinical_keyword_count": 0,
+      "brand_authority_count": 0,
+      "user_review_count": 0,
+      "f6_dominant_evidence": "none",
+      "review_widget_hints": [],
+      "aggregate_rating_value": null,
+      "aggregate_rating_count": null
+    },
+    {
+      "sku_id": "hnj-1000_cffi_cdb983a88bbed639_cffi",
+      "raw_path": "data/raw/medical_device/furun/self_mall/2026-04-24/hnj-1000_cffi_cdb983a88bbed639_cffi.html",
+      "html_length": 92710,
+      "text_length": 3671,
+      "table_count": 1,
+      "ul_count": 24,
+      "li_count": 89,
+      "p_count": 16,
+      "section_count": 29,
+      "spec_format_dominant": "BULLET",
+      "jsonld_scripts": 1,
+      "jsonld_types": [],
+      "jsonld_has_product": false,
+      "jsonld_has_aggregate_rating": false,
+      "jsonld_field_count": 2,
+      "jsonld_sample": {
+        "@context": "https://schema.org",
+        "@graph": "list"
+      },
+      "explicit_numbers": [
+        "25kg",
+        "440mm",
+        "450mm",
+        "720mm",
+        "23kg"
+      ],
+      "explicit_number_count": 5,
+      "ambiguous_term_count": 0,
+      "numeric_specificity_ratio": 1.0,
+      "cert_keyword_count": 0,
+      "cert_keywords_found": [],
+      "cert_first_position_ratio": -1.0,
+      "clinical_keyword_count": 0,
+      "brand_authority_count": 0,
+      "user_review_count": 0,
+      "f6_dominant_evidence": "none",
+      "review_widget_hints": [],
+      "aggregate_rating_value": null,
+      "aggregate_rating_count": null
+    },
+    {
+      "sku_id": "hnj-350_cffi_c4d5e65cf54ec7a9_cffi",
+      "raw_path": "data/raw/medical_device/furun/self_mall/2026-04-24/hnj-350_cffi_c4d5e65cf54ec7a9_cffi.html",
+      "html_length": 97149,
+      "text_length": 3974,
+      "table_count": 1,
+      "ul_count": 24,
+      "li_count": 89,
+      "p_count": 19,
+      "section_count": 31,
+      "spec_format_dominant": "BULLET",
+      "jsonld_scripts": 1,
+      "jsonld_types": [],
+      "jsonld_has_product": false,
+      "jsonld_has_aggregate_rating": false,
+      "jsonld_field_count": 2,
+      "jsonld_sample": {
+        "@context": "https://schema.org",
+        "@graph": "list"
+      },
+      "explicit_numbers": [
+        "20kg",
+        "400mm",
+        "49mm",
+        "3kg"
+      ],
+      "explicit_number_count": 4,
+      "ambiguous_term_count": 0,
+      "numeric_specificity_ratio": 1.0,
+      "cert_keyword_count": 0,
+      "cert_keywords_found": [],
+      "cert_first_position_ratio": -1.0,
+      "clinical_keyword_count": 0,
+      "brand_authority_count": 0,
+      "user_review_count": 0,
+      "f6_dominant_evidence": "none",
+      "review_widget_hints": [],
+      "aggregate_rating_value": null,
+      "aggregate_rating_count": null
+    },
+    {
+      "sku_id": "hnj-7000_cffi_a1f3e73fbad0cefc_cffi",
+      "raw_path": "data/raw/medical_device/furun/self_mall/2026-04-24/hnj-7000_cffi_a1f3e73fbad0cefc_cffi.html",
+      "html_length": 92456,
+      "text_length": 2878,
+      "table_count": 1,
+      "ul_count": 22,
+      "li_count": 82,
+      "p_count": 19,
+      "section_count": 27,
+      "spec_format_dominant": "BULLET",
+      "jsonld_scripts": 1,
+      "jsonld_types": [],
+      "jsonld_has_product": false,
+      "jsonld_has_aggregate_rating": false,
+      "jsonld_field_count": 2,
+      "jsonld_sample": {
+        "@context": "https://schema.org",
+        "@graph": "list"
+      },
+      "explicit_numbers": [
+        "50Hz",
+        "60Hz",
+        "25kg",
+        "680mm",
+        "775mm",
+        "150mm",
+        "50kg"
+      ],
+      "explicit_number_count": 7,
+      "ambiguous_term_count": 0,
+      "numeric_specificity_ratio": 1.0,
+      "cert_keyword_count": 0,
+      "cert_keywords_found": [],
+      "cert_first_position_ratio": -1.0,
+      "clinical_keyword_count": 0,
+      "brand_authority_count": 0,
+      "user_review_count": 0,
+      "f6_dominant_evidence": "none",
+      "review_widget_hints": [],
+      "aggregate_rating_value": null,
+      "aggregate_rating_count": null
+    },
+    {
+      "sku_id": "main_cffi_41d4200745053446_cffi",
+      "raw_path": "data/raw/medical_device/furun/self_mall/2026-04-24/main_cffi_41d4200745053446_cffi.html",
+      "html_length": 66382,
+      "text_length": 1401,
+      "table_count": 0,
+      "ul_count": 20,
+      "li_count": 72,
+      "p_count": 0,
+      "section_count": 26,
+      "spec_format_dominant": "BULLET",
+      "jsonld_scripts": 1,
+      "jsonld_types": [],
+      "jsonld_has_product": false,
+      "jsonld_has_aggregate_rating": false,
+      "jsonld_field_count": 2,
+      "jsonld_sample": {
+        "@context": "https://schema.org",
+        "@graph": "list"
+      },
+      "explicit_numbers": [],
+      "explicit_number_count": 0,
+      "ambiguous_term_count": 0,
+      "numeric_specificity_ratio": 0.0,
+      "cert_keyword_count": 0,
+      "cert_keywords_found": [],
+      "cert_first_position_ratio": -1.0,
+      "clinical_keyword_count": 0,
+      "brand_authority_count": 0,
+      "user_review_count": 0,
+      "f6_dominant_evidence": "none",
+      "review_widget_hints": [],
+      "aggregate_rating_value": null,
+      "aggregate_rating_count": null
+    },
+    {
+      "sku_id": "products_index_cffi_fa55010a552f2438_cffi",
+      "raw_path": "data/raw/medical_device/furun/self_mall/2026-04-24/products_index_cffi_fa55010a552f2438_cffi.html",
+      "html_length": 66938,
+      "text_length": 986,
+      "table_count": 0,
+      "ul_count": 20,
+      "li_count": 72,
+      "p_count": 0,
+      "section_count": 23,
+      "spec_format_dominant": "BULLET",
+      "jsonld_scripts": 1,
+      "jsonld_types": [],
+      "jsonld_has_product": false,
+      "jsonld_has_aggregate_rating": false,
+      "jsonld_field_count": 2,
+      "jsonld_sample": {
+        "@context": "https://schema.org",
+        "@graph": "list"
+      },
+      "explicit_numbers": [],
+      "explicit_number_count": 0,
+      "ambiguous_term_count": 0,
+      "numeric_specificity_ratio": 0.0,
+      "cert_keyword_count": 0,
+      "cert_keywords_found": [],
+      "cert_first_position_ratio": -1.0,
+      "clinical_keyword_count": 0,
+      "brand_authority_count": 0,
+      "user_review_count": 0,
+      "f6_dominant_evidence": "none",
+      "review_widget_hints": [],
+      "aggregate_rating_value": null,
+      "aggregate_rating_count": null
+    }
+  ],
+  "summary": {
+    "valid_pages": 8,
+    "f1_spec_format_dominant": "BULLET",
+    "f2_jsonld_types_union": [],
+    "f2_has_product_schema": false,
+    "f2_has_aggregate_rating": false,
+    "f3_avg_numeric_specificity": 0.375,
+    "f3_top_explicit_numbers": [
+      [
+        "25kg",
+        2
+      ],
+      [
+        "440mm",
+        1
+      ],
+      [
+        "450mm",
+        1
+      ],
+      [
+        "720mm",
+        1
+      ],
+      [
+        "23kg",
+        1
+      ],
+      [
+        "20kg",
+        1
+      ],
+      [
+        "400mm",
+        1
+      ],
+      [
+        "49mm",
+        1
+      ],
+      [
+        "3kg",
+        1
+      ],
+      [
+        "50Hz",
+        1
+      ],
+      [
+        "60Hz",
+        1
+      ],
+      [
+        "680mm",
+        1
+      ],
+      [
+        "775mm",
+        1
+      ],
+      [
+        "150mm",
+        1
+      ],
+      [
+        "50kg",
+        1
+      ]
+    ],
+    "f4_avg_cert_first_position_ratio": 0.807,
+    "f4_cert_position_label": "bottom",
+    "f5_cert_keywords": {
+      "CE": 2,
+      "GMP": 1
+    },
+    "f6_dominant_evidence_distribution": {
+      "none": 7,
+      "brand_authority": 1
+    },
+    "review_widget_hints_any": []
+  }
+}

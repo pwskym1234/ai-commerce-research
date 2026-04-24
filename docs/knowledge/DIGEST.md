@@ -4,7 +4,7 @@
 > 모든 발견을 한 줄씩. 상세는 `findings/`, `competitors/`, `methods/` 참조.
 > 이 파일이 항상 최신이면, Claude는 이것만 읽고도 작업 가능. (Ragless 핵심)
 
-**마지막 갱신**: 2026-04-24 v2.1 — L54 설계매트릭스 생성 + 54개 HTML 가상페이지 + API 러너 + 닥터케이 확정(11번가 198,000원) + Week3 일정 + 진단리포트 신뢰도 수정
+**마지막 갱신**: 2026-04-24 v2.2 — ★ curl_cffi(Chrome TLS impersonate)로 리스테린·퓨런 자사몰 차단 완전 우회. F1~F6 실측 완료. 퓨런 정식 URL `furun.kr`로 정정 (기존 furenhealth.com은 도메인 탈취 확인).
 
 ---
 
@@ -70,7 +70,7 @@
 | [바디닥터](competitors/bodydoctor.md) (우리) | ★ 확정 (크롤링 완료) | Product | partial | bottom/none | none | marketing | anchor (제조사 불명 — 화이트라벨 가능) |
 | [이지케이/EASY-K](competitors/easyk.md) | unknown | unknown | explicit | unknown | partial | user_reviews+celeb | 필수 (알파메딕, 제허 15-329 호, 허가일 2015-03-10) |
 | [**(주)세라젬**](competitors/_medical_device_oem_pool.md) | unknown | unknown | unknown | unknown | unknown | unknown | 권고 (제허 23-785 호, 대기업) |
-| [**(주)퓨런헬스케어**](competitors/_medical_device_oem_pool.md) | unknown | unknown | unknown | unknown | unknown | unknown | 권고 (2건 보유 전문) |
+| [**(주)퓨런헬스케어**](competitors/furun.md) ★실측 | BULLET | **none** | machine_spec_only (0.375) | **bottom** (0.807) | **CE+GMP만, 식약처/제허 언급 0** | none | EXPLORATORY (소비자 자사몰 X, H5/H6 관찰증거) |
 | [애플힙](competitors/applehip.md) (노이즈) | ? | ? | ambiguous | ? | none(추정) | — | 옵션 (H10 검정용) |
 | (해외 1종, Elvie 권장) | — | — | — | — | — | — | 권장 (글로벌 학습 편향 측정) |
 
@@ -79,7 +79,7 @@
 | 브랜드 | F1 HTML | F2 JSON-LD | F3 수치 | F6 근거 | 본실험 우선순위 |
 |--------|--------|-----------|--------|--------|------------|
 | [프로폴린스](competitors/propolinse.md) (우리) | image_heavy | none | explicit | visual_demo (텍스트 약) | anchor |
-| [리스테린](competitors/listerine.md) | ? (listerine.kr fetch 차단) | ? | **explicit** (99.9%/30초/12hr/4성분) | brand_authority + 5배 비교 인용 | 필수 |
+| [리스테린](competitors/listerine.md) ★실측 | BULLET (SPA, JS 렌더 전) | **none** (Product/AggregateRating 0) | **explicit** (0.517: 30초/99%/130년/52%/30%) | **brand_authority** + Bazaarvoice 리뷰 위젯 | 필수 |
 | [가그린](competitors/garglin.md) | PARAGRAPH 50% / BULLET 30% | none | ambiguous (CPC·불소 명시, 함량 X) | legacy(1982 최초, 갤럽 No.1) | 필수 |
 | [2080](competitors/2080.md) | 자사몰 약함 (마트 분산) | none(추정) | partial (무SLS/무파라벤) | 가성비 + 마케팅 중심 | 필수 |
 | [페리오](competitors/perio.md) | PARAGRAPH 위주 | none | ambiguous (12hr 단일 수치) | 치약 중심, 가글 약함 | 권장 |
@@ -91,8 +91,9 @@
 
 > 최신 5개만. 전체는 `findings/` 디렉토리.
 
+- 2026-04-24: [F2026-04-24_listerine_furun_selfmall_measured.md](findings/F2026-04-24_listerine_furun_selfmall_measured.md) — ★★★ curl_cffi 4차 시도로 WAF 우회 성공. 리스테린·퓨런 자사몰 F1~F6 실측 완료. 두 브랜드 모두 JSON-LD 0건. 퓨런 정식 URL `furun.kr`로 정정.
 - 2026-04-24: [F2026-04-24_week3_execution_plan.md](findings/F2026-04-24_week3_execution_plan.md) — ★ Week 3 실행 일정 (파일럿+본실험), critical path, 예산 $150 확정
-- 2026-04-24: [F2026-04-24_listerine_furen_status.md](findings/F2026-04-24_listerine_furen_status.md) — 리스테린·퓨런 크롤링 3차 시도 모두 WAF 차단. 쿠팡/SSG 우회 권고
+- 2026-04-24: [F2026-04-24_listerine_furen_status.md](findings/F2026-04-24_listerine_furen_status.md) — ~~리스테린·퓨런 크롤링 3차 시도 모두 WAF 차단~~. **2026-04-24 오후 curl_cffi로 4차 시도 성공 — 이 finding은 measured 파일로 수정됨**
 - 2026-04-24: [F2026-04-24_both_projects_pivot.md](findings/F2026-04-24_both_projects_pivot.md) — ★★★ v2 설계 확정 후 산공통/데마 두 프로젝트의 변경점 정리 (L54, 쿼리 8유형, Y7 감성, H12/14/15 사전등록, Sixthshop 점수 통합).
 - 2026-04-24: [F2026-04-24_wayne_diagnostic_vs_roadmap.md](findings/F2026-04-24_wayne_diagnostic_vs_roadmap.md) — ★★★ Wayne 진단 리포트(1,000건 실측)와 action_roadmap 비교. 닥터케이 실재 확인, 공식 인용 7%만(external evidence war 증거), 쿼리 COM 신규 반영 필요.
 - 2026-04-24: [F2026-04-24_hypothesis_upgrade.md](findings/F2026-04-24_hypothesis_upgrade.md) — 업계 리서치 반영 F/가설 고도화 초안 (→ experiment_design_v2.md로 확정).
@@ -146,8 +147,10 @@
 | 해외 1종 후보 결정 (의료기기 Elvie 권장 / 가글 콜게이트 또는 테라브레스) | Wayne | 1주차 內 | ⏳ |
 | easyk.kr 자사몰 직접 fetch + F1~F6 정밀 진단 | Claude (다음 task) | 1주차 內 | ⏳ |
 | 바디닥터 단독 모델 가격 + 자사몰 상세 페이지 fetch | Claude (다음 task) | 1주차 內 | ⏳ |
-| 가글 4종(가그린/페리오/2080/리스테린) 공식 페이지 fetch 보강 | 데마 팀 / Claude | 2주차 | ⏳ |
-| 의료기기 경쟁사 본실험 최종 리스트 확정 (권고: 바디닥터+이지케이+OEM 1~2종) | Wayne | 1주차 금요일 | ⏳ |
+| ✅ 리스테린 자사몰 fetch + F1~F6 실측 (curl_cffi로 Cloudflare 우회) | Claude | 2026-04-24 | 🟢 완료 |
+| ✅ 퓨런헬스케어 자사몰 fetch + F1~F6 실측 (furun.kr 확정) | Claude | 2026-04-24 | 🟢 완료 |
+| 가글 3종(가그린/페리오/2080) 공식 페이지 fetch 보강 | 데마 팀 / Claude | 2주차 | ⏳ |
+| ★ 의료기기 경쟁사 본실험 최종 리스트 확정 — **퓨런 자사몰 B2B로 판명, EXPLORATORY 이동** 권고. N=6 대체 후보(쉬엔비/리모트솔루션/비엠씨/유진플러스) 검토 | Wayne | 1주차 금요일 | 🔴 P0 |
 | 가글 경쟁사 본실험 최종 리스트 확정 (권고: 프로폴린스+리스테린+가그린+2080+페리오) | Wayne | 1주차 금요일 | ⏳ |
 | EXPLORATORY_NEW1/2 (의료기기 vs 비의료기기 구분 가설) 산공통 사전 가설 추가 여부 | Wayne | 1주차 內 | ⏳ |
 | 직교배열 L18 vs L36 결정 | Wayne | 1주차 | ⏳ |

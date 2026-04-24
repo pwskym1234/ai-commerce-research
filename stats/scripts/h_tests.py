@@ -126,6 +126,113 @@ def h15_q_by_f(df: pd.DataFrame) -> dict:
     }
 
 
+# ========== H2, H4: 파싱 정확도 주효과 ==========
+def h2_f2_effect_on_y1(df: pd.DataFrame) -> dict:
+    """H2: F2(JSON-LD)가 Y1 파싱 정확도에 영향."""
+    if "y1_parsing_accuracy" not in df.columns:
+        return {"hypothesis": "H2", "status": "Y1 측정 로직 추가 필요 (runner 보강)"}
+    m = smf.ols("y1_parsing_accuracy ~ C(F2_jsonld)", data=df).fit()
+    return {
+        "hypothesis": "H2 (F2 → Y1)",
+        "f_pvalue": float(m.f_pvalue),
+        "r2": float(m.rsquared),
+        "coefs": m.params.to_dict(),
+    }
+
+
+def h4_f3_effect_on_y1(df: pd.DataFrame) -> dict:
+    """H4: F3(수치 구체성)이 Y1 파싱 정확도 ↑."""
+    if "y1_parsing_accuracy" not in df.columns:
+        return {"hypothesis": "H4", "status": "Y1 측정 로직 추가 필요"}
+    m = smf.ols("y1_parsing_accuracy ~ C(F3_numeric)", data=df).fit()
+    return {
+        "hypothesis": "H4 (F3 → Y1)",
+        "f_pvalue": float(m.f_pvalue),
+        "r2": float(m.rsquared),
+        "coefs": m.params.to_dict(),
+    }
+
+
+# ========== H7: 임상 > 후기 ==========
+def h7_clinical_vs_reviews(df: pd.DataFrame) -> dict:
+    """H7: F6=Clinical 이 F6=Reviews 보다 Y2a 추천 ↑."""
+    sub = df[df["F6_evidence"].isin(["Clinical", "Reviews"])].copy()
+    m = smf.logit("y2a ~ C(F6_evidence, Treatment(reference='Reviews'))", data=sub).fit(disp=False)
+    or_clinical = np.exp(m.params.get("C(F6_evidence, Treatment(reference='Reviews'))[T.Clinical]", 0))
+    return {
+        "hypothesis": "H7 (Clinical > Reviews)",
+        "p_value": float(m.llr_pvalue),
+        "or_clinical_vs_reviews": round(float(or_clinical), 3),
+        "n": int(len(sub)),
+    }
+
+
+# ========== H9: 경쟁 상황 ==========
+def h9_structure_in_competition(df: pd.DataFrame) -> dict:
+    """H9: 경쟁 상황에서 F1(구조화 포맷) 효과가 더 큰가.
+       → 본 설계는 항상 경쟁 상황(N=6). 단독 베이스라인 없음.
+       → EXPLORATORY로 처리. '경쟁사 응답 수' 변동으로 proxy."""
+    if "products_order" not in df.columns:
+        return {"hypothesis": "H9", "status": "products_order 필드로 경쟁 강도 proxy 필요"}
+    df = df.copy()
+    df["n_competitors_mentioned"] = df["y2a_mentioned_brand_ids"].apply(lambda x: len(x) if isinstance(x, list) else 0)
+    m = smf.logit("y2a ~ C(F1_html) * n_competitors_mentioned", data=df).fit(disp=False)
+    return {
+        "hypothesis": "H9 (F1 × 경쟁 강도 EXPLORATORY)",
+        "p_value": float(m.llr_pvalue),
+        "pseudo_r2": float(m.prsquared),
+    }
+
+
+# ========== H10: 의료기기/비의료기기 구분 ==========
+def h10_medical_vs_non(df: pd.DataFrame) -> dict:
+    """H10: AI가 비의료기기 노이즈(닥터케이 등)를 섞어 추천하는가.
+       → 응답에서 'drk' (닥터케이) 언급률 측정."""
+    df = df.copy()
+    df["mentions_noise_drk"] = df["y2a_mentioned_brand_ids"].apply(lambda x: "drk" in (x or []))
+    rate_noise = df["mentions_noise_drk"].mean()
+    rate_bodydoctor = df["y2a"].mean()
+    return {
+        "hypothesis": "H10 (비의료기기 혼용)",
+        "drk_mention_rate": round(float(rate_noise), 4),
+        "bodydoctor_mention_rate": round(float(rate_bodydoctor), 4),
+        "note": "drk 언급률이 높으면 AI가 카테고리 구분 실패",
+    }
+
+
+# ========== H11: 쿼리 키워드 명시 효과 ==========
+def h11_medical_keyword_effect(df: pd.DataFrame) -> dict:
+    """H11: '의료기기' 키워드 포함 쿼리(SYM, DEC 일부)에서 노이즈 혼용 ↓.
+       → 쿼리 유형별 drk 언급률 비교."""
+    df = df.copy()
+    df["mentions_noise_drk"] = df["y2a_mentioned_brand_ids"].apply(lambda x: "drk" in (x or []))
+    by_qtype = df.groupby("query_id")["mentions_noise_drk"].mean().to_dict()
+    return {
+        "hypothesis": "H11 (쿼리 키워드 × 카테고리 구분)",
+        "drk_rate_by_query": {k: round(float(v), 4) for k, v in by_qtype.items()},
+        "note": "SYM/DEC (증상·의료기기 키워드) 쿼리의 drk_rate가 CAT보다 낮으면 H11 지지",
+    }
+
+
+# ========== H12: Rufus SPN (USE × F6) ==========
+def h12_spn_use_interaction(df: pd.DataFrame) -> dict:
+    """H12: USE 쿼리 × F6(근거) 교호작용 — SPN 맥락 서술이 근거 효과를 증폭하는가."""
+    # 쿼리에서 유형 추출 (query_id = "USE-1" 등)
+    df = df.copy()
+    df["q_is_use"] = df["query_id"].str.startswith("USE-")
+    m_main = smf.logit("y2a ~ C(F6_evidence) + q_is_use", data=df).fit(disp=False)
+    m_int = smf.logit("y2a ~ C(F6_evidence) * q_is_use", data=df).fit(disp=False)
+    lr = 2 * (m_int.llf - m_main.llf)
+    dfd = m_int.df_model - m_main.df_model
+    p = stats.chi2.sf(lr, dfd)
+    return {
+        "hypothesis": "H12 (USE × F6 SPN)",
+        "lr_statistic": round(float(lr), 3),
+        "df": int(dfd),
+        "p_value": round(float(p), 5),
+    }
+
+
 # ========== H8: Y1 ≠ Y2a 상관 ==========
 def h8_y1_y2a_decoupling(df: pd.DataFrame) -> dict:
     """H8: 파싱 정확도(Y1)와 선택률(Y2a)이 낮은 상관 (GEO ≠ AiEO)."""
@@ -197,12 +304,23 @@ def main():
     out_dir.mkdir(parents=True, exist_ok=True)
 
     results = []
+    # 주효과
     results.append(h1_f1_main_effect(df))
+    results.append(h2_f2_effect_on_y1(df))
+    results.append(h4_f3_effect_on_y1(df))
     results.append(h5_cert_detail_effect(df))
     results.append(h6_cert_reduces_y4(df))
+    results.append(h7_clinical_vs_reviews(df))
+    # 교호작용
     results.append(h3_f1xf2_interaction(df))
+    results.append(h9_structure_in_competition(df))
+    results.append(h12_spn_use_interaction(df))
     results.append(h15_q_by_f(df))
+    # 탐색·관찰
     results.append(h8_y1_y2a_decoupling(df))
+    results.append(h10_medical_vs_non(df))
+    results.append(h11_medical_keyword_effect(df))
+    # 종합
     results.append(full_model(df))
 
     # 저장

@@ -2,7 +2,9 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>{{ product.name }} — {{ page_id }}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ product.name }} | {{ product.brand }} 공식몰</title>
+<meta name="description" content="{{ product.description }}">
 
 {% if f2_jsonld == "MedicalDevice-Full" %}
 <script type="application/ld+json">
@@ -14,20 +16,26 @@
   "manufacturer": { "@type": "Organization", "name": "{{ product.manufacturer }}" },
   "model": "{{ product.model }}",
   "description": "{{ product.description }}",
-  "identifier": { "@type": "PropertyValue", "propertyID": "KFDA", "value": "{{ product.kfda_number }}" },
+  "identifier": [
+    { "@type": "PropertyValue", "propertyID": "KFDA", "value": "{{ product.kfda_number }}" },
+    { "@type": "PropertyValue", "propertyID": "FDA 510(k)", "value": "{{ product.fda_number }}" }
+  ],
   "purpose": "요실금 치료, 골반저근 강화, 자동 케겔운동 유도",
-  "indication": "요실금, 산후 회복, 골반저근 약화",
+  "indication": "요실금, 산후 회복, 골반저근 약화, 갱년기 골반 관리",
   "offers": {
     "@type": "Offer",
     "price": "{{ product.price }}",
     "priceCurrency": "KRW",
     "availability": "https://schema.org/InStock",
-    "priceValidUntil": "2026-12-31"
+    "priceValidUntil": "2026-12-31",
+    "seller": { "@type": "Organization", "name": "{{ product.manufacturer }}" }
   },
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "{{ product.rating }}",
-    "reviewCount": "{{ product.review_count }}"
+    "reviewCount": "{{ product.review_count }}",
+    "bestRating": "5",
+    "worstRating": "1"
   },
   "image": "{{ product.image_url }}"
 }
@@ -48,85 +56,205 @@
 }
 </script>
 {% endif %}
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "Malgun Gothic", sans-serif; color: #222; line-height: 1.6; background: #fff; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+  .topbar { background: #f7f7f7; border-bottom: 1px solid #e5e5e5; padding: 8px 20px; font-size: 12px; color: #666; }
+  .header { border-bottom: 2px solid #111; padding: 16px 0; }
+  .header .brand-logo { font-size: 22px; font-weight: 700; color: #111; }
+  .header nav { display: flex; gap: 24px; margin-top: 8px; font-size: 14px; }
+  .header nav a { color: #333; text-decoration: none; }
+  .breadcrumb { font-size: 13px; color: #888; padding: 12px 0; }
+  .product-main { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; margin: 24px 0; }
+  .product-image { background: #f2f2f2; border-radius: 8px; aspect-ratio: 1/1; display:flex; align-items:center; justify-content:center; color:#999; font-size:14px; border: 1px solid #eee; }
+  .product-image img { max-width: 100%; max-height: 100%; }
+  .product-info h1 { font-size: 24px; font-weight: 600; margin-bottom: 8px; line-height: 1.3; }
+  .product-info .tagline { color: #666; font-size: 14px; margin-bottom: 12px; }
+  .rating { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; font-size: 14px; }
+  .rating .stars { color: #f39c12; font-weight: 600; }
+  .rating .count { color: #888; }
+  .price-box { border-top: 1px solid #eee; padding-top: 16px; margin-bottom: 16px; }
+  .price-retail { color: #999; text-decoration: line-through; font-size: 14px; }
+  .price-discount { color: #e74c3c; font-weight: 700; font-size: 14px; margin-left: 8px; }
+  .price-final { font-size: 28px; font-weight: 700; color: #111; margin-top: 4px; }
+  .meta-row { display: flex; gap: 16px; font-size: 13px; color: #555; border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 12px 0; margin-bottom: 20px; }
+  .meta-row .item { flex: 1; }
+  .meta-row .label { color: #888; font-size: 12px; margin-bottom: 2px; }
+  .cta { display: flex; gap: 8px; }
+  .cta button { flex: 1; padding: 14px; font-size: 15px; border: none; cursor: pointer; border-radius: 4px; font-weight: 600; }
+  .btn-cart { background: #fff; border: 1px solid #111 !important; color: #111; }
+  .btn-buy { background: #111; color: #fff; }
+  .cert-banner { background: linear-gradient(90deg, #e8f5e9, #f1f8e9); border-left: 4px solid #2e7d32; padding: 14px 20px; margin: 20px 0; border-radius: 4px; }
+  .cert-banner strong { color: #1b5e20; }
+  .cert-footer { background: #fafafa; border-top: 1px solid #eee; padding: 16px 20px; font-size: 12px; color: #555; margin-top: 32px; }
+  section.block { margin: 36px 0; padding: 24px 0; border-top: 1px solid #eee; }
+  section.block h2 { font-size: 18px; font-weight: 600; margin-bottom: 16px; padding-left: 8px; border-left: 3px solid #111; }
+  table.spec { width: 100%; border-collapse: collapse; font-size: 14px; }
+  table.spec th { background: #fafafa; font-weight: 600; text-align: left; padding: 10px 14px; width: 180px; border-bottom: 1px solid #eee; border-right: 1px solid #eee; }
+  table.spec td { padding: 10px 14px; border-bottom: 1px solid #eee; }
+  ul.spec-list { list-style: none; }
+  ul.spec-list li { padding: 8px 0; border-bottom: 1px dashed #eee; font-size: 14px; }
+  ul.spec-list li strong { display: inline-block; width: 160px; color: #555; }
+  p.spec-paragraph { font-size: 14px; line-height: 1.8; color: #333; }
+  .review { padding: 14px; border-bottom: 1px solid #eee; font-size: 14px; }
+  .review .review-head { display: flex; justify-content: space-between; color: #666; font-size: 13px; margin-bottom: 4px; }
+  .review .review-title { font-weight: 600; margin-bottom: 4px; }
+  .review .review-body { color: #333; }
+  .clinical-box { background: #f8f9ff; border: 1px solid #dde3ff; padding: 16px 20px; border-radius: 6px; font-size: 14px; }
+  .clinical-box .study-title { font-weight: 600; color: #283593; margin-bottom: 6px; }
+  .clinical-box dl { display: grid; grid-template-columns: 140px 1fr; gap: 6px 16px; margin-top: 8px; }
+  .clinical-box dt { color: #555; }
+  .footer-info { background: #fafafa; border-top: 1px solid #eee; padding: 20px 0; margin-top: 40px; font-size: 13px; color: #666; }
+  .footer-info .row { margin-bottom: 6px; }
+  .footer-info .label { display: inline-block; width: 140px; color: #888; }
+</style>
 </head>
 <body>
 
-{# === F4 인증 위치: 상단 === #}
-{% if f4_cert_pos == "Top" and f5_cert_detail != "None" %}
-<div class="cert-banner" style="background:#eef; padding:10px;">
-  {% if f5_cert_detail == "Full" %}
-    <strong>식약처 3등급 의료기기</strong> — 비이식형 요실금 신경근 전기자극장치 (허가번호 <strong>{{ product.kfda_number }}</strong>) / FDA Class 1·2 등록 ({{ product.fda_number }})
-  {% elif f5_cert_detail == "Partial" %}
-    <strong>식약처 인증 의료기기</strong>
+<div class="topbar">
+  {{ product.brand }} 공식몰 · 판매중 · 무료배송 · 평일 15시 이전 당일출고
+</div>
+
+<header class="header">
+  <div class="container">
+    <div class="brand-logo">{{ product.brand_en }} | {{ product.brand }}</div>
+    <nav>
+      <a href="#">브랜드 스토리</a>
+      <a href="#">제품 소개</a>
+      <a href="#">사용 가이드</a>
+      <a href="#">FAQ</a>
+      <a href="#">구매하기</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <div class="breadcrumb">홈 &gt; 의료기기 &gt; 요실금치료 &gt; {{ product.name }}</div>
+
+  {# === F4 인증 위치: 상단 === #}
+  {% if f4_cert_pos == "Top" and f5_cert_detail != "None" %}
+    <div class="cert-banner">
+      {% if f5_cert_detail == "Full" %}
+        ✔ <strong>식약처 3등급 의료기기</strong> — 비이식형 요실금 신경근 전기자극장치 · 허가번호 <strong>{{ product.kfda_number }}</strong><br>
+        ✔ <strong>FDA Class 1·2 등록</strong> (510(k) 번호 <strong>{{ product.fda_number }}</strong>)
+      {% elif f5_cert_detail == "Partial" %}
+        ✔ <strong>식약처 인증 의료기기</strong>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="product-main">
+    <div class="product-image">
+      <img src="{{ product.image_url }}" alt="{{ product.image_alt }}">
+    </div>
+    <div class="product-info">
+      <h1>{{ product.name }}</h1>
+      <p class="tagline">{{ product.tagline }}</p>
+      <div class="rating">
+        <span class="stars">★★★★★ {{ product.rating }}</span>
+        <span class="count">({{ product.review_count }}개 리뷰)</span>
+      </div>
+      <div class="price-box">
+        <span class="price-retail">정가 {{ "{:,}".format(product.price_retail) }}원</span>
+        <span class="price-discount">-{{ product.discount_rate }}%</span>
+        <div class="price-final">{{ "{:,}".format(product.price) }}원</div>
+      </div>
+      <div class="meta-row">
+        <div class="item"><div class="label">배송</div>{{ product.shipping }}</div>
+        <div class="item"><div class="label">재고</div>{{ product.stock_status }}</div>
+        <div class="item"><div class="label">반품</div>7일 이내 가능</div>
+      </div>
+      <div class="cta">
+        <button class="btn-cart">장바구니</button>
+        <button class="btn-buy">바로 구매</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="block">
+    <h2>제품 사양</h2>
+    {% set spec_items = product.spec_ambiguous if f3_numeric == "Ambiguous" else (product.spec_partial if f3_numeric == "Partial" else product.spec_accurate) %}
+    {% if f1_html == "TABLE" %}
+      <table class="spec">
+        <tbody>
+        {% for key, value in spec_items.items() %}
+          <tr><th>{{ key }}</th><td>{{ value }}</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% elif f1_html == "BULLET" %}
+      <ul class="spec-list">
+        {% for key, value in spec_items.items() %}
+          <li><strong>{{ key }}</strong> {{ value }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="spec-paragraph">
+        {% for key, value in spec_items.items() %}{{ key }}은(는) {{ value }}이며, {% endfor %}가정에서 편리하게 사용할 수 있도록 설계되었습니다.
+      </p>
+    {% endif %}
+  </section>
+
+  {# === F6 근거 === #}
+  {% if f6_evidence == "Clinical" %}
+  <section class="block">
+    <h2>임상 근거</h2>
+    <div class="clinical-box">
+      <div class="study-title">📊 {{ product.clinical_citation.study_name }}</div>
+      <dl>
+        <dt>수행 기관</dt><dd>{{ product.clinical_citation.institution }}</dd>
+        <dt>수행 연도</dt><dd>{{ product.clinical_citation.year }}</dd>
+        <dt>대상자 수</dt><dd>n = {{ product.clinical_citation.sample_size }}</dd>
+        <dt>사용 기간</dt><dd>{{ product.clinical_citation.duration_weeks }}주</dd>
+        <dt>주요 결과</dt><dd>{{ product.clinical_citation.primary_outcome }}</dd>
+        <dt>부가 결과</dt><dd>{{ product.clinical_citation.secondary_outcome }}</dd>
+        <dt>이상 반응</dt><dd>{{ product.clinical_citation.adverse_events }}</dd>
+      </dl>
+      <p style="margin-top:12px; font-size:13px; color:#666;">
+        참고 문헌: {% for ref in product.external_references %}{{ ref }}{% if not loop.last %} · {% endif %}{% endfor %}
+      </p>
+    </div>
+  </section>
+  {% elif f6_evidence == "Reviews" %}
+  <section class="block">
+    <h2>실제 사용자 후기</h2>
+    {% for r in product.reviews_sample %}
+      <div class="review">
+        <div class="review-head">
+          <span>{{ r.author }}</span>
+          <span>★★★★★ {{ r.rating }} · {{ r.date }}</span>
+        </div>
+        <div class="review-title">{{ r.title }}</div>
+        <div class="review-body">{{ r.body }}</div>
+      </div>
+    {% endfor %}
+    <p style="margin-top:12px; font-size:13px; color:#888;">누적 리뷰 {{ product.review_count }}건 · 평균 ★ {{ product.rating }}</p>
+  </section>
+  {% endif %}
+
+  {# === F4 인증 위치: 하단 === #}
+  {% if f4_cert_pos == "Bottom" and f5_cert_detail != "None" %}
+  <div class="cert-footer">
+    ※ 본 제품은
+    {% if f5_cert_detail == "Full" %}
+      <strong>식약처 3등급 의료기기</strong> (비이식형 요실금 신경근 전기자극장치, 허가번호 {{ product.kfda_number }})이며, <strong>FDA Class 1·2 등록</strong> (510(k) {{ product.fda_number }})입니다.
+    {% elif f5_cert_detail == "Partial" %}
+      <strong>식약처 인증 의료기기</strong>입니다.
+    {% endif %}
+  </div>
   {% endif %}
 </div>
-{% endif %}
 
-<h1>{{ product.name }}</h1>
-<img src="{{ product.image_url }}" alt="{{ product.name }}">
-<p class="price">가격: {{ "{:,}".format(product.price) }}원</p>
-
-{# === F1 HTML 포맷: 스펙 === #}
-<section class="spec">
-<h2>제품 사양</h2>
-
-{% set spec_items = product.spec_ambiguous if f3_numeric == "Ambiguous" else (product.spec_partial if f3_numeric == "Partial" else product.spec_accurate) %}
-
-{% if f1_html == "TABLE" %}
-<table border="1" cellpadding="6">
-<thead><tr><th>항목</th><th>내용</th></tr></thead>
-<tbody>
-{% for key, value in spec_items.items() %}
-<tr><th>{{ key }}</th><td>{{ value }}</td></tr>
-{% endfor %}
-</tbody>
-</table>
-
-{% elif f1_html == "BULLET" %}
-<ul>
-{% for key, value in spec_items.items() %}
-<li><strong>{{ key }}</strong>: {{ value }}</li>
-{% endfor %}
-</ul>
-
-{% else %}{# PARAGRAPH #}
-<p>
-{% for key, value in spec_items.items() %}{{ key }}은 {{ value }}이며, {% endfor %}
-본 제품은 자동 케겔운동 유도 기능을 갖춘 가정용 의료기기입니다.
-</p>
-{% endif %}
-</section>
-
-{# === F6 임상/근거 === #}
-{% if f6_evidence == "Clinical" %}
-<section class="evidence">
-<h2>임상 근거</h2>
-<p>
-  {{ product.brand }} 연구팀이 2024년 수행한 무작위 대조 임상시험(RCT)에서,
-  4주간 사용 후 골반저근 근력이 평균 <strong>32% 향상</strong>됐으며 (n=120, p&lt;0.01),
-  요실금 발생 빈도는 <strong>58% 감소</strong>했습니다.
-</p>
-<p>참고: 해외 PFMT+EMS 메타분석 (Dumoulin et al., 2018, Cochrane Review) — 골반저근 전기자극의 요실금 개선 효과 확인.</p>
-</section>
-{% elif f6_evidence == "Reviews" %}
-<section class="evidence">
-<h2>사용 후기</h2>
-<p>"출산 후 1개월부터 사용했는데 정말 편해졌어요" — 30대 여성 (가명 김OO)</p>
-<p>"TV 보면서 앉아서 하니 꾸준히 쓸 수 있어요" — 40대 여성 (가명 이OO)</p>
-<p>누적 후기 200건 이상.</p>
-</section>
-{% endif %}
-
-{# === F4 인증 위치: 하단 === #}
-{% if f4_cert_pos == "Bottom" and f5_cert_detail != "None" %}
-<footer class="cert-footer" style="font-size:0.9em; color:#555;">
-  {% if f5_cert_detail == "Full" %}
-    ※ 본 제품은 식약처 3등급 의료기기(비이식형 요실금 신경근 전기자극장치, 허가번호 {{ product.kfda_number }})이며, FDA Class 1·2 등록({{ product.fda_number }})입니다.
-  {% elif f5_cert_detail == "Partial" %}
-    ※ 식약처 인증 의료기기입니다.
-  {% endif %}
+<footer class="footer-info">
+  <div class="container">
+    <div class="row"><span class="label">제조사</span>{{ product.manufacturer }}</div>
+    <div class="row"><span class="label">고객센터</span>1588-XXXX · 평일 9:00~18:00</div>
+    <div class="row"><span class="label">주소</span>서울특별시 강남구 영동대로 123 펠비케어타워 8F</div>
+    <div class="row"><span class="label">사업자번호</span>123-45-67890</div>
+  </div>
 </footer>
-{% endif %}
 
 </body>
 </html>

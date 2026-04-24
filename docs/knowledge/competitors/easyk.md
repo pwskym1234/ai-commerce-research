@@ -23,7 +23,10 @@ distribution_channels:
   - 롯데홈쇼핑
 mfds_grade: 3                          # ★ 바디닥터와 같은 등급
 mfds_category: 비이식형 요실금 신경근 전기자극장치
-mfds_license_number: 제허15-329호      # ★ 확정
+mfds_license_number: "제허 15-329 호"   # ★ 확정 (식약처 API 2026-04-24 직접 조회)
+mfds_approval_date: 2015-03-10
+mfds_product_name_official: 비이식형요실금신경근전기자극장치
+mfds_status: 1 (유효)
 gmp_certified: true
 fda_grade: unknown                      # 미확인 — 글로벌 인증 여부 추가 조사 필요
 spec_steps: 99                          # 99단계 강도 + 5단계 프로그램 (k-health 보도)

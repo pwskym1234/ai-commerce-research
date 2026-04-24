@@ -4,7 +4,7 @@
 > 모든 발견을 한 줄씩. 상세는 `findings/`, `competitors/`, `methods/` 참조.
 > 이 파일이 항상 최신이면, Claude는 이것만 읽고도 작업 가능. (Ragless 핵심)
 
-**마지막 갱신**: 2026-04-23 (LLM=1 결정 + 단독 페이지 정밀 진단 + 가상 페이지 method + 데마 크롤러 골격 작동 확인)
+**마지막 갱신**: 2026-04-24 (★ 식약처 API 해결 — 13개 OEM 풀 확보 + 바디닥터 DB 미등록 발견)
 
 ---
 
@@ -59,10 +59,11 @@
 
 | 브랜드 | F1 HTML | F2 JSON-LD | F3 수치 | F4 인증위치 | F5 인증상세 | F6 근거 | 본실험 우선순위 |
 |--------|--------|-----------|--------|------------|------------|--------|------------|
-| [바디닥터](competitors/bodydoctor.md) (우리) | paragraph(추정) | none | partial(99단계) | bottom/none | none | marketing | anchor (식약처 3등급, FDA 1+2) |
-| [이지케이/EASY-K](competitors/easyk.md) (알파메딕 제조) | unknown | unknown | explicit (99단+5단) | unknown | partial | user_reviews+celeb | 필수 (식약처 3등급, 제허15-329호) |
-| (식약처 API로 OEM 2종 추출) | — | — | — | — | — | — | 강 권장 (인증 받은 표본 확보) |
-| [애플힙](competitors/applehip.md) (노이즈) | ? | ? | ambiguous | ? | none(추정) | — | 옵션 (EXPLORATORY_NEW1 검정용) |
+| [바디닥터](competitors/bodydoctor.md) (우리) | ★ 확정 (크롤링 완료) | Product | partial | bottom/none | none | marketing | anchor (제조사 불명 — 화이트라벨 가능) |
+| [이지케이/EASY-K](competitors/easyk.md) | unknown | unknown | explicit | unknown | partial | user_reviews+celeb | 필수 (알파메딕, 제허 15-329 호, 허가일 2015-03-10) |
+| [**(주)세라젬**](competitors/_medical_device_oem_pool.md) | unknown | unknown | unknown | unknown | unknown | unknown | 권고 (제허 23-785 호, 대기업) |
+| [**(주)퓨런헬스케어**](competitors/_medical_device_oem_pool.md) | unknown | unknown | unknown | unknown | unknown | unknown | 권고 (2건 보유 전문) |
+| [애플힙](competitors/applehip.md) (노이즈) | ? | ? | ambiguous | ? | none(추정) | — | 옵션 (H10 검정용) |
 | (해외 1종, Elvie 권장) | — | — | — | — | — | — | 권장 (글로벌 학습 편향 측정) |
 
 ### 가글 버티컬
@@ -82,6 +83,7 @@
 
 > 최신 5개만. 전체는 `findings/` 디렉토리.
 
+- 2026-04-24: [F2026-04-24_mfds_oem_pool.md](findings/F2026-04-24_mfds_oem_pool.md) — ★★★ 식약처 API endpoint 확정 + 13개 OEM 전체 추출. 바디닥터 DB 미등록 → 화이트라벨 가능성. 본실험 경쟁군: 알파메딕+세라젬+퓨런헬스케어 권고
 - 2026-04-23: [F2026-04-23_empty_product_pages.md](findings/F2026-04-23_empty_product_pages.md) — ★★★ 바디닥터·이지케이 단독 페이지에 등급/허가번호/임상 모두 없음. 컨설팅 임팩트 결정타. (단, 크롤러 검증 후 정정: 텍스트는 있지만 의료기기 특화 정보 없음)
 - 2026-04-23: [F2026-04-23_same_grade_competition.md](findings/F2026-04-23_same_grade_competition.md) — ★★ 바디닥터·이지케이 모두 식약처 3등급. H5/H6/H7의 진짜 의미가 "같은 3등급 안에서 페이지 표기 방식이 추천에 영향" 으로 정밀화. 본실험 비교군 N=6 권고.
 - 2026-04-23: [F2026-04-23_competitor_initial_research.md](findings/F2026-04-23_competitor_initial_research.md) — 1차 경쟁사 조사 + 의료기기 시장 2층 구조 발견 + 바디닥터 인증 등급 정정 (식약처 3등급 + FDA 1+2)
@@ -119,7 +121,9 @@
 | ✅ EXPLORATORY → H10/H11 사전등록 | Wayne | 2026-04-23 | 🟢 완료 |
 | ✅ "닥터케이" = "바디닥터K" 약어 중복 추정 → 마스터 표기 통일 (모두 "바디닥터") | Wayne | 2026-04-23 | 🟢 완료 |
 | ✅ data.go.kr API 키 발급 + .env 저장 | Wayne | 2026-04-23 | 🟢 완료 |
-| ⚠️ data.go.kr **마이페이지에서 정확한 endpoint URL 확인 필요** (5개 추정 endpoint 모두 500. 식약처 통합정보시스템(udiportal)은 OAuth2 인증 별도) | Wayne | 1주차 內 | 🔴 진행 |
+| ✅ 식약처 API endpoint 확정 + 13개 OEM 풀 추출 | Claude | 2026-04-24 | 🟢 완료 |
+| ★ 바디닥터 실제 제조사 확인 (GN코스몰 "상품정보 표시" 섹션 또는 GN 측 문의) — 화이트라벨 여부 | Wayne | 1주차 內 | 🔴 P0 |
+| 본실험 경쟁군 3·4번 확정 (권고: 세라젬 + 퓨런헬스케어 중 선택) | Wayne | 1주차 內 | ⏳ |
 | 반복 횟수 20 vs 30 결정 (파일럿 후) | Wayne | 3주차 (파일럿 후) | ⏳ |
 | 해외 1종 후보 결정 (의료기기 Elvie 권장 / 가글 콜게이트 또는 테라브레스) | Wayne | 1주차 內 | ⏳ |
 | easyk.kr 자사몰 직접 fetch + F1~F6 정밀 진단 | Claude (다음 task) | 1주차 內 | ⏳ |

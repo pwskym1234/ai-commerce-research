@@ -2,96 +2,122 @@
 식약처 공공데이터 OpenAPI — 의료기기 품목허가 정보 조회
 
 데이터셋: data.go.kr/data/15057456
-목적: "비이식형 요실금 신경근 전기자극장치" 등 우리 카테고리에 등록된 의료기기 OEM 풀 추출
+Endpoint (확정):
+  https://apis.data.go.kr/1471000/MdlpPrdlstPrmisnInfoService05/getMdlpPrdlstPrmisnList04
 
-명세서가 공공데이터포털에 직접 노출되지 않으므로, 식약처 OpenAPI의 표준 패턴으로 endpoint를 시도하고
-응답 구조를 보면서 작동하는 endpoint를 찾는다.
+파라미터 (소문자):
+  - serviceKey: API 키
+  - pageNo, numOfRows, type=json
+  - prduct: 품목명 (정확 일치, 공백 없음. 예: "비이식형요실금신경근전기자극장치")
+  - entrps: 업체명 (정확 또는 부분 일치 불명확)
+
+응답 필드:
+  - ENTRPS: 업체명 (법인명)
+  - PRDUCT: 품목명 (카테고리명)
+  - PRMISN_STTEMNT: 허가 상태 코드 (1=유효, 2/3/4=다양)
+  - PRDUCT_PRMISN_NO: 허가번호 (예: "제허 15-329 호")
+  - PRMISN_DT: 허가일자 (YYYYMMDD)
+  - MDEQ_PRDLST_SN: 의료기기 품목 일련번호
+  - RTRCN_DSCTN_DIVS_CD / RTRCN_DSCTN_DT: 철회/취소 정보
+  - MANUF_NM: 제조원명 (수입 제품의 경우)
+  - CHG_DT: 마지막 변경일
+
+사용법:
+    python crawler/scripts/mfds_medical_device_api.py
 """
+from __future__ import annotations
+
+import json
 import os
 import sys
-import json
 import urllib.parse
 from pathlib import Path
 
 import requests
 from dotenv import load_dotenv
 
-load_dotenv(Path(__file__).resolve().parents[2] / ".env")
+REPO_ROOT = Path(__file__).resolve().parents[2]
+load_dotenv(REPO_ROOT / ".env")
 
 API_KEY = os.environ.get("MFDS_OPENAPI_KEY", "").strip()
 if not API_KEY:
-    sys.exit("환경변수 MFDS_OPENAPI_KEY가 비어 있습니다. .env 확인.")
+    sys.exit("MFDS_OPENAPI_KEY 미설정")
 
-# 식약처 OpenAPI 표준 호스트
-HOST = "https://apis.data.go.kr/1471000"
-SERVICE = "MdlpPrdlstPrmisnInfoService05"  # Wayne 제공: 의료기기 품목허가 정보
+ENDPOINT = "https://apis.data.go.kr/1471000/MdlpPrdlstPrmisnInfoService05/getMdlpPrdlstPrmisnList04"
 
-# 일반 식약처 패턴: getXxxInfo / getXxxInfoInq05 등
-OPERATION_CANDIDATES = [
-    "getMdlpPrdlstPrmisnDtlInq05",   # Dtl (Detail) 패턴
-    "getMdlpPrdlstPrmisnDtlInq",
-    "getMdlpPrdlstPrmisnInq",
-    "getMdlpPrdlstPrmisnDtl",
-    "getMdlpPrdlstInq05",
-    "getMdlpPrdlstInq",
-    "getMdlpPrdlst05",
-    "getMdlp05",
-    "list",
-    "search",
-    "",  # operation 없이 service URL만 (메뉴 출력 가능성)
-]
+OUT_DIR = REPO_ROOT / "data" / "external" / "mfds_medical_device"
+OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-QUERY_KEYWORDS = [
-    "비이식형 요실금 신경근 전기자극장치",
-    "저주파 의료용 조합 자극기",
-    "골반저근",
+# 우리 관심 품목 (공백 제거 형태로 검색)
+TARGET_CATEGORIES = [
+    "비이식형요실금신경근전기자극장치",  # 주 카테고리 — EASY-K가 여기
+    "개인용저주파자극기",               # 인접 — 알파메딕이 또 여기도 등록
+    "저주파의료용조합자극기",           # 마스터 §2.2에 바디닥터 등록 카테고리로 언급
+    "골반저근자극기",                    # 기타 관련
+    "전기근육자극기",                    # 광범위 (주의: 너무 많을 수 있음)
 ]
 
 
-def try_operation(operation: str, **params) -> dict:
-    """operation 1개 시도. 응답 미리보기 반환."""
-    url = f"{HOST}/{SERVICE}/{operation}"
-    base_params = {
-        "serviceKey": API_KEY,
-        "type": "json",
-        "pageNo": 1,
-        "numOfRows": 3,
-    }
-    base_params.update(params)
-    try:
-        r = requests.get(url, params=base_params, timeout=30)
-        return {
-            "operation": operation,
-            "status": r.status_code,
-            "url": r.url[:250],
-            "preview": r.text[:1000],
+def fetch_category(prduct: str, max_pages: int = 3, rows_per_page: int = 100) -> list[dict]:
+    """특정 품목명의 모든 등록 제품 수집."""
+    all_items = []
+    for page in range(1, max_pages + 1):
+        params = {
+            "serviceKey": API_KEY,
+            "pageNo": page,
+            "numOfRows": rows_per_page,
+            "type": "json",
+            "prduct": prduct,
         }
-    except Exception as e:
-        return {"operation": operation, "status": "error", "error": str(e)}
+        r = requests.get(ENDPOINT, params=params, timeout=30)
+        r.raise_for_status()
+        data = r.json()
+        items = [it.get("item", {}) for it in data.get("body", {}).get("items", [])]
+        total = data.get("body", {}).get("totalCount", 0)
+        all_items.extend(items)
+        if page * rows_per_page >= total:
+            break
+    return all_items
+
+
+def save_jsonl(items: list[dict], path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8") as f:
+        for it in items:
+            f.write(json.dumps(it, ensure_ascii=False) + "\n")
 
 
 def main():
-    print(f"API 키 끝 4자리: ...{API_KEY[-4:]}")
-    print(f"Service: {SERVICE}\n")
-    print("=" * 80)
-    print("Step 1: operation 이름 탐색")
-    print("=" * 80)
-    working_op = None
-    for op in OPERATION_CANDIDATES:
-        result = try_operation(op)
-        status = result.get("status")
-        marker = "✅" if status == 200 else "❌"
-        print(f"\n{marker} [{status}] {op}")
-        preview = result.get("preview", "")
-        if preview:
-            print(f"   응답: {preview[:400]}")
-        # 성공 또는 작동하는 응답 패턴 발견 시 저장
-        if status == 200 and preview and "INFO-" not in preview[:200]:
-            working_op = op
-            break
-        if status == 200 and "INFO-" in preview[:200]:
-            # INFO-200 = success but no data, INFO-NO-DATA 등도 성공
-            working_op = op
+    summary = []
+    for category in TARGET_CATEGORIES:
+        print(f"=== {category} ===")
+        items = fetch_category(category)
+        print(f"  수집: {len(items)}건")
+        # 유효 허가(상태=1)만 필터
+        active = [it for it in items if it.get("PRMISN_STTEMNT") == "1"]
+        print(f"  유효(상태=1): {len(active)}건")
+
+        # 회사별 집계
+        by_company: dict[str, list] = {}
+        for it in active:
+            company = it.get("ENTRPS", "(미상)")
+            by_company.setdefault(company, []).append(it)
+        for company, its in sorted(by_company.items(), key=lambda kv: -len(kv[1])):
+            for it in its:
+                print(
+                    f"    {company:<25} | {it.get('PRDUCT_PRMISN_NO'):<15} | {it.get('PRMISN_DT')}"
+                )
+
+        # 저장
+        slug = category.replace(" ", "_")
+        save_jsonl(items, OUT_DIR / f"{slug}.jsonl")
+        summary.append({"category": category, "total": len(items), "active": len(active), "companies": len(by_company)})
+        print()
+
+    # 요약 저장
+    summary_path = OUT_DIR / "_summary.json"
+    summary_path.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"✅ 요약 저장: {summary_path}")
 
 
 if __name__ == "__main__":

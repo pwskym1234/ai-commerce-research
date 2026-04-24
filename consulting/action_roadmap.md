@@ -1,4 +1,4 @@
-# 바디닥터 AiEO 실제 개선 액션 로드맵
+;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           # 바디닥터 AiEO 실제 개선 액션 로드맵
 
 **작성일**: 2026-04-24
 **기반**: 업계 리서치 2건 (AiEO_경쟁사_리서치.md + ai_product_visibility_landscape_2026-04-24.md) + 프로젝트 실측 데이터
@@ -254,12 +254,21 @@
 |---------|----------------|--------|
 | JSON-LD MedicalDevice 전면 추가 | Ecomtent 고객 평균 +30~60% AI mention | +40% (보수적) |
 | Rufus SPN 5 facet 추가 | Amazon 논문 효과 크기 ~2x | +50% |
-| 리뷰 50+ 확보 | ChatGPT Shopping card 트리거 가능 → rich render +300% | Y2b 극적 상승 |
+| 리뷰 50+ 확보 | ChatGPT Shopping card 트리거 가능 → rich render +300% | (rich card 측정은 MVP 이월) |
 | 인증 풀 명시 | 업계 일반 ~+15% | +15~25% |
 | 맘카페 시딩 3개월 | Evertune programmatic 사례 ~+20% | +10~20% (한국 특화 미검증) |
 
-**Before 추천율**: 14.5% (추정, 마스터 §9.3)
-**After 목표**: 3개월 25~35%, 6개월 40%+
+### ⚠️ Before/After baseline 수정 (2026-04-24)
+
+**변경 전**: Wayne 진단 리포트(dashboard-ruby-kappa.vercel.app)의 CAT 추천율 14.5%를 Before baseline으로 사용.
+
+**변경 사유**: 진단 리포트의 **쿼리 프롬프트 구성이 이상**하다는 Wayne 피드백. 수치 자체 신뢰 X. **쿼리 유형 분류 구조(BRD/CAT/SYM/CMP/COM)만 참고**로 제한.
+
+**새 baseline**: **본실험(L54 × 8쿼리 × 20회 = 8,640 호출) 결과를 Before baseline으로 사용**. F=현 바디닥터 수준(= F1 PARAGRAPH, F2 None or Product-Minimal, F3 Ambiguous, F4 None, F5 None, F6 None) 조합의 Y2a 값이 실제 현재 추천율.
+
+**After 목표**: 본실험 "F=풀 명시 조합"(F1=TABLE, F2=MedicalDevice-Full, F3=Accurate, F4=Top, F5=Full, F6=Clinical) Y2a 수준까지 도달. **정량 목표는 본실험 결과 후 확정**.
+
+**핵심 차별**: 수치 기반 주장 대신 **본실험의 인과 효과 크기**로 정량 제시. 이게 학술적으로도 컨설팅적으로도 훨씬 방어 가능.
 
 ---
 

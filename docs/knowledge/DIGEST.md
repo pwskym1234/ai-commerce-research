@@ -4,7 +4,7 @@
 > 모든 발견을 한 줄씩. 상세는 `findings/`, `competitors/`, `methods/` 참조.
 > 이 파일이 항상 최신이면, Claude는 이것만 읽고도 작업 가능. (Ragless 핵심)
 
-**마지막 갱신**: 2026-04-24 v2 (Wayne 결정 반영 — L54·쿼리 8유형·Y7 감성·H12/H14/H15 사전등록·gpt-5.4 확정 + Sixthshop 점수 실측)
+**마지막 갱신**: 2026-04-24 v2.1 — L54 설계매트릭스 생성 + 54개 HTML 가상페이지 + API 러너 + 닥터케이 확정(11번가 198,000원) + Week3 일정 + 진단리포트 신뢰도 수정
 
 ---
 
@@ -91,6 +91,8 @@
 
 > 최신 5개만. 전체는 `findings/` 디렉토리.
 
+- 2026-04-24: [F2026-04-24_week3_execution_plan.md](findings/F2026-04-24_week3_execution_plan.md) — ★ Week 3 실행 일정 (파일럿+본실험), critical path, 예산 $150 확정
+- 2026-04-24: [F2026-04-24_listerine_furen_status.md](findings/F2026-04-24_listerine_furen_status.md) — 리스테린·퓨런 크롤링 3차 시도 모두 WAF 차단. 쿠팡/SSG 우회 권고
 - 2026-04-24: [F2026-04-24_both_projects_pivot.md](findings/F2026-04-24_both_projects_pivot.md) — ★★★ v2 설계 확정 후 산공통/데마 두 프로젝트의 변경점 정리 (L54, 쿼리 8유형, Y7 감성, H12/14/15 사전등록, Sixthshop 점수 통합).
 - 2026-04-24: [F2026-04-24_wayne_diagnostic_vs_roadmap.md](findings/F2026-04-24_wayne_diagnostic_vs_roadmap.md) — ★★★ Wayne 진단 리포트(1,000건 실측)와 action_roadmap 비교. 닥터케이 실재 확인, 공식 인용 7%만(external evidence war 증거), 쿼리 COM 신규 반영 필요.
 - 2026-04-24: [F2026-04-24_hypothesis_upgrade.md](findings/F2026-04-24_hypothesis_upgrade.md) — 업계 리서치 반영 F/가설 고도화 초안 (→ experiment_design_v2.md로 확정).
@@ -117,10 +119,11 @@
 
 > `methods/`에 정착된 재사용 절차들.
 
-- **[experiment_design_v2.md](methods/experiment_design_v2.md)** ★ — **v2 본실험 설계 (L54, 쿼리 8유형, Y 7개, H12~H15). gpt-5.4 비용 추론 포함. 현행 기준.**
-- [orthogonal_array_L36.md](methods/orthogonal_array_L36.md) — v1 (L36). 참고용. L54로 대체됨.
-- [sample_size_justification.md](methods/sample_size_justification.md) — N=6 표본 정당화. 호출 수는 v2에서 8,640으로 업데이트 필요.
-- [synthetic_pages_design.md](methods/synthetic_pages_design.md) — 가상 페이지 제작 가이드. F1 SPN 고정 주입 섹션 삭제 필요 (experiment_design_v2 §7 반영).
+- **[orthogonal_array_L54.md](methods/orthogonal_array_L54.md)** ★ — **L54 실제 구현안 (L27×2 복제) + 직교성 실측 검증 + Jinja2 템플릿 연결**
+- **[experiment_design_v2.md](methods/experiment_design_v2.md)** ★ — v2 본실험 설계 전체 (L54, 쿼리 8유형, Y 7개, H12~H15). gpt-5.4 비용 추론 포함.
+- [orthogonal_array_L36.md](methods/orthogonal_array_L36.md) — v1 (L36). L54로 대체됨.
+- [sample_size_justification.md](methods/sample_size_justification.md) — N=6 표본 정당화.
+- [synthetic_pages_design.md](methods/synthetic_pages_design.md) — 가상 페이지 제작 가이드.
 
 ---
 

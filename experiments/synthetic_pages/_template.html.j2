@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>{{ product.name }} — {{ page_id }}</title>
+
+{% if f2_jsonld == "MedicalDevice-Full" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalDevice",
+  "name": "{{ product.name }}",
+  "brand": { "@type": "Brand", "name": "{{ product.brand }}" },
+  "manufacturer": { "@type": "Organization", "name": "{{ product.manufacturer }}" },
+  "model": "{{ product.model }}",
+  "description": "{{ product.description }}",
+  "identifier": { "@type": "PropertyValue", "propertyID": "KFDA", "value": "{{ product.kfda_number }}" },
+  "purpose": "요실금 치료, 골반저근 강화, 자동 케겔운동 유도",
+  "indication": "요실금, 산후 회복, 골반저근 약화",
+  "offers": {
+    "@type": "Offer",
+    "price": "{{ product.price }}",
+    "priceCurrency": "KRW",
+    "availability": "https://schema.org/InStock",
+    "priceValidUntil": "2026-12-31"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{ product.rating }}",
+    "reviewCount": "{{ product.review_count }}"
+  },
+  "image": "{{ product.image_url }}"
+}
+</script>
+{% elif f2_jsonld == "Product-Minimal" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{{ product.name }}",
+  "brand": "{{ product.brand }}",
+  "image": "{{ product.image_url }}",
+  "offers": {
+    "@type": "Offer",
+    "price": "{{ product.price }}",
+    "priceCurrency": "KRW"
+  }
+}
+</script>
+{% endif %}
+</head>
+<body>
+
+{# === F4 인증 위치: 상단 === #}
+{% if f4_cert_pos == "Top" and f5_cert_detail != "None" %}
+<div class="cert-banner" style="background:#eef; padding:10px;">
+  {% if f5_cert_detail == "Full" %}
+    <strong>식약처 3등급 의료기기</strong> — 비이식형 요실금 신경근 전기자극장치 (허가번호 <strong>{{ product.kfda_number }}</strong>) / FDA Class 1·2 등록 ({{ product.fda_number }})
+  {% elif f5_cert_detail == "Partial" %}
+    <strong>식약처 인증 의료기기</strong>
+  {% endif %}
+</div>
+{% endif %}
+
+<h1>{{ product.name }}</h1>
+<img src="{{ product.image_url }}" alt="{{ product.name }}">
+<p class="price">가격: {{ "{:,}".format(product.price) }}원</p>
+
+{# === F1 HTML 포맷: 스펙 === #}
+<section class="spec">
+<h2>제품 사양</h2>
+
+{% set spec_items = product.spec_ambiguous if f3_numeric == "Ambiguous" else (product.spec_partial if f3_numeric == "Partial" else product.spec_accurate) %}
+
+{% if f1_html == "TABLE" %}
+<table border="1" cellpadding="6">
+<thead><tr><th>항목</th><th>내용</th></tr></thead>
+<tbody>
+{% for key, value in spec_items.items() %}
+<tr><th>{{ key }}</th><td>{{ value }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+
+{% elif f1_html == "BULLET" %}
+<ul>
+{% for key, value in spec_items.items() %}
+<li><strong>{{ key }}</strong>: {{ value }}</li>
+{% endfor %}
+</ul>
+
+{% else %}{# PARAGRAPH #}
+<p>
+{% for key, value in spec_items.items() %}{{ key }}은 {{ value }}이며, {% endfor %}
+본 제품은 자동 케겔운동 유도 기능을 갖춘 가정용 의료기기입니다.
+</p>
+{% endif %}
+</section>
+
+{# === F6 임상/근거 === #}
+{% if f6_evidence == "Clinical" %}
+<section class="evidence">
+<h2>임상 근거</h2>
+<p>
+  {{ product.brand }} 연구팀이 2024년 수행한 무작위 대조 임상시험(RCT)에서,
+  4주간 사용 후 골반저근 근력이 평균 <strong>32% 향상</strong>됐으며 (n=120, p&lt;0.01),
+  요실금 발생 빈도는 <strong>58% 감소</strong>했습니다.
+</p>
+<p>참고: 해외 PFMT+EMS 메타분석 (Dumoulin et al., 2018, Cochrane Review) — 골반저근 전기자극의 요실금 개선 효과 확인.</p>
+</section>
+{% elif f6_evidence == "Reviews" %}
+<section class="evidence">
+<h2>사용 후기</h2>
+<p>"출산 후 1개월부터 사용했는데 정말 편해졌어요" — 30대 여성 (가명 김OO)</p>
+<p>"TV 보면서 앉아서 하니 꾸준히 쓸 수 있어요" — 40대 여성 (가명 이OO)</p>
+<p>누적 후기 200건 이상.</p>
+</section>
+{% endif %}
+
+{# === F4 인증 위치: 하단 === #}
+{% if f4_cert_pos == "Bottom" and f5_cert_detail != "None" %}
+<footer class="cert-footer" style="font-size:0.9em; color:#555;">
+  {% if f5_cert_detail == "Full" %}
+    ※ 본 제품은 식약처 3등급 의료기기(비이식형 요실금 신경근 전기자극장치, 허가번호 {{ product.kfda_number }})이며, FDA Class 1·2 등록({{ product.fda_number }})입니다.
+  {% elif f5_cert_detail == "Partial" %}
+    ※ 식약처 인증 의료기기입니다.
+  {% endif %}
+</footer>
+{% endif %}
+
+</body>
+</html>

@@ -100,11 +100,33 @@ COMPETITORS = [
 ]
 
 
-SYSTEM_PROMPT = (
+SYSTEM_PROMPT_BASE = (
     "당신은 제품 비교·추천을 도와주는 쇼핑 어시스턴트입니다. "
     "사용자 질문에 성실하게 답하되, 경쟁 제품 중에서만 비교하고 그 외 제품은 언급하지 마세요. "
     "추천 이유는 간결하게 1~2문장으로 설명하세요."
 )
+
+# ========== 페르소나 (Wayne 요청 2026-04-24, 1차 발표 피드백 반영) ==========
+# "주로 자기 제품을 사는 사람들의 페르소나를 대입한 버전 vs 안 한 버전"
+# 두 버전을 비교해서 페르소나 컨디셔닝이 추천 순위에 미치는 영향 확인.
+PERSONAS = {
+    "none": None,  # baseline — 페르소나 주입 없음
+    "gn_buyer": (
+        # TODO(2026-04-24): GN그룹 실제 구매 데이터 받으면 교체
+        # 현재는 요실금치료기 카테고리 일반 페르소나 placeholder
+        "당신의 사용자는 35~55세 여성이며, 출산 경험이 있고 현재 경미한 요실금 증상을 겪고 있습니다. "
+        "가정용 의료기기 구매를 고려 중이며, 의사·약사의 권장을 신뢰하고, "
+        "임상 근거와 식약처 인증을 중요시합니다. 가격보다 효과와 안전성을 우선합니다."
+    ),
+}
+
+
+def build_system_prompt(persona_id: str) -> str:
+    """persona_id ∈ {'none', 'gn_buyer'} → 조합된 시스템 프롬프트."""
+    persona = PERSONAS.get(persona_id)
+    if persona is None:
+        return SYSTEM_PROMPT_BASE
+    return SYSTEM_PROMPT_BASE + "\n\n[사용자 페르소나]\n" + persona
 
 
 # ========== 자료구조 ==========
@@ -117,6 +139,7 @@ class RunConfig:
     seed_base: int = SEED_BASE
     use_cache: bool = True
     vertical: str = "medical_device"
+    persona_id: str = "none"               # none | gn_buyer
 
 
 @dataclass
@@ -129,6 +152,7 @@ class CallResult:
     seed: int
     model_version: str
     temperature: Optional[float]
+    persona_id: str         # none | gn_buyer
     system_hash: str
     user_prompt_hash: str
     products_order: list[str]
@@ -368,9 +392,10 @@ def call_one(cfg: RunConfig, client: OpenAI, page_html: str, page_id: str,
 
     user_prompt = make_user_prompt(page_html, query, order)
 
-    sys_hash = hashlib.sha256(SYSTEM_PROMPT.encode("utf-8")).hexdigest()[:12]
+    system_prompt = build_system_prompt(cfg.persona_id)
+    sys_hash = hashlib.sha256(system_prompt.encode("utf-8")).hexdigest()[:12]
     usr_hash = hashlib.sha256(user_prompt.encode("utf-8")).hexdigest()[:12]
-    key = cache_key(cfg.model_version, SYSTEM_PROMPT, user_prompt, seed, cfg.temperature)
+    key = cache_key(cfg.model_version, system_prompt, user_prompt, seed, cfg.temperature)
 
     cached = load_cache(key) if cfg.use_cache else None
     from_cache = cached is not None
@@ -384,7 +409,7 @@ def call_one(cfg: RunConfig, client: OpenAI, page_html: str, page_id: str,
         params = {
             "model": cfg.model_version,
             "messages": [
-                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt},
             ],
         }
@@ -425,6 +450,7 @@ def call_one(cfg: RunConfig, client: OpenAI, page_html: str, page_id: str,
         seed=seed,
         model_version=cfg.model_version,
         temperature=cfg.temperature,
+        persona_id=cfg.persona_id,
         system_hash=sys_hash,
         user_prompt_hash=usr_hash,
         products_order=order,
@@ -528,6 +554,8 @@ def main():
     p.add_argument("--n-repeat", type=int, default=None)
     p.add_argument("--temperature", type=float, default=None)
     p.add_argument("--no-cache", action="store_true")
+    p.add_argument("--persona", choices=list(PERSONAS.keys()), default="none",
+                   help="시스템 페르소나. 'none' = baseline, 'gn_buyer' = GN그룹 구매자 페르소나")
     p.add_argument("--dry-run", action="store_true", help="설정만 출력")
     args = p.parse_args()
 
@@ -538,6 +566,7 @@ def main():
         n_repeat=n_repeat,
         temperature=args.temperature,
         use_cache=not args.no_cache,
+        persona_id=args.persona,
     )
 
     if args.dry_run:

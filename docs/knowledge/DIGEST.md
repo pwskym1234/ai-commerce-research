@@ -4,7 +4,7 @@
 > 모든 발견을 한 줄씩. 상세는 `findings/`, `competitors/`, `methods/` 참조.
 > 이 파일이 항상 최신이면, Claude는 이것만 읽고도 작업 가능. (Ragless 핵심)
 
-**마지막 갱신**: 2026-04-24 v2.6 — 데마+컨설팅 우선 체제로 전환. Phase A(데이터 보강) 완료: 47 SKU 크롤(코웨이 테라솔 P 51점, 훌스 하이리빙 우회 31점, Elvie Shopify 57점 추가) + brand-level 집계(18 브랜드) + NAVER 외부증거 수집기 준비(Wayne 키 대기). 산공통 L54/본실험은 보류.
+**마지막 갱신**: 2026-04-24 v2.7 — 의료기기 경쟁군 **N=13 확정** (Elvie 제외, Wayne 결정 2026-04-24). 스탑요 쿠팡 URL 확정(itemId 8637377284) but Akamai 차단 — 페이지 피처 없이 레이블만 유지. 가글 버티컬은 N=5 별도 유지 (프로폴린스 anchor + 리스테린/가그린/페리오/2080). 데마+컨설팅 Phase A 완료.
 
 ---
 
@@ -20,8 +20,9 @@
 | 지표 | 값 | 출처 | 갱신일 |
 |------|-----|------|--------|
 | **현재 우선순위** | 데마 + 컨설팅 (Phase A~D). 산공통 L54/본실험 **보류** | 2026-04-24 v2.6 결정 | 2026-04-24 |
-| 크롤링한 SKU 수 | **47** (의료기기 13브랜드 + 가글 5브랜드 + 바디닥터 anchor) | data/processed/sixthshop_scores.jsonl | 2026-04-24 |
-| 경쟁군 브랜드 수 | **18 브랜드** 집계 완료 | brand_aggregated_features.jsonl | 2026-04-24 |
+| **경쟁군 확정** | **의료기기 N=13** (anchor + 12 경쟁, Elvie 제외) / **가글 N=5** | runner.py L81 | 2026-04-24 |
+| 크롤링한 SKU 수 | **47** (스탑요는 Akamai 차단 → 레이블만 유지) | data/processed/sixthshop_scores.jsonl | 2026-04-24 |
+| 경쟁군 브랜드 집계 | **18 브랜드** (elvie 포함, 모델 학습 시 11~12 브랜드로 조정) | brand_aggregated_features.jsonl | 2026-04-24 |
 | Sixthshop 바디닥터 (gncosshop) | **59/100** (A25/B13/C6/D15) | sixthshop_scores.jsonl | 2026-04-24 |
 | Sixthshop Top 3 (의료기기) | 페로니언 11st **73**, 애플힙 kakao **75**, 코웨이 테라솔 P **51** | 2026-04-24 |
 | Sixthshop Top 3 (가글) | 2080 SSG **82**, 가글린 dmall **74**, 리스테린 gum-care **43** | 2026-04-24 |

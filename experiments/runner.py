@@ -75,9 +75,10 @@ def load_queries() -> list[tuple[str, str, str]]:
     return items
 
 
-# ========== 경쟁군 N=14 (2026-04-24 v3 — Wayne 결정: 공산품 포함, 닥터케이 제거) ==========
+# ========== 경쟁군 N=13 (2026-04-24 v4 — elvie 제외, 의료기기 버티컬 한정) ==========
 # 식약처 등록 여부는 메타 라벨이지 경쟁군 포함 기준 아님.
-# AI가 실제 추천에서 섞어 언급하는 모든 브랜드 포함.
+# AI가 실제 추천에서 섞어 언급하는 모든 국내 브랜드 포함.
+# 해외 Elvie는 Wayne 결정(2026-04-24)으로 제외 — 한국 AI 추천에 등장 빈도 낮을 것.
 COMPETITORS = [
     # 우리 anchor
     {"id": "bodydoctor", "name": "바디닥터 요실금치료기", "brand": "GN그룹", "category": "medical_device"},
@@ -95,8 +96,6 @@ COMPETITORS = [
     {"id": "kegel_magic", "name": "케겔매직", "brand": "케겔매직", "category": "consumer_product"},
     {"id": "huonsen", "name": "휴온센 EMS 레깅스", "brand": "휴온센", "category": "consumer_product"},
     {"id": "applehip", "name": "애플힙 2026년형 케겔자동운동기구", "brand": "애플힙", "category": "consumer_product"},
-    # 해외
-    {"id": "elvie", "name": "Elvie Trainer", "brand": "Elvie", "category": "foreign"},
 ]
 
 
@@ -210,7 +209,7 @@ def assert_reproducibility(cfg: RunConfig) -> None:
 
 # ========== 응답 파싱 ==========
 
-# 사전 정의 경쟁사 키워드 매칭 (N=14, 2026-04-24 v3)
+# 사전 정의 경쟁사 키워드 매칭 (N=13, 2026-04-24 v4 — elvie 제외)
 COMPETITOR_KEYWORDS = {
     "bodydoctor": ["바디닥터"],
     "easyk": ["이지케이", "EASY-K", "EASY K", "easyk"],
@@ -225,7 +224,6 @@ COMPETITOR_KEYWORDS = {
     "kegel_magic": ["케겔매직"],
     "huonsen": ["휴온센"],
     "applehip": ["애플힙"],
-    "elvie": ["elvie", "엘비"],
 }
 
 # 한국 의료기기/케겔/가글 카테고리에서 AI가 언급할 가능성 있는 브랜드 사전 (친구 대시보드 NER 교훈 반영)

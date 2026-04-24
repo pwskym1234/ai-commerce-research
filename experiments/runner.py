@@ -98,6 +98,26 @@ COMPETITORS = [
     {"id": "applehip", "name": "애플힙 2026년형 케겔자동운동기구", "brand": "애플힙", "category": "consumer_product"},
 ]
 
+# ========== 가글 경쟁군 N=12 (2026-04-24 Wayne 결정: 풀 확장) ==========
+# 친구 대시보드 NER 발견 반영. 어썸쿨(프로폴리스 직접경쟁) 반드시 포함.
+COMPETITORS_GARGLE = [
+    # 우리 anchor
+    {"id": "propolinse", "name": "프로폴린스 가글", "brand": "지앤코스/GN그룹", "category": "gargle"},
+    # 국내 대표
+    {"id": "listerine", "name": "리스테린 쿨민트 가글", "brand": "존슨앤존슨", "category": "gargle"},
+    {"id": "garglin", "name": "가그린 제로", "brand": "동아제약", "category": "gargle"},
+    {"id": "perio", "name": "페리오 가글", "brand": "LG생활건강", "category": "gargle"},
+    {"id": "gargle_2080", "name": "2080 구강청결제", "brand": "애경산업", "category": "gargle"},
+    # 친구 대시보드 NER 발견 — 풀 확장
+    {"id": "awesomecool", "name": "어썸쿨 프로폴리스 가글 600ml", "brand": "어썸쿨", "category": "gargle"},
+    {"id": "therabreath", "name": "테라브레스 오랄린스", "brand": "TheraBreath", "category": "gargle"},
+    {"id": "usimol", "name": "유시몰 가글", "brand": "유시몰", "category": "gargle"},
+    {"id": "colgate", "name": "콜게이트 플락스", "brand": "Colgate", "category": "gargle"},
+    {"id": "oralb", "name": "오랄비 가글", "brand": "Oral-B/P&G", "category": "gargle"},
+    {"id": "sensodyne", "name": "센소다인 가글", "brand": "Sensodyne", "category": "gargle"},
+    {"id": "kwangdong", "name": "광동 인후엔 가글", "brand": "광동제약", "category": "gargle"},
+]
+
 
 SYSTEM_PROMPT_BASE = (
     "당신은 제품 비교·추천을 도와주는 쇼핑 어시스턴트입니다. "
@@ -209,8 +229,9 @@ def assert_reproducibility(cfg: RunConfig) -> None:
 
 # ========== 응답 파싱 ==========
 
-# 사전 정의 경쟁사 키워드 매칭 (N=13, 2026-04-24 v4 — elvie 제외)
+# 사전 정의 경쟁사 키워드 매칭 (의료기기 N=13 + 가글 N=12, 2026-04-24 v5)
 COMPETITOR_KEYWORDS = {
+    # 의료기기 (N=13)
     "bodydoctor": ["바디닥터"],
     "easyk": ["이지케이", "EASY-K", "EASY K", "easyk"],
     "coway_therasol": ["코웨이 테라솔", "테라솔 U", "테라솔U", "Coway Therasol"],
@@ -224,6 +245,19 @@ COMPETITOR_KEYWORDS = {
     "kegel_magic": ["케겔매직"],
     "huonsen": ["휴온센"],
     "applehip": ["애플힙"],
+    # 가글 (N=12)
+    "propolinse": ["프로폴린스", "Propolinse"],
+    "listerine": ["리스테린", "Listerine"],
+    "garglin": ["가그린", "Garglin"],
+    "perio": ["페리오"],
+    "gargle_2080": ["2080"],
+    "awesomecool": ["어썸쿨"],
+    "therabreath": ["테라브레스", "TheraBreath"],
+    "usimol": ["유시몰", "Usimol"],
+    "colgate": ["콜게이트", "Colgate"],
+    "oralb": ["오랄비", "오랄B", "Oral-B", "OralB"],
+    "sensodyne": ["센소다인", "Sensodyne"],
+    "kwangdong": ["광동 인후엔", "광동인후엔", "인후엔"],
 }
 
 # 한국 의료기기/케겔/가글 카테고리에서 AI가 언급할 가능성 있는 브랜드 사전 (친구 대시보드 NER 교훈 반영)
@@ -243,20 +277,9 @@ KNOWN_OTHER_BRANDS = [
     ("이고진", "egojin"),
     ("메디펄스", "medipulse"),
     ("펠비케어", "pelvicare"),
-    # 가글 (데마 재활용)
-    ("리스테린", "listerine"),
-    ("가그린", "garglin"),
-    ("페리오", "perio"),
-    ("2080", "2080"),
-    ("프로폴린스", "propolinse"),
-    ("오랄비", "oralb"),
-    ("오랄B", "oralb"),
-    ("센소다인", "sensodyne"),
-    ("콜게이트", "colgate"),
-    ("테라브레스", "therabreath"),
-    ("어썸쿨", "awesomecool"),
-    ("광동", "kwangdong"),
-    ("유시몰", "usimol"),
+    # 가글은 2026-04-24 풀 확장으로 모두 COMPETITORS_GARGLE 로 편입됨.
+    # 여기선 아직 안 잡힌 기타 가글 브랜드(있으면 추후 추가)만 유지.
+    # 현재 비어 있음 — 필요 시 "스타버스트"·"스마일" 등 새 브랜드 등장하면 추가.
 ]
 
 

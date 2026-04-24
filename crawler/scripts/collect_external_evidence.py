@@ -39,30 +39,35 @@ NAVER_CLIENT_SECRET = os.environ.get("NAVER_CLIENT_SECRET", "").strip()
 
 OUT_PATH = REPO_ROOT / "data" / "processed" / "external_evidence.jsonl"
 
-# 경쟁군 N=14 + 쿼리 + 카테고리
+# 경쟁군 의료기기 N=13 + 가글 N=12 (2026-04-24 v5 — 가글 풀 확장)
 BRANDS = [
-    # 의료기기
+    # 의료기기 anchor + 경쟁 12 (elvie/stopyo 제외: elvie는 경쟁군에서 제외, stopyo는 쿠팡 Akamai 차단)
     {"id": "bodydoctor", "query": "바디닥터 요실금치료기", "vertical": "medical_device"},
     {"id": "easyk", "query": "이지케이 EASY-K", "vertical": "medical_device"},
     {"id": "coway_therasol", "query": "코웨이 테라솔", "vertical": "medical_device"},
     {"id": "ceragem", "query": "세라젬 요실금치료기", "vertical": "medical_device"},
     {"id": "furenhealth", "query": "퓨런헬스케어 요실금", "vertical": "medical_device"},
-    # 공산품
     {"id": "peronian", "query": "페로니언 케겔", "vertical": "medical_device"},
     {"id": "hools", "query": "훌스 음파방석", "vertical": "medical_device"},
-    {"id": "wavecare", "query": "웨이브케어", "vertical": "medical_device"},
+    {"id": "wavecare", "query": "웨이브케어 V8", "vertical": "medical_device"},
+    {"id": "stopyo", "query": "스탑요 자동 케겔", "vertical": "medical_device"},
     {"id": "ems_vital", "query": "EMS케겔휘트니스 비틀", "vertical": "medical_device"},
     {"id": "kegel_magic", "query": "케겔매직", "vertical": "medical_device"},
     {"id": "huonsen", "query": "휴온센 EMS 레깅스", "vertical": "medical_device"},
     {"id": "applehip", "query": "애플힙 케겔자동운동기구", "vertical": "medical_device"},
-    # 해외
-    {"id": "elvie", "query": "Elvie Trainer", "vertical": "medical_device"},
-    # 가글 (데마 재활용)
+    # 가글 anchor + 경쟁 11 (풀 확장 2026-04-24)
     {"id": "propolinse", "query": "프로폴린스 가글", "vertical": "gargle"},
     {"id": "listerine", "query": "리스테린 가글", "vertical": "gargle"},
     {"id": "garglin", "query": "가그린", "vertical": "gargle"},
     {"id": "perio", "query": "페리오 가글", "vertical": "gargle"},
-    {"id": "2080", "query": "2080 가글", "vertical": "gargle"},
+    {"id": "gargle_2080", "query": "2080 구강청결제", "vertical": "gargle"},
+    {"id": "awesomecool", "query": "어썸쿨 프로폴리스 가글", "vertical": "gargle"},
+    {"id": "therabreath", "query": "테라브레스 오랄린스", "vertical": "gargle"},
+    {"id": "usimol", "query": "유시몰 가글", "vertical": "gargle"},
+    {"id": "colgate", "query": "콜게이트 플락스 가글", "vertical": "gargle"},
+    {"id": "oralb", "query": "오랄비 가글", "vertical": "gargle"},
+    {"id": "sensodyne", "query": "센소다인 가글", "vertical": "gargle"},
+    {"id": "kwangdong", "query": "광동 인후엔 가글", "vertical": "gargle"},
 ]
 
 ENDPOINTS = {

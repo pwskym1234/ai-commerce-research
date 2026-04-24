@@ -23,6 +23,12 @@ from typing import Optional
 
 from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout
 
+try:
+    from playwright_stealth import Stealth  # v2+
+    STEALTH_AVAILABLE = True
+except ImportError:
+    STEALTH_AVAILABLE = False
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DATA_RAW = REPO_ROOT / "data" / "raw"
 USER_AGENT = (
@@ -58,6 +64,7 @@ def render_pages(
     wait_for: str = "networkidle",  # "load" | "domcontentloaded" | "networkidle"
     timeout_ms: int = 30000,
     screenshot: bool = False,
+    stealth: bool = False,
 ) -> list[RenderResult]:
     """
     여러 URL을 JS 렌더링 후 저장.
@@ -73,6 +80,11 @@ def render_pages(
             locale="ko-KR",
             viewport={"width": 1280, "height": 2400},
         )
+
+        if stealth and STEALTH_AVAILABLE:
+            # playwright-stealth v2: context에 apply
+            Stealth().apply_stealth_sync(context)
+
         for tgt in targets:
             url = tgt["url"]
             vertical = tgt["vertical"]

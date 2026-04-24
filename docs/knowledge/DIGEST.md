@@ -4,7 +4,7 @@
 > 모든 발견을 한 줄씩. 상세는 `findings/`, `competitors/`, `methods/` 참조.
 > 이 파일이 항상 최신이면, Claude는 이것만 읽고도 작업 가능. (Ragless 핵심)
 
-**마지막 갱신**: 2026-04-24 (업계 리서치 2건 반영 → F 요인/가설 고도화 제안 + GN 요청 리스트 + 실제 개선 로드맵 신설. 경쟁군 세라젬+퓨런 확정)
+**마지막 갱신**: 2026-04-24 v2 (Wayne 결정 반영 — L54·쿼리 8유형·Y7 감성·H12/H14/H15 사전등록·gpt-5.4 확정 + Sixthshop 점수 실측)
 
 ---
 
@@ -19,8 +19,12 @@
 
 | 지표 | 값 | 출처 | 갱신일 |
 |------|-----|------|--------|
-| 가상 페이지 제작 수 | 0 / 36 (L36 확정) | methods/orthogonal_array_L36.md | 2026-04-23 |
-| 본실험 API 호출 수 (예정) | 0 / 2,880 (36×4×20×1, ChatGPT만) | methods/sample_size_justification.md | 2026-04-23 |
+| 가상 페이지 제작 수 | 0 / **54 (L54 확정 v2)** | methods/experiment_design_v2.md | 2026-04-24 |
+| 본실험 API 호출 수 (예정) | 0 / **8,640** (54×8×20×1, gpt-5.4) | methods/experiment_design_v2.md | 2026-04-24 |
+| 본실험 예상 비용 | **$108** (gpt-5.4 $2.50/15 input/output MTok) | experiment_design_v2 §5 | 2026-04-24 |
+| Sixthshop 점수 (바디닥터 gncosshop) | **59/100** (A25/B13/C6/D15) | sixthshop_scores.jsonl | 2026-04-24 |
+| Sixthshop 점수 (프로폴린스 자사몰) | **36/100** (A0/B13/C15/D8) — JSON-LD 없음이 치명적 | sixthshop_scores.jsonl | 2026-04-24 |
+| Sixthshop 최고 (2080 SSG) | **82/100** — 이커머스 플랫폼 효과 | sixthshop_scores.jsonl | 2026-04-24 |
 | 크롤링한 SKU 수 | **15** (정적 4 + Playwright rendered 11: 의료기기 3 + 가글 6 + bot차단 2) | crawler/scripts/scrape_*.py | 2026-04-24 |
 | 추출한 피처 수 | 1차 EDA 가능 수준 (text length, JSON-LD, 인증/임상 키워드, 수치 비율, 가격) | data/processed/features.jsonl | 2026-04-23 |
 | 비교군 N | 의료기기 6 / 가글 6 (확정) | F2026-04-23_same_grade_competition + methods/sample_size_justification | 2026-04-23 |
@@ -46,6 +50,10 @@
 | H9 | 경쟁 상황에서 구조화 효과 ↑ | 🟡 미검정 |
 | H10 | AI는 의료기기/비의료기기 구분 못해 의료기기 점유율 희석 | 🟡 미검정 (사전등록 2026-04-23) |
 | H11 | 쿼리에 "의료기기" 명시 시 카테고리 좁혀짐 | 🟡 미검정 (사전등록 2026-04-23) |
+| **H12** | Rufus SPN (USE 쿼리 × F6) 교호작용 | 🟡 미검정 (사전등록 2026-04-24) |
+| ~~H13~~ | ~~Rich card rendering~~ | ❌ 드롭 (API 구조 파싱 한계) |
+| **H14** | 외부 증거(리뷰·인용·커뮤니티)가 추천 ↑ | 🟡 미검정 (관찰형, 사전등록 2026-04-24) |
+| **H15** | 쿼리 × F 교호작용 | 🟡 미검정 (사전등록 2026-04-24, L54 근거) |
 
 상태 범례: 🟡 미검정 / 🟢 지지 / 🔴 기각 / ⚪ 결과 mixed
 
@@ -83,7 +91,9 @@
 
 > 최신 5개만. 전체는 `findings/` 디렉토리.
 
-- 2026-04-24: [F2026-04-24_hypothesis_upgrade.md](findings/F2026-04-24_hypothesis_upgrade.md) — ★★★ 업계 리서치 반영 F/가설 고도화. H12(Rufus SPN), H13(rich card rendering), H14(external evidence), H15(쿼리×F). 쿼리 4→7유형, Y2 이중(Y2a/Y2b), 신규 Y5/Y6. 비용 +40%.
+- 2026-04-24: [F2026-04-24_both_projects_pivot.md](findings/F2026-04-24_both_projects_pivot.md) — ★★★ v2 설계 확정 후 산공통/데마 두 프로젝트의 변경점 정리 (L54, 쿼리 8유형, Y7 감성, H12/14/15 사전등록, Sixthshop 점수 통합).
+- 2026-04-24: [F2026-04-24_wayne_diagnostic_vs_roadmap.md](findings/F2026-04-24_wayne_diagnostic_vs_roadmap.md) — ★★★ Wayne 진단 리포트(1,000건 실측)와 action_roadmap 비교. 닥터케이 실재 확인, 공식 인용 7%만(external evidence war 증거), 쿼리 COM 신규 반영 필요.
+- 2026-04-24: [F2026-04-24_hypothesis_upgrade.md](findings/F2026-04-24_hypothesis_upgrade.md) — 업계 리서치 반영 F/가설 고도화 초안 (→ experiment_design_v2.md로 확정).
 - 2026-04-24: [F2026-04-24_feature_comparison.md](findings/F2026-04-24_feature_comparison.md) — ★★★ Playwright 크롤링 + 11+ 피처 실측 비교. 의료기기: 이지케이가 바디닥터보다 text 4배·explicit num 무한배 우위. 가글: 프로폴린스가 가그린·2080 대비 JSON-LD 없음.
 - 2026-04-24: [F2026-04-24_mfds_oem_pool.md](findings/F2026-04-24_mfds_oem_pool.md) — ★★★ 식약처 API endpoint 확정 + 13개 OEM 전체 추출. 바디닥터 DB 미등록 → 화이트라벨 가능성. 본실험 경쟁군: 알파메딕+세라젬+퓨런헬스케어 권고
 - 2026-04-23: [F2026-04-23_empty_product_pages.md](findings/F2026-04-23_empty_product_pages.md) — ★★★ 바디닥터·이지케이 단독 페이지에 등급/허가번호/임상 모두 없음. 컨설팅 임팩트 결정타. (단, 크롤러 검증 후 정정: 텍스트는 있지만 의료기기 특화 정보 없음)
@@ -107,9 +117,10 @@
 
 > `methods/`에 정착된 재사용 절차들.
 
-- [orthogonal_array_L36.md](methods/orthogonal_array_L36.md) — 본실험 가상 페이지 36개 설계 표 (Taguchi L36). L18/L26과의 비용·효용 비교.
-- [sample_size_justification.md](methods/sample_size_justification.md) — N=6 + 반복 20회 + LLM=1 (2,880 호출) 표본 정당화. 발표 대응 스크립트 포함.
-- [synthetic_pages_design.md](methods/synthetic_pages_design.md) — 가상 페이지 36개 제작 표준 가이드. F1~F6 수준별 마크업 패턴 + Jinja2 템플릿 골격 + 검증 체크리스트.
+- **[experiment_design_v2.md](methods/experiment_design_v2.md)** ★ — **v2 본실험 설계 (L54, 쿼리 8유형, Y 7개, H12~H15). gpt-5.4 비용 추론 포함. 현행 기준.**
+- [orthogonal_array_L36.md](methods/orthogonal_array_L36.md) — v1 (L36). 참고용. L54로 대체됨.
+- [sample_size_justification.md](methods/sample_size_justification.md) — N=6 표본 정당화. 호출 수는 v2에서 8,640으로 업데이트 필요.
+- [synthetic_pages_design.md](methods/synthetic_pages_design.md) — 가상 페이지 제작 가이드. F1 SPN 고정 주입 섹션 삭제 필요 (experiment_design_v2 §7 반영).
 
 ---
 

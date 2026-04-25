@@ -24,6 +24,32 @@ FEATURE_BRAND_ALIAS = {
     "2080": "gargle_2080",
 }
 
+# 채널 → 자사몰 / 리테일 분류 (Wayne 결정 2026-04-25, 옵션 C 채널 통제)
+CHANNEL_TYPE_MAP = {
+    # 자사·제조사 채널
+    "self_mall": "owned",
+    "gncosshop": "owned",
+    "manufacturer_site": "owned",
+    "hiliving_mall": "owned",
+    "lgcaremall": "owned",
+    "coreatech": "owned",
+    "official_global": "owned",
+    # 리테일·오픈마켓
+    "11st": "retail",
+    "smartstore": "retail",
+    "coupang": "retail",
+    "kakao_store": "retail",
+    "gsshop": "retail",
+    "ssg": "retail",
+    "dmall": "retail",
+    "oliveyoung": "retail",
+    "emart_mall": "retail",
+}
+
+
+def channel_type_of(channel: str) -> str:
+    return CHANNEL_TYPE_MAP.get(channel, "unknown")
+
 
 def read_jsonl(path: Path) -> pd.DataFrame:
     if not path.exists():
@@ -144,6 +170,7 @@ def build_xy_table(
     """X (페이지 피처 + 태깅 + 외부 증거) join + Y (anchor mention rate per query type)."""
     feats = load_features()
     feats = feats[feats["vertical"] == vertical].copy()
+    feats["channel_type"] = feats["channel"].map(CHANNEL_TYPE_MAP).fillna("unknown")
 
     # 자동 X 컬럼만 (numeric)
     drop_cols = ["raw_path", "vertical", "brand", "channel", "sku_id",

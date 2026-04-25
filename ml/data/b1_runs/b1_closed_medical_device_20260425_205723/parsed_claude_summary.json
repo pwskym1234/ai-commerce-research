@@ -1,0 +1,8 @@
+{
+  "run_dir": "ml/data/b1_runs/b1_closed_medical_device_20260425_205723",
+  "total": 480,
+  "model": "claude-haiku-4-5-20251001",
+  "total_cost_usd": 0.2033,
+  "parse_errors": 0,
+  "elapsed_sec": 69.3
+}

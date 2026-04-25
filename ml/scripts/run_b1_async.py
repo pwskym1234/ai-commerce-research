@@ -149,8 +149,9 @@ def load_pages_with_meta(vertical: str) -> list[dict]:
             except Exception:
                 full_text, text = "", ""
 
-            # ★ 로그인 벽·SPA·Akamai 차단 페이지 (텍스트 < 500자) 제외
-            if len(full_text) < 500:
+            # ★ 명백한 차단 페이지(텍스트 < 100자)만 제외 — Wayne 결정 (2026-04-25):
+            # brand 단위로 다 포함하기 위해 필터 완화. 짧아도 brand명은 컨텍스트에 노출.
+            if len(full_text) < 100:
                 continue
 
             # brand 단위 best 후보 (가장 긴 full_text)

@@ -96,6 +96,8 @@ COMPETITORS = [
     {"id": "kegel_magic", "name": "케겔매직", "brand": "케겔매직", "category": "consumer_product"},
     {"id": "huonsen", "name": "휴온센 EMS 레깅스", "brand": "휴온센", "category": "consumer_product"},
     {"id": "applehip", "name": "애플힙 2026년형 케겔자동운동기구", "brand": "애플힙", "category": "consumer_product"},
+    # 식약처 등록 의료기기 (Phase A+에서 검증 통과 추가)
+    {"id": "mblab", "name": "엠비랩 ReTens", "brand": "엠비랩(MBLab)", "category": "medical_device"},
 ]
 
 # ========== 가글 경쟁군 N=12 (2026-04-24 Wayne 결정: 풀 확장) ==========
@@ -245,6 +247,7 @@ COMPETITOR_KEYWORDS = {
     "kegel_magic": ["케겔매직"],
     "huonsen": ["휴온센"],
     "applehip": ["애플힙"],
+    "mblab": ["엠비랩", "MBLab", "ReTens", "Retens"],
     # 가글 (N=12)
     "propolinse": ["프로폴린스", "Propolinse"],
     "listerine": ["리스테린", "Listerine"],

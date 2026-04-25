@@ -1,0 +1,10 @@
+{
+  "run_id": "brd_per_brand_20260425_145754",
+  "n_brands": 25,
+  "n_repeat": 20,
+  "total_calls": 500,
+  "cache_hits": 0,
+  "total_cost_usd": 1.584,
+  "elapsed_sec": 138.1,
+  "model_version": "gpt-5.4-mini"
+}

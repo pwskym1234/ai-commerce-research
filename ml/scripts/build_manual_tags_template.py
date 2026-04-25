@@ -39,6 +39,8 @@ COMMON_DIMENSIONS = [
     ("T11_price_display", "LIST/DISCOUNT/RENTAL/HIDDEN", "P1"),
     ("T12_personalization", "YES/NO", "P1"),
     ("T13_cert_mark_visual", "MULTIPLE/SINGLE/KEYWORD_ONLY/NONE", "P0"),
+    ("T14_answer_first", "STRONG/WEAK/NONE", "P0"),
+    ("T15_qa_section", "RICH/BRIEF/NONE", "P0"),
     # B. 공통 정성 (10)
     ("Q1_content_depth", "SHALLOW/MID/DEEP", "P0"),
     ("Q2_safety_disclaimer", "EXPLICIT/IMPLICIT/NONE", "P0"),

@@ -258,6 +258,7 @@ PRICES = {
 async def call_one(
     client: AsyncOpenAI,
     semaphore: asyncio.Semaphore,
+    budget_state: dict,
     *,
     run_id: str,
     mode: str,
@@ -290,23 +291,32 @@ async def call_one(
         raw = cached["raw_response"]
         tokens_in = cached.get("tokens_in", 0)
         tokens_out = cached.get("tokens_out", 0)
+    elif budget_state.get("exceeded"):
+        # 예산 초과 → API 호출 안 함, skip row 반환
+        raw = "(SKIPPED: budget exceeded)"
+        tokens_in, tokens_out = 0, 0
     else:
         async with semaphore:
-            try:
-                r = await client.chat.completions.create(
-                    model=MODEL_VERSION,
-                    messages=[
-                        {"role": "system", "content": SYSTEM_PROMPT},
-                        {"role": "user", "content": user_prompt},
-                    ],
-                )
-                raw = r.choices[0].message.content or ""
-                tokens_in = r.usage.prompt_tokens if r.usage else 0
-                tokens_out = r.usage.completion_tokens if r.usage else 0
-                save_cache(key, {"raw_response": raw, "tokens_in": tokens_in, "tokens_out": tokens_out})
-            except Exception as e:
-                raw = f"(API ERROR: {type(e).__name__}: {str(e)[:200]})"
+            # double check: semaphore 대기 중 다른 task 가 한도 초과 발생시켰을 수도
+            if budget_state.get("exceeded"):
+                raw = "(SKIPPED: budget exceeded)"
                 tokens_in, tokens_out = 0, 0
+            else:
+                try:
+                    r = await client.chat.completions.create(
+                        model=MODEL_VERSION,
+                        messages=[
+                            {"role": "system", "content": SYSTEM_PROMPT},
+                            {"role": "user", "content": user_prompt},
+                        ],
+                    )
+                    raw = r.choices[0].message.content or ""
+                    tokens_in = r.usage.prompt_tokens if r.usage else 0
+                    tokens_out = r.usage.completion_tokens if r.usage else 0
+                    save_cache(key, {"raw_response": raw, "tokens_in": tokens_in, "tokens_out": tokens_out})
+                except Exception as e:
+                    raw = f"(API ERROR: {type(e).__name__}: {str(e)[:200]})"
+                    tokens_in, tokens_out = 0, 0
 
     # 룰 파싱
     mentioned = parse_mentioned_predefined(raw)
@@ -335,7 +345,7 @@ async def call_one(
 # ========== 본 실행 (async) ==========
 async def run_async(
     *, mode: str, vertical: str, n_repeat: int, concurrency: int,
-    use_cache: bool, run_id: str
+    use_cache: bool, run_id: str, budget: Optional[float] = None,
 ) -> dict:
     if not API_KEY:
         sys.exit("OPENAI_API_KEY 미설정")
@@ -356,16 +366,19 @@ async def run_async(
     print(f"   total={total}, concurrency={concurrency}, model={MODEL_VERSION}")
     if mode == "closed":
         print(f"   pages={len(pages)} (페이지 텍스트 + URL 컨텍스트)")
+    if budget is not None:
+        print(f"   ⚠️  Budget: ${budget:.2f} (초과 시 새 호출 중단)")
 
     client = AsyncOpenAI(api_key=API_KEY)
     semaphore = asyncio.Semaphore(concurrency)
+    budget_state: dict = {"exceeded": False}
 
     # 모든 호출 task 만들기
     tasks = []
     for qid, qtype, qtext in queries:
         for rep in range(n_repeat):
             tasks.append(call_one(
-                client, semaphore,
+                client, semaphore, budget_state,
                 run_id=run_id, mode=mode, vertical=vertical,
                 qid=qid, qtype=qtype, qtext=qtext, repeat_idx=rep,
                 pages_for_closed=pages, anchor_id=anchor, use_cache=use_cache,
@@ -377,13 +390,21 @@ async def run_async(
     for i, future in enumerate(asyncio.as_completed(tasks), start=1):
         row = await future
         results.append(row)
+        cost = sum(r.cost_usd for r in results)
+        # budget 체크 (이미 초과면 skip)
+        if budget is not None and not budget_state["exceeded"] and cost >= budget:
+            budget_state["exceeded"] = True
+            skipped_remaining = total - i
+            print(f"\n⛔ Budget ${budget:.2f} 도달 (현재 ${cost:.4f}). "
+                  f"새 호출 중단, 진행 중 task 마저 완료... (남은 ~{skipped_remaining})")
         if i % 50 == 0 or i == total:
             elapsed = time.time() - t0
             rate = i / elapsed if elapsed > 0 else 0
             eta = (total - i) / rate if rate > 0 else 0
-            cost = sum(r.cost_usd for r in results)
             cache_n = sum(1 for r in results if r.from_cache)
-            print(f"  [{i}/{total}] ${cost:.3f} 캐시={cache_n} | {rate:.1f}/s ETA={eta:.0f}s")
+            skipped = sum(1 for r in results if r.raw_response.startswith("(SKIPPED"))
+            tag = " ⛔" if budget_state["exceeded"] else ""
+            print(f"  [{i}/{total}] ${cost:.3f} 캐시={cache_n} skip={skipped}{tag} | {rate:.1f}/s ETA={eta:.0f}s")
 
     # 정렬: query_id, repeat_idx 순으로
     results.sort(key=lambda r: (r.query_id, r.repeat_idx))
@@ -396,6 +417,9 @@ async def run_async(
         "model_version": MODEL_VERSION, "n_queries": len(queries), "n_repeat": n_repeat,
         "total_calls": total,
         "cache_hits": sum(1 for r in results if r.from_cache),
+        "skipped_budget": sum(1 for r in results if r.raw_response.startswith("(SKIPPED")),
+        "budget_usd": budget,
+        "budget_exceeded": budget_state["exceeded"],
         "total_cost_usd": round(sum(r.cost_usd for r in results), 4),
         "elapsed_sec": round(time.time() - t0, 1),
         "concurrency": concurrency,
@@ -417,6 +441,8 @@ def main():
     p.add_argument("--concurrency", type=int, default=20)
     p.add_argument("--no-cache", action="store_true")
     p.add_argument("--pilot", action="store_true", help="5 반복으로 빠른 검증")
+    p.add_argument("--budget", type=float, default=None,
+                   help="USD 한도. 누적 비용이 한도 도달 시 새 호출 중단 (진행 중 task 는 완료)")
     args = p.parse_args()
 
     n_repeat = 5 if args.pilot else args.n_repeat
@@ -425,6 +451,7 @@ def main():
     asyncio.run(run_async(
         mode=args.mode, vertical=args.vertical, n_repeat=n_repeat,
         concurrency=args.concurrency, use_cache=not args.no_cache, run_id=run_id,
+        budget=args.budget,
     ))
 
 

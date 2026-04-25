@@ -112,7 +112,16 @@ VERTICAL_ANCHOR = {"medical_device": "바디닥터", "gargle": "프로폴린스"
 
 
 async def parse_one(client: AsyncAnthropic, semaphore: asyncio.Semaphore,
-                    row: dict) -> ParsedRow:
+                    budget_state: dict, row: dict) -> ParsedRow:
+    if budget_state.get("exceeded"):
+        return ParsedRow(
+            run_id=row["run_id"], query_id=row["query_id"], repeat_idx=row["repeat_idx"],
+            mentioned_brands=[], our_mention=False, our_sentiment="not_mentioned",
+            our_rank=None, comparison_result=None, single_select=None,
+            safety_avoidance=False, confidence=0.0,
+            claude_tokens_in=0, claude_tokens_out=0, claude_cost_usd=0.0,
+            parse_error="SKIPPED: budget exceeded",
+        )
     vertical = row.get("vertical", "medical_device")
     anchor_label = VERTICAL_ANCHOR.get(vertical, "바디닥터")
 
@@ -166,7 +175,7 @@ async def parse_one(client: AsyncAnthropic, semaphore: asyncio.Semaphore,
     )
 
 
-async def run_async(run_dir: Path):
+async def run_async(run_dir: Path, budget: Optional[float] = None):
     if not ANTHROPIC_KEY:
         sys.exit("❌ ANTHROPIC_API_KEY 미설정")
 
@@ -181,21 +190,29 @@ async def run_async(run_dir: Path):
 
     print(f"🎬 Claude 정밀 파싱 — {len(rows)} 응답, model={CLAUDE_MODEL}")
     print(f"   concurrency={CONCURRENCY}")
+    if budget is not None:
+        print(f"   ⚠️  Budget: ${budget:.2f}")
 
     client = AsyncAnthropic(api_key=ANTHROPIC_KEY)
     semaphore = asyncio.Semaphore(CONCURRENCY)
+    budget_state: dict = {"exceeded": False}
 
-    tasks = [parse_one(client, semaphore, row) for row in rows]
+    tasks = [parse_one(client, semaphore, budget_state, row) for row in rows]
     results = []
     t0 = time.time()
     for i, future in enumerate(asyncio.as_completed(tasks), start=1):
         parsed = await future
         results.append(parsed)
+        cost = sum(r.claude_cost_usd for r in results)
+        if budget is not None and not budget_state["exceeded"] and cost >= budget:
+            budget_state["exceeded"] = True
+            print(f"\n⛔ Budget ${budget:.2f} 도달 (현재 ${cost:.4f}). 새 호출 중단...")
         if i % 30 == 0 or i == len(rows):
             elapsed = time.time() - t0
-            cost = sum(r.claude_cost_usd for r in results)
-            err = sum(1 for r in results if r.parse_error)
-            print(f"  [{i}/{len(rows)}] ${cost:.3f} 파싱오류={err} | {i/elapsed:.1f}/s")
+            err = sum(1 for r in results if r.parse_error and "SKIPPED" not in (r.parse_error or ""))
+            skipped = sum(1 for r in results if r.parse_error and "SKIPPED" in (r.parse_error or ""))
+            tag = " ⛔" if budget_state["exceeded"] else ""
+            print(f"  [{i}/{len(rows)}] ${cost:.3f} 오류={err} skip={skipped}{tag} | {i/elapsed:.1f}/s")
 
     out_path = run_dir / "parsed_claude.jsonl"
     results.sort(key=lambda r: (r.query_id, r.repeat_idx))
@@ -222,8 +239,9 @@ async def run_async(run_dir: Path):
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("run_dir", help="ml/data/b1_runs/<run_id>")
+    p.add_argument("--budget", type=float, default=None, help="USD 한도")
     args = p.parse_args()
-    asyncio.run(run_async(Path(args.run_dir)))
+    asyncio.run(run_async(Path(args.run_dir), budget=args.budget))
 
 
 if __name__ == "__main__":

@@ -1,0 +1,7 @@
+{
+  "vertical": "medical_device",
+  "n_samples": 6720,
+  "n_features": 24,
+  "y_positive_rate": 0.0443452380952381,
+  "n_brands": 14
+}

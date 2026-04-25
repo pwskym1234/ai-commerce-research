@@ -38,7 +38,8 @@ COMMON_DIMENSIONS = [
     ("T10_usp_clarity", "HIGH/MID/LOW", "P0"),
     ("T11_price_display", "LIST/DISCOUNT/RENTAL/HIDDEN", "P1"),
     ("T12_personalization", "YES/NO", "P1"),
-    # B. 공통 정성 (8)
+    ("T13_cert_mark_visual", "MULTIPLE/SINGLE/KEYWORD_ONLY/NONE", "P0"),
+    # B. 공통 정성 (10)
     ("Q1_content_depth", "SHALLOW/MID/DEEP", "P0"),
     ("Q2_safety_disclaimer", "EXPLICIT/IMPLICIT/NONE", "P0"),
     ("Q3_educational_resources", "RICH/SOME/NONE", "P1"),
@@ -47,6 +48,8 @@ COMMON_DIMENSIONS = [
     ("Q6_customer_support", "RICH/BASIC/NONE", "P1"),
     ("Q7_trust_claim_tone", "AUTHORITY/HERITAGE/INNOVATION/COMMUNITY/MIXED/WEAK", "P0"),
     ("Q8_retention_mechanism", "YES/NO", "P1"),
+    ("Q9_external_authority_count", "0~5 (count from checklist)", "P0"),
+    ("Q10_numeric_source", "CLINICAL_TRIAL/OWN_STAT/CITED/MARKETING/NO_SOURCE", "P0"),
 ]
 
 MEDICAL_DIMENSIONS = [

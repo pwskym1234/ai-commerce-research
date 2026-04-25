@@ -45,6 +45,9 @@ experiments/api_runs/**/*.jsonl
 !experiments/api_runs/.gitkeep
 !experiments/api_runs/**/sample_*
 
+# API 캐시 (sha256 키 단위) — 재실험 시 자동 재생성
+experiments/api_runs/_cache/
+
 # 크롤러 임시 출력
 crawler/output/
 

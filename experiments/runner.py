@@ -100,6 +100,20 @@ COMPETITORS = [
     {"id": "mblab", "name": "엠비랩 ReTens", "brand": "엠비랩(MBLab)", "category": "medical_device"},
 ]
 
+# ========== 바디닥터 K (케겔 힙머신) anchor 경쟁군 N=8 (2026-04-26 신규) ==========
+# K = 의료기기 아닌 일반 건강보조 운동기구. 마케팅 제한 X.
+# 경쟁군: 닥터케이 + 기존 공산품 케겔 7종 (페로니언/애플힙/휴온센/케겔매직/훌스/웨이브케어/ems_vital)
+COMPETITORS_K = [
+    {"id": "bodydoctor_k", "name": "바디닥터 K 케겔 힙머신", "brand": "GN그룹/제너럴네트", "category": "kegel_exerciser"},
+    {"id": "drk", "name": "닥터케이 저주파 EMS 케겔운동기", "brand": "닥터케이", "category": "kegel_exerciser"},
+    {"id": "peronian", "name": "페로니언 케겔 훈련기", "brand": "페로니언", "category": "kegel_exerciser"},
+    {"id": "applehip", "name": "애플힙 2026년형 케겔자동운동기구", "brand": "애플힙", "category": "kegel_exerciser"},
+    {"id": "huonsen", "name": "휴온센 EMS 레깅스", "brand": "휴온센", "category": "kegel_exerciser"},
+    {"id": "kegel_magic", "name": "케겔매직", "brand": "케겔매직", "category": "kegel_exerciser"},
+    {"id": "hools", "name": "훌스 음파방석", "brand": "HOOL'S", "category": "kegel_exerciser"},
+    {"id": "wavecare", "name": "웨이브케어 V8 포 맨/우먼", "brand": "웨이브케어", "category": "kegel_exerciser"},
+]
+
 # ========== 가글 경쟁군 N=12 (2026-04-24 Wayne 결정: 풀 확장) ==========
 # 친구 대시보드 NER 발견 반영. 어썸쿨(프로폴리스 직접경쟁) 반드시 포함.
 COMPETITORS_GARGLE = [
@@ -248,6 +262,8 @@ COMPETITOR_KEYWORDS = {
     "huonsen": ["휴온센"],
     "applehip": ["애플힙"],
     "mblab": ["엠비랩", "MBLab", "ReTens", "Retens"],
+    "bodydoctor_k": ["바디닥터 K", "바디닥터K", "Body Doctor K", "BodyDoctor K", "케겔 힙머신", "케겔힙머신"],
+    "drk": ["닥터케이", "닥터 케이", "Doctor K", "DR.K", "Dr.K"],
     # 가글 (N=12)
     "propolinse": ["프로폴린스", "Propolinse"],
     "listerine": ["리스테린", "Listerine"],

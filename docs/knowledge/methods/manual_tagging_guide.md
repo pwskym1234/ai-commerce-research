@@ -29,8 +29,9 @@
    open data/raw/medical_device/bodydoctor/.../...rendered.html
    ```
 2. **vertical 컬럼 확인**:
-   - `medical_device` → A + B + C 차원만 답 (D는 N/A 자동)
-   - `gargle` → A + B + D 차원만 답 (C는 N/A 자동)
+   - `medical_device` (의료기기 — 식약처 등록 요실금치료기): A + B + C 차원 답 (D는 N/A 자동)
+   - `gargle` (가글): A + B + D 차원 답 (C는 N/A 자동)
+   - `kegel_exerciser` (바디닥터 K · 닥터케이 등 — 의료기기 미등록 일반 운동기구): A + B + **C 일부**(M1·M2·M4·M6·M7 적용 / **M3 KFDA·M5 부작용은 N/A 자동**) — K는 의료기기 미등록이라 KFDA 등급 / 부작용 표기 의무 X
 3. 페이지를 **위에서 아래로 한 번 빠르게 스크롤**하며 차원별로 판정
 4. 5초 안에 결정 안 되면 **빈칸**으로 두고 넘어감 → 검수자(Wayne)가 일괄 결정
 5. 한 SKU 끝나면 다음 row로

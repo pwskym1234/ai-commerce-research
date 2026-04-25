@@ -17,7 +17,11 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 PROCESSED = REPO_ROOT / "data" / "processed"
 B1_RUNS = REPO_ROOT / "ml" / "data" / "b1_runs"
 
-VERTICAL_ANCHOR = {"medical_device": "bodydoctor", "gargle": "propolinse"}
+VERTICAL_ANCHOR = {
+    "medical_device": "bodydoctor",
+    "gargle": "propolinse",
+    "kegel_exerciser": "bodydoctor_k",  # 2026-04-26 신규
+}
 
 FEATURE_BRAND_ALIAS = {
     "furun": "furenhealth",

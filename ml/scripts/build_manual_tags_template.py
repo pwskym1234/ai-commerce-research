@@ -23,6 +23,12 @@ GARGLE_BRANDS = {
     "sensodyne", "kwangdong",
 }
 
+# K vertical (케겔 힙머신, 비의료기기)
+KEGEL_K_BRANDS = {"bodydoctor_k", "drk"}
+# 공산품 케겔 (의료기기 미등록) — K vertical의 경쟁군
+KEGEL_K_COMPETITORS = {"peronian", "applehip", "huonsen", "kegel_magic", "hools",
+                       "wavecare", "ems_vital"}
+
 # (key, allowed_values, priority) — guide 와 일치
 COMMON_DIMENSIONS = [
     # A. 페이지 구조 (12)
@@ -75,8 +81,12 @@ GARGLE_DIMENSIONS = [
 ]
 
 
-def vertical_of(brand: str) -> str:
-    return "gargle" if brand in GARGLE_BRANDS else "medical_device"
+def vertical_of(brand: str, raw_path: str = "") -> str:
+    if brand in GARGLE_BRANDS:
+        return "gargle"
+    if brand in KEGEL_K_BRANDS or "kegel_exerciser" in raw_path:
+        return "kegel_exerciser"
+    return "medical_device"
 
 
 def main():
@@ -89,7 +99,7 @@ def main():
                 "channel": d["channel"],
                 "sku_id": d["sku_id"],
                 "raw_path": d["raw_path"],
-                "vertical": vertical_of(d["brand"]),
+                "vertical": vertical_of(d["brand"], d["raw_path"]),
                 "sixthshop_total": d["total"],
             })
 
@@ -113,13 +123,22 @@ def main():
 
         for row in rows:
             line = [row.get(c, "") for c in base_cols]
-            # 버티컬 분기: 의료기기 row는 G* 컬럼 N/A, 가글 row는 M* 컬럼 N/A
+            # 버티컬 분기:
+            #   medical_device: M 적용, G N/A
+            #   gargle: G 적용, M N/A
+            #   kegel_exerciser (K): M1·M2·M4 적용, M3·M5 N/A (의료기기 미등록), G N/A
             for col in common_cols:
                 line.append("")
             if row["vertical"] == "medical_device":
                 line.extend([""] * len(medical_cols))
                 line.extend(["N/A"] * len(gargle_cols))
-            else:
+            elif row["vertical"] == "kegel_exerciser":
+                # M3 KFDA·M5 부작용은 N/A (K는 의료기기 미등록)
+                k_skip = {"M3_kfda_class", "M5_adverse_effects"}
+                for c in medical_cols:
+                    line.append("N/A" if c in k_skip else "")
+                line.extend(["N/A"] * len(gargle_cols))
+            else:  # gargle
                 line.extend(["N/A"] * len(medical_cols))
                 line.extend([""] * len(gargle_cols))
             writer.writerow(line)

@@ -1,0 +1,8 @@
+{
+  "run_dir": "ml/data/b1_runs/b1_open_gargle_20260425_110221",
+  "total": 480,
+  "model": "claude-haiku-4-5-20251001",
+  "total_cost_usd": 0.2517,
+  "parse_errors": 0,
+  "elapsed_sec": 62.7
+}

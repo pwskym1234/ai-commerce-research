@@ -1,0 +1,212 @@
+{
+  "classifier_model": "claude-sonnet-4-6",
+  "classifier_mode": "llm_structured_output",
+  "sentiment_classes": {
+    "positive": "명시적 긍정 표현 (탁월한, 효과 좋다, 강력 추천 등)",
+    "neutral": "단순 정보 제공, 중립 비교, 사용법 안내",
+    "negative": "단점/권장하지 않음/주의 경고/효과 미미",
+    "null": "우리 브랜드가 응답에 미언급"
+  },
+  "known_biases": [
+    "보수적 기본값 — 애매한 언급은 neutral로 분류(긍정·부정 모두 강한 시그널 필요)",
+    "권위 인용('리스테린은 FDA 승인')을 positive가 아니라 neutral로 취급",
+    "confidence 점수 없음 — 분류기 불확실성 노출 불가"
+  ],
+  "output_schema": {
+    "properties": {
+      "our_brand_mentioned": {
+        "enum": [
+          "Y",
+          "N"
+        ],
+        "title": "Our Brand Mentioned",
+        "type": "string"
+      },
+      "our_brand_recommended": {
+        "enum": [
+          "Y",
+          "N"
+        ],
+        "title": "Our Brand Recommended",
+        "type": "string"
+      },
+      "our_brand_rank": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Our Brand Rank"
+      },
+      "our_brand_top1": {
+        "enum": [
+          "Y",
+          "N"
+        ],
+        "title": "Our Brand Top1",
+        "type": "string"
+      },
+      "our_brand_top3": {
+        "enum": [
+          "Y",
+          "N"
+        ],
+        "title": "Our Brand Top3",
+        "type": "string"
+      },
+      "our_brand_sentiment": {
+        "anyOf": [
+          {
+            "enum": [
+              "positive",
+              "neutral",
+              "negative"
+            ],
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Our Brand Sentiment"
+      },
+      "evidence_type": {
+        "anyOf": [
+          {
+            "enum": [
+              "official",
+              "review",
+              "community",
+              "media",
+              "unknown"
+            ],
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Evidence Type"
+      },
+      "evasion": {
+        "enum": [
+          "Y",
+          "N"
+        ],
+        "title": "Evasion",
+        "type": "string"
+      },
+      "clarification_request": {
+        "enum": [
+          "Y",
+          "N"
+        ],
+        "title": "Clarification Request",
+        "type": "string"
+      },
+      "off_topic": {
+        "enum": [
+          "Y",
+          "N"
+        ],
+        "title": "Off Topic",
+        "type": "string"
+      },
+      "top_exposed_brands": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Top Exposed Brands",
+        "type": "array"
+      },
+      "recommended_brands": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Recommended Brands",
+        "type": "array"
+      },
+      "mentioned_competitors": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Mentioned Competitors",
+        "type": "array"
+      },
+      "recommended_competitors": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Recommended Competitors",
+        "type": "array"
+      },
+      "top1_brand": {
+        "default": "",
+        "title": "Top1 Brand",
+        "type": "string"
+      },
+      "final_recommendation": {
+        "default": "",
+        "title": "Final Recommendation",
+        "type": "string"
+      },
+      "target_competitor_mentioned": {
+        "enum": [
+          "Y",
+          "N"
+        ],
+        "title": "Target Competitor Mentioned",
+        "type": "string"
+      },
+      "target_competitor_recommended": {
+        "enum": [
+          "Y",
+          "N"
+        ],
+        "title": "Target Competitor Recommended",
+        "type": "string"
+      },
+      "target_competitor_rank": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Target Competitor Rank"
+      },
+      "target_competitor_top1": {
+        "enum": [
+          "Y",
+          "N"
+        ],
+        "title": "Target Competitor Top1",
+        "type": "string"
+      }
+    },
+    "required": [
+      "our_brand_mentioned",
+      "our_brand_recommended",
+      "our_brand_top1",
+      "our_brand_top3",
+      "evasion",
+      "clarification_request",
+      "off_topic",
+      "target_competitor_mentioned",
+      "target_competitor_recommended",
+      "target_competitor_top1"
+    ],
+    "title": "ParseResult",
+    "type": "object"
+  },
+  "system_prompt": "다음은 EMS 케겔 힙머신 관련 질문에 대한 AI 응답을 분석하는 작업입니다.\n브랜드 노출·추천 상태를 **엄격한 정의에 따라** JSON으로 구조화해야 합니다.\n\n[브랜드 컨텍스트 — 매 호출마다 동일]\n\n우리 브랜드:\n- 브랜드명: 바디닥터K\n- 영문명: BodyDoctorK\n\n경쟁사 목록:\n- 이지케이 (Easy-K) 요실금치료기\n- 닥터케이 저주파 EMS 자동 케겔운동기\n\n[엄격한 정의 — 잘못 분류 시 진단 결과가 오염됩니다]\n\n▼ mentioned (Y/N): 응답 본문에 브랜드명/제품명이 한 번이라도 등장하면 Y.\n\n▼ recommended (Y/N): AI가 사용자에게 그 브랜드/제품을 **사용·구매하도록 명시적으로 권유**했을 때만 Y.\n  ✓ Y 인 경우 (명시적 추천 표현):\n    - \"...추천합니다\", \"...권장합니다\", \"...권해드립니다\"\n    - \"고려하시면 좋습니다\", \"선택하시면 좋습니다\", \"...을 추천드립니다\"\n    - \"...이 좋은 옵션입니다\", \"탁월한 선택입니다\"\n    - 번호 매긴 추천 목록에 포함\n  ✗ N 인 경우 (추천 아님):\n    - 단순 정보 제공: \"X는 ~한 제품입니다\", \"X는 ~기능을 합니다\"\n    - 사실 진술: \"X는 2020년 수상했습니다\", \"X는 FDA 인증을 받았습니다\"\n    - 비교 설명: \"A는 ~하고 B는 ~합니다\" (어느 쪽도 권유 안 함)\n    - 사용법·주의사항 안내: \"X 사용 시 주의하세요\" (사용을 전제로 한 안내일 뿐 권유 아님)\n\n▼ top1 (Y/N): 응답이 **명시적으로 순위를 매기고 1위로 지목**한 경우만 Y.\n  ✓ Y 인 경우:\n    - \"1위로 추천\", \"가장 추천드리는 것은\", \"최우선 선택\", \"베스트는\"\n    - 번호 매긴 추천 목록의 1번\n    - \"X가 가장 좋습니다\"\n  ✗ N 인 경우:\n    - 본문에서 첫 번째로 언급됨 (단순 텍스트 순서) → top1 아님\n    - 회피·정보부족 답변에서 우리만 등장 → top1 아님\n    - 비교 설명에서 우리가 먼저 나옴 → top1 아님\n    - \"X도 추천\", \"Y도 좋다\"식 병렬 추천 → 어느 것도 top1 아님 (모두 N)\n\n▼ top3 (Y/N): 명시적 ranking에서 상위 3위 안에 있을 때만 Y. top1 규칙과 동일하게 엄격.\n\n▼ evasion (Y/N): AI가 답을 회피했으면 Y.\n  ✓ 회피 패턴:\n    - \"현재 제공된 정보로는...어렵습니다\"\n    - \"확인할 수 없습니다\", \"확인하기 어렵습니다\"\n    - \"죄송하지만...찾을 수 없었습니다\"\n    - \"구체적인 정보를 제공하기 어렵습니다\"\n    - 일반 정보만 제공하고 구체적 추천 회피\n  ✓ evasion=Y 인 경우, recommended/top1/top3 는 모두 N (회피 시 추천 아님)\n\n▼ clarification_request (Y/N): AI가 추천하기 전에 **사용자에게 추가 정보를 요구**한 경우 Y.\n  ✓ 패턴:\n    - \"어떤 용도로 쓰실 건가요?\"\n    - \"예산이 어느 정도세요?\", \"사용 시간대를 알려주시면...\"\n    - \"더 자세한 정보를 알려주시면 추천드릴게요\"\n    - \"사용자분의 상황을 더 알려주시면 적합한 제품을...\"\n  ✗ 일반 질문 답변 후 부가 안내가 들어간 경우는 N\n    (예: \"...추천드립니다. 추가로 OOO 상황이라면 다른 제품이 더 맞을 수 있어요\" — 이미 추천했음)\n  ✓ 의미: clarification_request=Y 인 응답은 \"추천 거부\"가 아니라 \"정보 부족으로 보류\" 상태.\n    추천률 분모에서 제외해 해석할 수도 있음 (집계 단계 결정).\n\n▼ off_topic (Y/N): 응답이 **질문 의도와 일치하지 않을** 때 Y.\n  ✓ 대표 패턴:\n    - \"X보다 나은 거 뭐 있어?\" → 대안을 묻는 질문인데 응답이 X(경쟁사)에 대한 설명만 함\n    - \"X 대신 살 만한 거?\" → 대안 추천이 아니라 X 자체 리뷰\n    - \"A vs B 어디가 나아?\" → 비교 없이 한쪽만 길게 설명 (직접 비교 회피)\n    - \"1만원대 추천\" → 가격대 무시한 일반 추천\n  ✗ 응답이 질문에 정확히 답하면 N\n  ✓ 의미: off_topic=Y 면 진단 지표(comp_only 미노출, h2h 무승부 등) 분모에서 제외 고려 가치.\n\n▼ sentiment (positive/neutral/negative/null):\n  - positive: \"탁월한\", \"효과 좋다\", \"강력 추천\" 등\n  - negative: \"단점이 많다\", \"권장하지 않는다\", \"주의가 필요하다 (안전 경고)\", \"효과 미미\"\n  - neutral: 단순 정보 제공, 중립 비교, 사용법 안내\n  - null: 우리 브랜드 미언급\n\n▼ top_exposed_brands: 응답에서 명시적 추천 순위가 있을 때 순서대로. 명시 순위 없으면 [].\n\n▼ top1_brand: 응답이 명시적으로 1위로 꼽은 브랜드. 명시 없으면 빈 문자열.\n\n▼ mentioned_competitors / recommended_competitors: 우리 브랜드 제외, 경쟁사 목록 중 해당하는 것만.\n\n엄격하게 판단하세요 — 애매하면 N으로. 출력 스키마는 시스템이 자동으로 검증합니다.\n\n[입력 형식]\n사용자 메시지에 다음 형식으로 응답이 전달됩니다:\n\n타깃 경쟁사: <경쟁사명 또는 \"없음\">\n\n응답:\n---\n<AI 응답 본문>\n---\n\n각 호출마다 응답을 분석해 ParseResult 스키마에 맞춰 반환하세요."
+}

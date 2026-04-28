@@ -1,0 +1,115 @@
+{
+  "brand_name": "프로폴린스",
+  "total_runs": 147,
+  "distinct_prompts": 74,
+  "our_brand_rank": 7,
+  "our_brand_share": 0.0,
+  "our_brand_hit_count": 0,
+  "total_brands_detected": 7,
+  "rows": [
+    {
+      "brand": "리스테린",
+      "hit_count": 36,
+      "share": 24.49,
+      "aliases": [
+        "리스테린",
+        "Listerine",
+        "listerine",
+        "리스테린 토탈 케어",
+        "리스테린 토탈 케어 무알코올",
+        "리스테린(Listerine)",
+        "1. 리스테린(Listerine) 토탈 케어",
+        "리스테린 토탈케어 제로"
+      ],
+      "is_ours": false,
+      "is_known_competitor": true,
+      "rank": 1
+    },
+    {
+      "brand": "클로르헥시딘",
+      "hit_count": 19,
+      "share": 12.93,
+      "aliases": [
+        "클로르헥시딘",
+        "클로르헥시딘(Chlorhexidine)",
+        "클로헥시딘 함유 구강청결제",
+        "Chlorhexidine"
+      ],
+      "is_ours": false,
+      "is_known_competitor": false,
+      "rank": 2
+    },
+    {
+      "brand": "가그린",
+      "hit_count": 17,
+      "share": 11.56,
+      "aliases": [
+        "가그린",
+        "가그린(Garglin)",
+        "2. 가그린(Garglin) 오리지널",
+        "가그린 제로",
+        "Garglin"
+      ],
+      "is_ours": false,
+      "is_known_competitor": false,
+      "rank": 3
+    },
+    {
+      "brand": "콜게이트",
+      "hit_count": 14,
+      "share": 9.52,
+      "aliases": [
+        "콜게이트",
+        "콜게이트 플루오린 가글",
+        "콜게이트 플락스",
+        "3. 콜게이트(Colgate) 플락스",
+        "콜게이트 플루오린트 무알코올 가글",
+        "Colgate"
+      ],
+      "is_ours": false,
+      "is_known_competitor": false,
+      "rank": 4
+    },
+    {
+      "brand": "센소다인",
+      "hit_count": 9,
+      "share": 6.12,
+      "aliases": [
+        "센소다인",
+        "센소다인 구강청결제",
+        "센소다인 무알코올 가글"
+      ],
+      "is_ours": false,
+      "is_known_competitor": false,
+      "rank": 5
+    },
+    {
+      "brand": "오랄비",
+      "hit_count": 4,
+      "share": 2.72,
+      "aliases": [
+        "오랄비",
+        "오랄비 구강청결제"
+      ],
+      "is_ours": false,
+      "is_known_competitor": false,
+      "rank": 6
+    },
+    {
+      "brand": "프로폴린스",
+      "hit_count": 0,
+      "share": 0.0,
+      "aliases": [
+        "프로폴린스",
+        "Propolinse",
+        "프로폴린스 가글",
+        "프로폴린스 구강청결제",
+        "지앤코스 프로폴린스",
+        "지앤코스"
+      ],
+      "is_ours": true,
+      "is_known_competitor": false,
+      "rank": 7
+    }
+  ]
+}

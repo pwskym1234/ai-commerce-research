@@ -1,0 +1,621 @@
+{
+  "brand_name": "프로폴린스",
+  "dashboard_mode": "category_first",
+  "category_cards": [
+    {
+      "category_code": "NEUTRAL",
+      "category": "중립",
+      "total_rows": 147,
+      "primary_metric_label": "언급률",
+      "primary_metric_value": 0.0,
+      "primary_metric_count": 0,
+      "primary_metric_denom": 147,
+      "secondary_metric_label": "추천률",
+      "secondary_metric_value": 0.0,
+      "secondary_metric_count": 0,
+      "secondary_metric_denom": 147,
+      "clarification_count": 0,
+      "off_topic_count": 3,
+      "effective_denom": 144,
+      "effective_primary_count": 0,
+      "effective_primary_value": 0.0,
+      "effective_secondary_count": 0,
+      "effective_secondary_value": 0.0,
+      "explain": "브랜드를 모르는 상태의 질문에서 우리 브랜드가 자연스럽게 떠오르는지"
+    },
+    {
+      "category_code": "BRAND_ONLY",
+      "category": "브랜드 지명",
+      "total_rows": 30,
+      "primary_metric_label": "긍정 비율",
+      "primary_metric_value": 6.67,
+      "primary_metric_count": 2,
+      "primary_metric_denom": 30,
+      "secondary_metric_label": "부정 비율",
+      "secondary_metric_value": 6.67,
+      "secondary_metric_count": 2,
+      "secondary_metric_denom": 30,
+      "extra_metric_label": "중립 비율",
+      "extra_metric_value": 86.67,
+      "clarification_count": 0,
+      "off_topic_count": 0,
+      "effective_denom": 30,
+      "effective_primary_count": 2,
+      "effective_primary_value": 6.67,
+      "effective_secondary_count": 2,
+      "effective_secondary_value": 6.67,
+      "explain": "브랜드명을 직접 넣어 물었을 때 AI가 우리 브랜드를 어떤 톤으로 말하는지"
+    },
+    {
+      "category_code": "COMP_ONLY",
+      "category": "경쟁사 대안",
+      "total_rows": 57,
+      "primary_metric_label": "대안 소환율",
+      "primary_metric_value": 0.0,
+      "primary_metric_count": 0,
+      "primary_metric_denom": 57,
+      "secondary_metric_label": "공동 언급률",
+      "secondary_metric_value": 0.0,
+      "secondary_metric_count": 0,
+      "secondary_metric_denom": 57,
+      "extra_metric_label": "평균 추천 순위(우리/경쟁사)",
+      "extra_metric_value": "- / 2",
+      "clarification_count": 0,
+      "off_topic_count": 2,
+      "effective_denom": 55,
+      "effective_primary_count": 0,
+      "effective_primary_value": 0.0,
+      "effective_secondary_count": 0,
+      "effective_secondary_value": 0.0,
+      "explain": "경쟁사 대신 다른 대안을 찾을 때 우리 브랜드가 얼마나 추천되는지"
+    },
+    {
+      "category_code": "H2H",
+      "category": "직접 비교",
+      "total_rows": 60,
+      "primary_metric_label": "승률",
+      "primary_metric_value": 13.33,
+      "primary_metric_count": 8,
+      "primary_metric_denom": 60,
+      "secondary_metric_label": "패배율",
+      "secondary_metric_value": 16.67,
+      "secondary_metric_count": 10,
+      "secondary_metric_denom": 60,
+      "extra_metric_label": "무승부율",
+      "extra_metric_value": 70.0,
+      "clarification_count": 0,
+      "off_topic_count": 0,
+      "effective_denom": 60,
+      "effective_primary_count": 8,
+      "effective_primary_value": 13.33,
+      "effective_secondary_count": 10,
+      "effective_secondary_value": 16.67,
+      "explain": "직접 비교 질문에서 경쟁사 대비 얼마나 이기는지"
+    }
+  ],
+  "neutral": {
+    "category_code": "NEUTRAL",
+    "category": "중립",
+    "total_rows": 147,
+    "primary_metric_label": "언급률",
+    "primary_metric_value": 0.0,
+    "primary_metric_count": 0,
+    "primary_metric_denom": 147,
+    "secondary_metric_label": "추천률",
+    "secondary_metric_value": 0.0,
+    "secondary_metric_count": 0,
+    "secondary_metric_denom": 147,
+    "clarification_count": 0,
+    "off_topic_count": 3,
+    "effective_denom": 144,
+    "effective_primary_count": 0,
+    "effective_primary_value": 0.0,
+    "effective_secondary_count": 0,
+    "effective_secondary_value": 0.0,
+    "explain": "브랜드를 모르는 상태의 질문에서 우리 브랜드가 자연스럽게 떠오르는지"
+  },
+  "brand_only": {
+    "category_code": "BRAND_ONLY",
+    "category": "브랜드 지명",
+    "total_rows": 30,
+    "primary_metric_label": "긍정 비율",
+    "primary_metric_value": 6.67,
+    "primary_metric_count": 2,
+    "primary_metric_denom": 30,
+    "secondary_metric_label": "부정 비율",
+    "secondary_metric_value": 6.67,
+    "secondary_metric_count": 2,
+    "secondary_metric_denom": 30,
+    "extra_metric_label": "중립 비율",
+    "extra_metric_value": 86.67,
+    "clarification_count": 0,
+    "off_topic_count": 0,
+    "effective_denom": 30,
+    "effective_primary_count": 2,
+    "effective_primary_value": 6.67,
+    "effective_secondary_count": 2,
+    "effective_secondary_value": 6.67,
+    "explain": "브랜드명을 직접 넣어 물었을 때 AI가 우리 브랜드를 어떤 톤으로 말하는지"
+  },
+  "comp_only": {
+    "category_code": "COMP_ONLY",
+    "category": "경쟁사 대안",
+    "total_rows": 57,
+    "primary_metric_label": "대안 소환율",
+    "primary_metric_value": 0.0,
+    "primary_metric_count": 0,
+    "primary_metric_denom": 57,
+    "secondary_metric_label": "공동 언급률",
+    "secondary_metric_value": 0.0,
+    "secondary_metric_count": 0,
+    "secondary_metric_denom": 57,
+    "extra_metric_label": "평균 추천 순위(우리/경쟁사)",
+    "extra_metric_value": "- / 2",
+    "clarification_count": 0,
+    "off_topic_count": 2,
+    "effective_denom": 55,
+    "effective_primary_count": 0,
+    "effective_primary_value": 0.0,
+    "effective_secondary_count": 0,
+    "effective_secondary_value": 0.0,
+    "explain": "경쟁사 대신 다른 대안을 찾을 때 우리 브랜드가 얼마나 추천되는지"
+  },
+  "h2h": {
+    "category_code": "H2H",
+    "category": "직접 비교",
+    "total_rows": 60,
+    "primary_metric_label": "승률",
+    "primary_metric_value": 13.33,
+    "primary_metric_count": 8,
+    "primary_metric_denom": 60,
+    "secondary_metric_label": "패배율",
+    "secondary_metric_value": 16.67,
+    "secondary_metric_count": 10,
+    "secondary_metric_denom": 60,
+    "extra_metric_label": "무승부율",
+    "extra_metric_value": 70.0,
+    "clarification_count": 0,
+    "off_topic_count": 0,
+    "effective_denom": 60,
+    "effective_primary_count": 8,
+    "effective_primary_value": 13.33,
+    "effective_secondary_count": 10,
+    "effective_secondary_value": 16.67,
+    "explain": "직접 비교 질문에서 경쟁사 대비 얼마나 이기는지"
+  },
+  "h2h_by_competitor": [
+    {
+      "target_competitor": "테라브레스",
+      "total_rows": 20,
+      "wins": 1,
+      "losses": 7,
+      "draws": 12,
+      "win_rate": 5.0,
+      "loss_rate": 35.0,
+      "draw_rate": 60.0,
+      "avg_our_rank_when_ranked": 2,
+      "avg_target_rank_when_ranked": 1
+    },
+    {
+      "target_competitor": "리스테린",
+      "total_rows": 20,
+      "wins": 4,
+      "losses": 3,
+      "draws": 13,
+      "win_rate": 20.0,
+      "loss_rate": 15.0,
+      "draw_rate": 65.0,
+      "avg_our_rank_when_ranked": 1,
+      "avg_target_rank_when_ranked": 1.5
+    },
+    {
+      "target_competitor": "어썸쿨 프로폴리스 가글 600ml",
+      "total_rows": 20,
+      "wins": 3,
+      "losses": 0,
+      "draws": 17,
+      "win_rate": 15.0,
+      "loss_rate": 0.0,
+      "draw_rate": 85.0,
+      "avg_our_rank_when_ranked": null,
+      "avg_target_rank_when_ranked": null
+    }
+  ],
+  "comp_only_by_competitor": [
+    {
+      "target_competitor": "리스테린",
+      "total_rows": 20,
+      "surfaced_count": 0,
+      "co_mentioned_count": 0,
+      "not_surfaced_count": 20,
+      "surfaced_rate": 0.0,
+      "co_mentioned_rate": 0.0,
+      "not_surfaced_rate": 100.0,
+      "avg_our_rank_when_ranked": null,
+      "avg_target_rank_when_ranked": 1.5
+    },
+    {
+      "target_competitor": "어썸쿨 프로폴리스 가글 600ml",
+      "total_rows": 18,
+      "surfaced_count": 0,
+      "co_mentioned_count": 0,
+      "not_surfaced_count": 18,
+      "surfaced_rate": 0.0,
+      "co_mentioned_rate": 0.0,
+      "not_surfaced_rate": 100.0,
+      "avg_our_rank_when_ranked": null,
+      "avg_target_rank_when_ranked": null
+    },
+    {
+      "target_competitor": "테라브레스",
+      "total_rows": 19,
+      "surfaced_count": 0,
+      "co_mentioned_count": 0,
+      "not_surfaced_count": 19,
+      "surfaced_rate": 0.0,
+      "co_mentioned_rate": 0.0,
+      "not_surfaced_rate": 100.0,
+      "avg_our_rank_when_ranked": null,
+      "avg_target_rank_when_ranked": 3
+    }
+  ],
+  "diagnostics": [
+    "리스테린 대안 질문 미노출률 100%",
+    "어썸쿨 프로폴리스 가글 600ml 대안 질문 미노출률 100%",
+    "테라브레스 대안 질문 미노출률 100%"
+  ],
+  "action_items": [
+    {
+      "problem": "리스테린 대안 질문에서 우리 브랜드 미노출 100%",
+      "hypothesis": "경쟁사 대체재 맥락에서 AI가 우리 브랜드를 후보로 인식 못 함",
+      "actions": [
+        "\"리스테린 대신 우리 브랜드\" 비교 콘텐츠 작성",
+        "대안 검색 키워드 타겟 리뷰 확대",
+        "경쟁사 대비 차별 포인트 페이지 강화"
+      ]
+    },
+    {
+      "problem": "어썸쿨 프로폴리스 가글 600ml 대안 질문에서 우리 브랜드 미노출 100%",
+      "hypothesis": "경쟁사 대체재 맥락에서 AI가 우리 브랜드를 후보로 인식 못 함",
+      "actions": [
+        "\"어썸쿨 프로폴리스 가글 600ml 대신 우리 브랜드\" 비교 콘텐츠 작성",
+        "대안 검색 키워드 타겟 리뷰 확대",
+        "경쟁사 대비 차별 포인트 페이지 강화"
+      ]
+    },
+    {
+      "problem": "테라브레스 대안 질문에서 우리 브랜드 미노출 100%",
+      "hypothesis": "경쟁사 대체재 맥락에서 AI가 우리 브랜드를 후보로 인식 못 함",
+      "actions": [
+        "\"테라브레스 대신 우리 브랜드\" 비교 콘텐츠 작성",
+        "대안 검색 키워드 타겟 리뷰 확대",
+        "경쟁사 대비 차별 포인트 페이지 강화"
+      ]
+    },
+    {
+      "problem": "어썸쿨 프로폴리스 가글 600ml 비교에서 우열 판정 안 됨 (무 85%)",
+      "hypothesis": "양 브랜드 모두 추천 안 하거나 동등 추천 → 차별 시그널 부족",
+      "actions": [
+        "어썸쿨 프로폴리스 가글 600ml와 다른 우위 포인트 명문화",
+        "구체 수치·임상 결과로 차별점 강화"
+      ]
+    },
+    {
+      "problem": "테라브레스 직접 비교에서 열세 (승률 5%, 패배율 35%)",
+      "hypothesis": "테라브레스의 특정 포지셔닝에서 밀리고 있음",
+      "actions": [
+        "테라브레스 대비 차별 메시지 명확화",
+        "비교표/비교 리뷰 콘텐츠 강화",
+        "약점 포지션 보완 콘텐츠 작성"
+      ]
+    },
+    {
+      "problem": "브랜드 직접 질문 응답이 중립/부정에 몰림 (6.67% 긍정)",
+      "hypothesis": "AI가 참조할 긍정 시그널(리뷰/수상/임상)이 부족",
+      "actions": [
+        "수상·임상·후기 페이지 강화",
+        "브랜드 스토리 콘텐츠 강화"
+      ]
+    },
+    {
+      "problem": "중립 질문에서 브랜드 등장률 낮음 (0%)",
+      "hypothesis": "AI가 기본 후보군으로 우리 브랜드를 잘 떠올리지 못함",
+      "actions": [
+        "제품 소개/FAQ 콘텐츠 보강",
+        "추천 리뷰·사용기 콘텐츠 확대",
+        "카테고리 탐색형 비교 콘텐츠 작성"
+      ]
+    },
+    {
+      "problem": "‘카테고리 일반’ 류 질문에서 브랜드 미노출 (0%, n=99)",
+      "hypothesis": "이 의도(CAT)에 맞는 정확한 키워드 매칭이 부족",
+      "actions": [
+        "카테고리 일반 시나리오에 특화된 콘텐츠 추가",
+        "관련 키워드(예시 질문 톤)로 SEO·블로그 강화"
+      ]
+    },
+    {
+      "problem": "‘증상/상황’ 류 질문에서 브랜드 미노출 (0%, n=16)",
+      "hypothesis": "이 의도(SYM)에 맞는 정확한 키워드 매칭이 부족",
+      "actions": [
+        "증상/상황 시나리오에 특화된 콘텐츠 추가",
+        "관련 키워드(예시 질문 톤)로 SEO·블로그 강화"
+      ]
+    },
+    {
+      "problem": "‘솔루션 대안 비교’ 류 질문에서 브랜드 미노출 (0%, n=32)",
+      "hypothesis": "이 의도(ALT)에 맞는 정확한 키워드 매칭이 부족",
+      "actions": [
+        "솔루션 대안 비교 시나리오에 특화된 콘텐츠 추가",
+        "관련 키워드(예시 질문 톤)로 SEO·블로그 강화"
+      ]
+    },
+    {
+      "problem": "리스테린 비교에서 우열 판정 안 됨 (무 65%)",
+      "hypothesis": "양 브랜드 모두 추천 안 하거나 동등 추천 → 차별 시그널 부족",
+      "actions": [
+        "리스테린와 다른 우위 포인트 명문화",
+        "구체 수치·임상 결과로 차별점 강화"
+      ]
+    }
+  ],
+  "spotlights": {
+    "neutral_strong": [],
+    "neutral_weak": [
+      {
+        "prompt_id": "NEUTRAL-001",
+        "category_code": "NEUTRAL",
+        "target_competitor": "",
+        "prompt_text": "30대 직장인인데 구강청결제 처음 써봐. 입냄새 케어용으로 뭐 사면 돼?",
+        "mention_rate": 0.0,
+        "recommendation_rate": 0.0,
+        "wins": 0,
+        "losses": 0,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 0,
+        "positive_count": 0,
+        "negative_count": 0
+      },
+      {
+        "prompt_id": "NEUTRAL-002",
+        "category_code": "NEUTRAL",
+        "target_competitor": "",
+        "prompt_text": "20대 후반인데 가글 입문자야. 자극 약하면서 무난한 거 뭐 있어?",
+        "mention_rate": 0.0,
+        "recommendation_rate": 0.0,
+        "wins": 0,
+        "losses": 0,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 0,
+        "positive_count": 0,
+        "negative_count": 0
+      },
+      {
+        "prompt_id": "NEUTRAL-003",
+        "category_code": "NEUTRAL",
+        "target_competitor": "",
+        "prompt_text": "500ml 이상 용량 기준으로 가성비 좋은 가글 고르려면 뭐 봐야 해?",
+        "mention_rate": 0.0,
+        "recommendation_rate": 0.0,
+        "wins": 0,
+        "losses": 0,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 0,
+        "positive_count": 0,
+        "negative_count": 0
+      }
+    ],
+    "h2h_win": [
+      {
+        "prompt_id": "H2H-002",
+        "category_code": "H2H",
+        "target_competitor": "어썸쿨 프로폴리스 가글 600ml",
+        "prompt_text": "어썸쿨 프로폴리스 가글 600ml 1년 쓰다가 프로폴린스으로 바꿔볼 가치 있을까?",
+        "mention_rate": 100.0,
+        "recommendation_rate": 100.0,
+        "wins": 2,
+        "losses": 0,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 0,
+        "positive_count": 2,
+        "negative_count": 0
+      },
+      {
+        "prompt_id": "H2H-012",
+        "category_code": "H2H",
+        "target_competitor": "리스테린",
+        "prompt_text": "구강청결제 리스테린 1년 쓰다가 자극 강해서 프로폴린스로 갈아타볼까 고민 중인데 어때?",
+        "mention_rate": 100.0,
+        "recommendation_rate": 100.0,
+        "wins": 2,
+        "losses": 0,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 0,
+        "positive_count": 2,
+        "negative_count": 0
+      },
+      {
+        "prompt_id": "H2H-006",
+        "category_code": "H2H",
+        "target_competitor": "어썸쿨 프로폴리스 가글 600ml",
+        "prompt_text": "20대 후반 가글 처음 써보는 입문자인데 프로폴린스이랑 어썸쿨 프로폴리스 가글 600ml 중 뭐부터?",
+        "mention_rate": 100.0,
+        "recommendation_rate": 50.0,
+        "wins": 1,
+        "losses": 0,
+        "draws": 1,
+        "surfaced_count": 0,
+        "not_surfaced_count": 0,
+        "positive_count": 1,
+        "negative_count": 0
+      }
+    ],
+    "h2h_loss": [
+      {
+        "prompt_id": "H2H-023",
+        "category_code": "H2H",
+        "target_competitor": "테라브레스",
+        "prompt_text": "30대 만성 구취 심한 편인데 프로폴린스이랑 테라브레스 중 뭐가 더 확실해?",
+        "mention_rate": 100.0,
+        "recommendation_rate": 0.0,
+        "wins": 0,
+        "losses": 2,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 0,
+        "positive_count": 0,
+        "negative_count": 1
+      },
+      {
+        "prompt_id": "H2H-027",
+        "category_code": "H2H",
+        "target_competitor": "테라브레스",
+        "prompt_text": "20대 후반 처음 구강청결제 사는 건데 프로폴린스이랑 테라브레스 중 실패 확률 낮은 쪽?",
+        "mention_rate": 100.0,
+        "recommendation_rate": 50.0,
+        "wins": 0,
+        "losses": 2,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 0,
+        "positive_count": 0,
+        "negative_count": 0
+      },
+      {
+        "prompt_id": "H2H-029",
+        "category_code": "H2H",
+        "target_competitor": "테라브레스",
+        "prompt_text": "30대 직장인이 점심 후 사무실에서 쓰기엔 가글 프로폴린스이랑 테라브레스 중 어디가 현실적?",
+        "mention_rate": 100.0,
+        "recommendation_rate": 0.0,
+        "wins": 0,
+        "losses": 2,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 0,
+        "positive_count": 0,
+        "negative_count": 2
+      }
+    ],
+    "comp_only_surfaced": [],
+    "comp_only_not_surfaced": [
+      {
+        "prompt_id": "COMP_ONLY-001",
+        "category_code": "COMP_ONLY",
+        "target_competitor": "어썸쿨 프로폴리스 가글 600ml",
+        "prompt_text": "어썸쿨 프로폴리스 가글 600ml 말고 비슷한 프로폴리스 성분 가글 뭐 있어?",
+        "mention_rate": 0.0,
+        "recommendation_rate": 0.0,
+        "wins": 0,
+        "losses": 0,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 2,
+        "positive_count": 0,
+        "negative_count": 0
+      },
+      {
+        "prompt_id": "COMP_ONLY-002",
+        "category_code": "COMP_ONLY",
+        "target_competitor": "어썸쿨 프로폴리스 가글 600ml",
+        "prompt_text": "어썸쿨 프로폴리스 가글 600ml 대신 1만원대에서 살 만한 프로폴리스 가글 뭐야?",
+        "mention_rate": 0.0,
+        "recommendation_rate": 0.0,
+        "wins": 0,
+        "losses": 0,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 2,
+        "positive_count": 0,
+        "negative_count": 0
+      },
+      {
+        "prompt_id": "COMP_ONLY-003",
+        "category_code": "COMP_ONLY",
+        "target_competitor": "어썸쿨 프로폴리스 가글 600ml",
+        "prompt_text": "어썸쿨 프로폴리스 가글 600ml 1년 쓰다가 다른 프로폴리스 가글 써볼까 하는데 뭐 괜찮아?",
+        "mention_rate": 0.0,
+        "recommendation_rate": 0.0,
+        "wins": 0,
+        "losses": 0,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 2,
+        "positive_count": 0,
+        "negative_count": 0
+      }
+    ],
+    "brand_only_negative": [
+      {
+        "prompt_id": "BRAND_ONLY-001",
+        "category_code": "BRAND_ONLY",
+        "target_competitor": "",
+        "prompt_text": "프로폴린스 입냄새 케어 진짜 효과 있어 아니면 마케팅이야? 6개월 이상 사용자 반응 기준",
+        "mention_rate": 100.0,
+        "recommendation_rate": 0.0,
+        "wins": 0,
+        "losses": 0,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 0,
+        "positive_count": 0,
+        "negative_count": 1
+      },
+      {
+        "prompt_id": "BRAND_ONLY-013",
+        "category_code": "BRAND_ONLY",
+        "target_competitor": "",
+        "prompt_text": "프로폴린스 안 맞는 사람도 있어? 어떤 체질이나 어떤 경우에 별로라는 후기 나와?",
+        "mention_rate": 100.0,
+        "recommendation_rate": 0.0,
+        "wins": 0,
+        "losses": 0,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 0,
+        "positive_count": 0,
+        "negative_count": 1
+      }
+    ]
+  },
+  "neutral_by_subcategory": [
+    {
+      "subcategory": "CAT",
+      "subcategory_label": "카테고리 일반",
+      "total_rows": 99,
+      "mention_count": 0,
+      "mention_rate": 0.0,
+      "recommendation_count": 0,
+      "recommendation_rate": 0.0,
+      "top1_count": 0,
+      "top1_rate": 0.0
+    },
+    {
+      "subcategory": "SYM",
+      "subcategory_label": "증상/상황",
+      "total_rows": 16,
+      "mention_count": 0,
+      "mention_rate": 0.0,
+      "recommendation_count": 0,
+      "recommendation_rate": 0.0,
+      "top1_count": 0,
+      "top1_rate": 0.0
+    },
+    {
+      "subcategory": "ALT",
+      "subcategory_label": "솔루션 대안 비교",
+      "total_rows": 32,
+      "mention_count": 0,
+      "mention_rate": 0.0,
+      "recommendation_count": 0,
+      "recommendation_rate": 0.0,
+      "top1_count": 0,
+      "top1_rate": 0.0
+    }
+  ]
+}

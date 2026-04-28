@@ -1,0 +1,84 @@
+{
+  "brand_name": "프로폴린스",
+  "brand_name_en": "Propolinse",
+  "brand_keywords": [
+    "프로폴린스",
+    "Propolinse",
+    "propolinse",
+    "프로폴린스 가글",
+    "프로폴린스 구강청결제",
+    "지앤코스 프로폴린스",
+    "지앤코스"
+  ],
+  "product_category": "구강청결제 / 가글 (의약외품)",
+  "product_description": "프로폴리스 추출물과 차 카테킨 성분이 입안의 단백질 찌꺼기(노폐물)를 응고시켜 배출하는 '찌꺼기 가글'. 지앤코스가 유통하는 의약외품 구강청결제로, 사용 후 가시적으로 떠오르는 찌꺼기가 특징.",
+  "competitors": [
+    {
+      "name": "어썸쿨 프로폴리스 가글 600ml",
+      "keywords": [
+        "어썸쿨",
+        "어썸쿨 가글",
+        "어썸쿨 프로폴리스",
+        "어썸쿨 프로폴리스 가글",
+        "프로폴리스 가글 600ml",
+        "Awesome Cool",
+        "AwesomeCool",
+        "awesome cool"
+      ]
+    },
+    {
+      "name": "리스테린",
+      "keywords": [
+        "Listerine",
+        "listerine"
+      ]
+    },
+    {
+      "name": "테라브레스",
+      "keywords": [
+        "Therabreath",
+        "TheraBreath",
+        "Thera Breath",
+        "therabreath"
+      ]
+    }
+  ],
+  "alternatives": [
+    "치과 스케일링",
+    "치실",
+    "워터픽 (구강세정기)",
+    "혀클리너",
+    "구강 캔디·민트"
+  ],
+  "audit_settings": {
+    "competitor_limit": 5,
+    "category_targets": {
+      "NEUTRAL": 75,
+      "H2H": 30,
+      "COMP_ONLY": 30,
+      "BRAND_ONLY": 15
+    }
+  },
+  "personas": [
+    {
+      "id": "P1",
+      "desc": "30대 직장인, 매일 출근 전 1분 루틴, 입냄새 신경"
+    },
+    {
+      "id": "P2",
+      "desc": "20대 후반 가글 입문자, 자극 약한 무알코올 선호"
+    },
+    {
+      "id": "P3",
+      "desc": "60대 부모 (식후 텁텁함 케어), 가족 함께 쓸 수 있는 제품"
+    },
+    {
+      "id": "P4",
+      "desc": "임신·수유 중 30-40대, 안전·저자극 우선, 가격 민감"
+    },
+    {
+      "id": "P5",
+      "desc": "리스테린/테라브레스 사용 경험자, 자극·ml당 가격 비교"
+    }
+  ]
+}

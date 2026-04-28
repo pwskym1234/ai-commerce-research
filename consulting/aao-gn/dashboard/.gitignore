@@ -1,0 +1,14 @@
+node_modules/
+.next/
+out/
+dist/
+.DS_Store
+*.log
+.env*.local
+next-env.d.ts
+.vscode/
+.gstack/
+.vercel
+
+# `npm run sync-brands` 가 빌드 시 ../brands/ 를 rsync 하는 산출물
+brands/

@@ -64,3 +64,6 @@ Thumbs.db
 # 로그
 *.log
 logs/
+
+# Claude Code 로컬 settings (개인 환경)
+.claude/

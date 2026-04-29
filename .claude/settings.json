@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(python3 ml/scripts/parse_responses_claude.py ml/data/b1_runs/b1_closed_medical_device_20260425_205723 --budget 1.0)",
-      "Bash(python3 ml/scripts/parse_responses_claude.py ml/data/b1_runs/b1_closed_gargle_20260425_205908 --budget 1.0)",
-      "Bash(git restore *)"
-    ]
-  }
-}

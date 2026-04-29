@@ -74,7 +74,7 @@ CLOSED_INSTRUCTION = (
 def load_queries(vertical: str) -> list[tuple[str, str, str]]:
     """8유형 × 3 = 24개 (qid, qtype, text)."""
     yaml_path = EXP_DIR / "prompts" / (
-        "queries.yaml" if vertical == "medical_device" else "queries_gargle.yaml"
+        "queries_medical.yaml" if vertical == "medical_device" else "queries_gargle.yaml"
     )
     with yaml_path.open("r", encoding="utf-8") as f:
         data = yaml.safe_load(f)

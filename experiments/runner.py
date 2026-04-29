@@ -60,7 +60,7 @@ CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
 
 # ========== 쿼리 로드 (YAML, 8유형 × 3개) ==========
-QUERIES_YAML = EXP_DIR / "prompts" / "queries.yaml" if False else Path(__file__).resolve().parent / "prompts" / "queries.yaml"
+QUERIES_YAML = Path(__file__).resolve().parent / "prompts" / "queries_medical.yaml"
 
 def load_queries() -> list[tuple[str, str, str]]:
     """Returns list of (query_id, query_type, query_text).

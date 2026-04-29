@@ -1,0 +1,85 @@
+{
+  "brand_name": "바디닥터K",
+  "total_runs": 149,
+  "distinct_prompts": 75,
+  "our_brand_rank": 5,
+  "our_brand_share": 0.0,
+  "our_brand_hit_count": 0,
+  "total_brands_detected": 5,
+  "rows": [
+    {
+      "brand": "엘비",
+      "hit_count": 12,
+      "share": 8.05,
+      "aliases": [
+        "엘비",
+        "엘비 케겔 트레이너 (Elvie Kegel Trainer):",
+        "Elvie Trainer"
+      ],
+      "is_ours": false,
+      "is_known_competitor": false,
+      "rank": 1
+    },
+    {
+      "brand": "인티미나 케겔스마트",
+      "hit_count": 5,
+      "share": 3.36,
+      "aliases": [
+        "인티미나 케겔스마트",
+        "케겔스마트 (KegelSmart):",
+        "KegelSmart by Intimina"
+      ],
+      "is_ours": false,
+      "is_known_competitor": false,
+      "rank": 2
+    },
+    {
+      "brand": "이지케이 (Easy-K) 요실금치료기",
+      "hit_count": 4,
+      "share": 2.68,
+      "aliases": [
+        "이지케이 (Easy-K) 요실금치료기",
+        "이지케이",
+        "Easy-K",
+        "EasyK",
+        "Easy K",
+        "이지케이 요실금",
+        "이지케이 치료기",
+        "이지케이 요실금치료기"
+      ],
+      "is_ours": false,
+      "is_known_competitor": true,
+      "rank": 3
+    },
+    {
+      "brand": "페리핏",
+      "hit_count": 2,
+      "share": 1.34,
+      "aliases": [
+        "페리핏",
+        "Perifit"
+      ],
+      "is_ours": false,
+      "is_known_competitor": false,
+      "rank": 4
+    },
+    {
+      "brand": "바디닥터K",
+      "hit_count": 0,
+      "share": 0.0,
+      "aliases": [
+        "바디닥터K",
+        "BodyDoctorK",
+        "바디닥터 K",
+        "바디닥터케이",
+        "BodyDoctor K",
+        "바디닥터K 케겔 힙머신",
+        "바디닥터 K 케겔",
+        "바디닥터K 힙머신"
+      ],
+      "is_ours": true,
+      "is_known_competitor": false,
+      "rank": 5
+    }
+  ]
+}

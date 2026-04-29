@@ -1,0 +1,621 @@
+{
+  "brand_name": "바디닥터K",
+  "dashboard_mode": "category_first",
+  "category_cards": [
+    {
+      "category_code": "NEUTRAL",
+      "category": "중립",
+      "total_rows": 149,
+      "primary_metric_label": "언급률",
+      "primary_metric_value": 2.68,
+      "primary_metric_count": 4,
+      "primary_metric_denom": 149,
+      "secondary_metric_label": "추천률",
+      "secondary_metric_value": 0.67,
+      "secondary_metric_count": 1,
+      "secondary_metric_denom": 149,
+      "clarification_count": 0,
+      "off_topic_count": 7,
+      "effective_denom": 142,
+      "effective_primary_count": 4,
+      "effective_primary_value": 2.82,
+      "effective_secondary_count": 1,
+      "effective_secondary_value": 0.7,
+      "explain": "브랜드를 모르는 상태의 질문에서 우리 브랜드가 자연스럽게 떠오르는지"
+    },
+    {
+      "category_code": "BRAND_ONLY",
+      "category": "브랜드 지명",
+      "total_rows": 30,
+      "primary_metric_label": "긍정 비율",
+      "primary_metric_value": 6.67,
+      "primary_metric_count": 2,
+      "primary_metric_denom": 30,
+      "secondary_metric_label": "부정 비율",
+      "secondary_metric_value": 0.0,
+      "secondary_metric_count": 0,
+      "secondary_metric_denom": 30,
+      "extra_metric_label": "중립 비율",
+      "extra_metric_value": 93.33,
+      "clarification_count": 0,
+      "off_topic_count": 2,
+      "effective_denom": 28,
+      "effective_primary_count": 2,
+      "effective_primary_value": 7.14,
+      "effective_secondary_count": 0,
+      "effective_secondary_value": 0.0,
+      "explain": "브랜드명을 직접 넣어 물었을 때 AI가 우리 브랜드를 어떤 톤으로 말하는지"
+    },
+    {
+      "category_code": "COMP_ONLY",
+      "category": "경쟁사 대안",
+      "total_rows": 59,
+      "primary_metric_label": "대안 소환율",
+      "primary_metric_value": 0.0,
+      "primary_metric_count": 0,
+      "primary_metric_denom": 59,
+      "secondary_metric_label": "공동 언급률",
+      "secondary_metric_value": 0.0,
+      "secondary_metric_count": 0,
+      "secondary_metric_denom": 59,
+      "extra_metric_label": "평균 추천 순위(우리/경쟁사)",
+      "extra_metric_value": "- / -",
+      "clarification_count": 0,
+      "off_topic_count": 18,
+      "effective_denom": 41,
+      "effective_primary_count": 0,
+      "effective_primary_value": 0.0,
+      "effective_secondary_count": 0,
+      "effective_secondary_value": 0.0,
+      "explain": "경쟁사 대신 다른 대안을 찾을 때 우리 브랜드가 얼마나 추천되는지"
+    },
+    {
+      "category_code": "H2H",
+      "category": "직접 비교",
+      "total_rows": 60,
+      "primary_metric_label": "승률",
+      "primary_metric_value": 20.0,
+      "primary_metric_count": 12,
+      "primary_metric_denom": 60,
+      "secondary_metric_label": "패배율",
+      "secondary_metric_value": 3.33,
+      "secondary_metric_count": 2,
+      "secondary_metric_denom": 60,
+      "extra_metric_label": "무승부율",
+      "extra_metric_value": 76.67,
+      "clarification_count": 0,
+      "off_topic_count": 0,
+      "effective_denom": 60,
+      "effective_primary_count": 12,
+      "effective_primary_value": 20.0,
+      "effective_secondary_count": 2,
+      "effective_secondary_value": 3.33,
+      "explain": "직접 비교 질문에서 경쟁사 대비 얼마나 이기는지"
+    }
+  ],
+  "neutral": {
+    "category_code": "NEUTRAL",
+    "category": "중립",
+    "total_rows": 149,
+    "primary_metric_label": "언급률",
+    "primary_metric_value": 2.68,
+    "primary_metric_count": 4,
+    "primary_metric_denom": 149,
+    "secondary_metric_label": "추천률",
+    "secondary_metric_value": 0.67,
+    "secondary_metric_count": 1,
+    "secondary_metric_denom": 149,
+    "clarification_count": 0,
+    "off_topic_count": 7,
+    "effective_denom": 142,
+    "effective_primary_count": 4,
+    "effective_primary_value": 2.82,
+    "effective_secondary_count": 1,
+    "effective_secondary_value": 0.7,
+    "explain": "브랜드를 모르는 상태의 질문에서 우리 브랜드가 자연스럽게 떠오르는지"
+  },
+  "brand_only": {
+    "category_code": "BRAND_ONLY",
+    "category": "브랜드 지명",
+    "total_rows": 30,
+    "primary_metric_label": "긍정 비율",
+    "primary_metric_value": 6.67,
+    "primary_metric_count": 2,
+    "primary_metric_denom": 30,
+    "secondary_metric_label": "부정 비율",
+    "secondary_metric_value": 0.0,
+    "secondary_metric_count": 0,
+    "secondary_metric_denom": 30,
+    "extra_metric_label": "중립 비율",
+    "extra_metric_value": 93.33,
+    "clarification_count": 0,
+    "off_topic_count": 2,
+    "effective_denom": 28,
+    "effective_primary_count": 2,
+    "effective_primary_value": 7.14,
+    "effective_secondary_count": 0,
+    "effective_secondary_value": 0.0,
+    "explain": "브랜드명을 직접 넣어 물었을 때 AI가 우리 브랜드를 어떤 톤으로 말하는지"
+  },
+  "comp_only": {
+    "category_code": "COMP_ONLY",
+    "category": "경쟁사 대안",
+    "total_rows": 59,
+    "primary_metric_label": "대안 소환율",
+    "primary_metric_value": 0.0,
+    "primary_metric_count": 0,
+    "primary_metric_denom": 59,
+    "secondary_metric_label": "공동 언급률",
+    "secondary_metric_value": 0.0,
+    "secondary_metric_count": 0,
+    "secondary_metric_denom": 59,
+    "extra_metric_label": "평균 추천 순위(우리/경쟁사)",
+    "extra_metric_value": "- / -",
+    "clarification_count": 0,
+    "off_topic_count": 18,
+    "effective_denom": 41,
+    "effective_primary_count": 0,
+    "effective_primary_value": 0.0,
+    "effective_secondary_count": 0,
+    "effective_secondary_value": 0.0,
+    "explain": "경쟁사 대신 다른 대안을 찾을 때 우리 브랜드가 얼마나 추천되는지"
+  },
+  "h2h": {
+    "category_code": "H2H",
+    "category": "직접 비교",
+    "total_rows": 60,
+    "primary_metric_label": "승률",
+    "primary_metric_value": 20.0,
+    "primary_metric_count": 12,
+    "primary_metric_denom": 60,
+    "secondary_metric_label": "패배율",
+    "secondary_metric_value": 3.33,
+    "secondary_metric_count": 2,
+    "secondary_metric_denom": 60,
+    "extra_metric_label": "무승부율",
+    "extra_metric_value": 76.67,
+    "clarification_count": 0,
+    "off_topic_count": 0,
+    "effective_denom": 60,
+    "effective_primary_count": 12,
+    "effective_primary_value": 20.0,
+    "effective_secondary_count": 2,
+    "effective_secondary_value": 3.33,
+    "explain": "직접 비교 질문에서 경쟁사 대비 얼마나 이기는지"
+  },
+  "h2h_by_competitor": [
+    {
+      "target_competitor": "이지케이 (Easy-K) 요실금치료기",
+      "total_rows": 30,
+      "wins": 6,
+      "losses": 2,
+      "draws": 22,
+      "win_rate": 20.0,
+      "loss_rate": 6.67,
+      "draw_rate": 73.33,
+      "avg_our_rank_when_ranked": 1,
+      "avg_target_rank_when_ranked": null
+    },
+    {
+      "target_competitor": "닥터케이 저주파 EMS 자동 케겔운동기",
+      "total_rows": 30,
+      "wins": 6,
+      "losses": 0,
+      "draws": 24,
+      "win_rate": 20.0,
+      "loss_rate": 0.0,
+      "draw_rate": 80.0,
+      "avg_our_rank_when_ranked": 1,
+      "avg_target_rank_when_ranked": null
+    }
+  ],
+  "comp_only_by_competitor": [
+    {
+      "target_competitor": "닥터케이 저주파 EMS 자동 케겔운동기",
+      "total_rows": 29,
+      "surfaced_count": 0,
+      "co_mentioned_count": 0,
+      "not_surfaced_count": 29,
+      "surfaced_rate": 0.0,
+      "co_mentioned_rate": 0.0,
+      "not_surfaced_rate": 100.0,
+      "avg_our_rank_when_ranked": null,
+      "avg_target_rank_when_ranked": null
+    },
+    {
+      "target_competitor": "이지케이 (Easy-K) 요실금치료기",
+      "total_rows": 30,
+      "surfaced_count": 0,
+      "co_mentioned_count": 0,
+      "not_surfaced_count": 30,
+      "surfaced_rate": 0.0,
+      "co_mentioned_rate": 0.0,
+      "not_surfaced_rate": 100.0,
+      "avg_our_rank_when_ranked": null,
+      "avg_target_rank_when_ranked": null
+    }
+  ],
+  "diagnostics": [
+    "닥터케이 저주파 EMS 자동 케겔운동기 대안 질문 미노출률 100%",
+    "이지케이 (Easy-K) 요실금치료기 대안 질문 미노출률 100%",
+    "브랜드 직접 질문 긍정 톤 6.67%로 인지 품질 낮음"
+  ],
+  "action_items": [
+    {
+      "problem": "닥터케이 저주파 EMS 자동 케겔운동기 대안 질문에서 우리 브랜드 미노출 100%",
+      "hypothesis": "경쟁사 대체재 맥락에서 AI가 우리 브랜드를 후보로 인식 못 함",
+      "actions": [
+        "\"닥터케이 저주파 EMS 자동 케겔운동기 대신 우리 브랜드\" 비교 콘텐츠 작성",
+        "대안 검색 키워드 타겟 리뷰 확대",
+        "경쟁사 대비 차별 포인트 페이지 강화"
+      ]
+    },
+    {
+      "problem": "이지케이 (Easy-K) 요실금치료기 대안 질문에서 우리 브랜드 미노출 100%",
+      "hypothesis": "경쟁사 대체재 맥락에서 AI가 우리 브랜드를 후보로 인식 못 함",
+      "actions": [
+        "\"이지케이 (Easy-K) 요실금치료기 대신 우리 브랜드\" 비교 콘텐츠 작성",
+        "대안 검색 키워드 타겟 리뷰 확대",
+        "경쟁사 대비 차별 포인트 페이지 강화"
+      ]
+    },
+    {
+      "problem": "브랜드 직접 질문 응답이 중립/부정에 몰림 (6.67% 긍정)",
+      "hypothesis": "AI가 참조할 긍정 시그널(리뷰/수상/임상)이 부족",
+      "actions": [
+        "수상·임상·후기 페이지 강화",
+        "브랜드 스토리 콘텐츠 강화"
+      ]
+    },
+    {
+      "problem": "닥터케이 저주파 EMS 자동 케겔운동기 비교에서 우열 판정 안 됨 (무 80%)",
+      "hypothesis": "양 브랜드 모두 추천 안 하거나 동등 추천 → 차별 시그널 부족",
+      "actions": [
+        "닥터케이 저주파 EMS 자동 케겔운동기와 다른 우위 포인트 명문화",
+        "구체 수치·임상 결과로 차별점 강화"
+      ]
+    },
+    {
+      "problem": "중립 질문에서 브랜드 등장률 낮음 (2.68%)",
+      "hypothesis": "AI가 기본 후보군으로 우리 브랜드를 잘 떠올리지 못함",
+      "actions": [
+        "제품 소개/FAQ 콘텐츠 보강",
+        "추천 리뷰·사용기 콘텐츠 확대",
+        "카테고리 탐색형 비교 콘텐츠 작성"
+      ]
+    },
+    {
+      "problem": "이지케이 (Easy-K) 요실금치료기 비교에서 우열 판정 안 됨 (무 73.33%)",
+      "hypothesis": "양 브랜드 모두 추천 안 하거나 동등 추천 → 차별 시그널 부족",
+      "actions": [
+        "이지케이 (Easy-K) 요실금치료기와 다른 우위 포인트 명문화",
+        "구체 수치·임상 결과로 차별점 강화"
+      ]
+    },
+    {
+      "problem": "‘증상/상황’ 류 질문에서 브랜드 미노출 (0%, n=12)",
+      "hypothesis": "이 의도(SYM)에 맞는 정확한 키워드 매칭이 부족",
+      "actions": [
+        "증상/상황 시나리오에 특화된 콘텐츠 추가",
+        "관련 키워드(예시 질문 톤)로 SEO·블로그 강화"
+      ]
+    },
+    {
+      "problem": "‘솔루션 대안 비교’ 류 질문에서 브랜드 미노출 (0%, n=16)",
+      "hypothesis": "이 의도(ALT)에 맞는 정확한 키워드 매칭이 부족",
+      "actions": [
+        "솔루션 대안 비교 시나리오에 특화된 콘텐츠 추가",
+        "관련 키워드(예시 질문 톤)로 SEO·블로그 강화"
+      ]
+    },
+    {
+      "problem": "‘카테고리 일반’ 류 질문에서 브랜드 미노출 (1.09%, n=92)",
+      "hypothesis": "이 의도(CAT)에 맞는 정확한 키워드 매칭이 부족",
+      "actions": [
+        "카테고리 일반 시나리오에 특화된 콘텐츠 추가",
+        "관련 키워드(예시 질문 톤)로 SEO·블로그 강화"
+      ]
+    },
+    {
+      "problem": "‘가격 기반’ 류 질문에서 브랜드 미노출 (10%, n=10)",
+      "hypothesis": "이 의도(PRC)에 맞는 정확한 키워드 매칭이 부족",
+      "actions": [
+        "가격 기반 시나리오에 특화된 콘텐츠 추가",
+        "관련 키워드(예시 질문 톤)로 SEO·블로그 강화"
+      ]
+    },
+    {
+      "problem": "‘구매의도 단일선택’ 류 질문에서 브랜드 미노출 (10%, n=10)",
+      "hypothesis": "이 의도(DEC)에 맞는 정확한 키워드 매칭이 부족",
+      "actions": [
+        "구매의도 단일선택 시나리오에 특화된 콘텐츠 추가",
+        "관련 키워드(예시 질문 톤)로 SEO·블로그 강화"
+      ]
+    },
+    {
+      "problem": "‘유스케이스’ 류 질문에서 브랜드 미노출 (11.11%, n=9)",
+      "hypothesis": "이 의도(USE)에 맞는 정확한 키워드 매칭이 부족",
+      "actions": [
+        "유스케이스 시나리오에 특화된 콘텐츠 추가",
+        "관련 키워드(예시 질문 톤)로 SEO·블로그 강화"
+      ]
+    }
+  ],
+  "spotlights": {
+    "neutral_strong": [
+      {
+        "prompt_id": "NEUTRAL-070",
+        "category_code": "NEUTRAL",
+        "target_competitor": "",
+        "prompt_text": "40대 주부인데 주말에 집에서 1-2시간 편하게 쓸 수 있는 골반 EMS 운동기 찾고 있어",
+        "mention_rate": 100.0,
+        "recommendation_rate": 0.0,
+        "wins": 0,
+        "losses": 0,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 0,
+        "positive_count": 0,
+        "negative_count": 0
+      },
+      {
+        "prompt_id": "NEUTRAL-018",
+        "category_code": "NEUTRAL",
+        "target_competitor": "",
+        "prompt_text": "60대 엄마가 가벼운 요실금 때문에 고민이신데 집에서 쓸 만한 EMS 기계 있나?",
+        "mention_rate": 50.0,
+        "recommendation_rate": 0.0,
+        "wins": 0,
+        "losses": 0,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 0,
+        "positive_count": 0,
+        "negative_count": 0
+      },
+      {
+        "prompt_id": "NEUTRAL-064",
+        "category_code": "NEUTRAL",
+        "target_competitor": "",
+        "prompt_text": "40대 산후 케어용으로 요실금 EMS 기기 보고 있어. 50만원 이상 비싼 거랑 10만원대 저렴한 거 효과 차이 커?",
+        "mention_rate": 50.0,
+        "recommendation_rate": 0.0,
+        "wins": 0,
+        "losses": 0,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 0,
+        "positive_count": 0,
+        "negative_count": 0
+      }
+    ],
+    "neutral_weak": [
+      {
+        "prompt_id": "NEUTRAL-001",
+        "category_code": "NEUTRAL",
+        "target_competitor": "",
+        "prompt_text": "40대 출산 경험 있는데 케겔운동 기계 처음 써보려고. 너무 어렵지 않을까?",
+        "mention_rate": 0.0,
+        "recommendation_rate": 0.0,
+        "wins": 0,
+        "losses": 0,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 0,
+        "positive_count": 0,
+        "negative_count": 0
+      },
+      {
+        "prompt_id": "NEUTRAL-002",
+        "category_code": "NEUTRAL",
+        "target_competitor": "",
+        "prompt_text": "40대인데 둘째 낳고 5년 됐어. 혼자 집에서 쓸 수 있는 골반저근 운동기 뭐 없을까?",
+        "mention_rate": 0.0,
+        "recommendation_rate": 0.0,
+        "wins": 0,
+        "losses": 0,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 0,
+        "positive_count": 0,
+        "negative_count": 0
+      },
+      {
+        "prompt_id": "NEUTRAL-003",
+        "category_code": "NEUTRAL",
+        "target_competitor": "",
+        "prompt_text": "30대 직장인인데 매일 운동할 시간이 없어. 사무실에서 앉아서만 하는 거 있어?",
+        "mention_rate": 0.0,
+        "recommendation_rate": 0.0,
+        "wins": 0,
+        "losses": 0,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 0,
+        "positive_count": 0,
+        "negative_count": 0
+      }
+    ],
+    "h2h_win": [
+      {
+        "prompt_id": "H2H-003",
+        "category_code": "H2H",
+        "target_competitor": "이지케이 (Easy-K) 요실금치료기",
+        "prompt_text": "케겔 EMS 의자 처음 사는 초보자가 사기엔 바디닥터K이랑 Easy-K 중에 어디가 낫지?",
+        "mention_rate": 100.0,
+        "recommendation_rate": 100.0,
+        "wins": 2,
+        "losses": 0,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 0,
+        "positive_count": 2,
+        "negative_count": 0
+      },
+      {
+        "prompt_id": "H2H-012",
+        "category_code": "H2H",
+        "target_competitor": "이지케이 (Easy-K) 요실금치료기",
+        "prompt_text": "60대 어머니 선물용으로 골반저근 EMS 케겔 운동기 사려는데 Easy-K이랑 바디닥터K 중에 어디가 사용이 간편할까?",
+        "mention_rate": 100.0,
+        "recommendation_rate": 100.0,
+        "wins": 2,
+        "losses": 0,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 0,
+        "positive_count": 2,
+        "negative_count": 0
+      },
+      {
+        "prompt_id": "H2H-029",
+        "category_code": "H2H",
+        "target_competitor": "닥터케이 저주파 EMS 자동 케겔운동기",
+        "prompt_text": "2-3년 장기간 꾸준히 쓸 거면 바디닥터K이랑 닥터케이 저주파 EMS 자동 케겔운동기 둘 중 뭐가 낫대?",
+        "mention_rate": 100.0,
+        "recommendation_rate": 100.0,
+        "wins": 2,
+        "losses": 0,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 0,
+        "positive_count": 2,
+        "negative_count": 0
+      }
+    ],
+    "h2h_loss": [
+      {
+        "prompt_id": "H2H-006",
+        "category_code": "H2H",
+        "target_competitor": "이지케이 (Easy-K) 요실금치료기",
+        "prompt_text": "30대 1인 가구 여성이 집에서 골반저근 EMS 케겔 운동기 혼자 쓰려면 바디닥터K이랑 Easy-K 중에 뭐가 덜 번거로워?",
+        "mention_rate": 100.0,
+        "recommendation_rate": 0.0,
+        "wins": 0,
+        "losses": 2,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 0,
+        "positive_count": 0,
+        "negative_count": 0
+      }
+    ],
+    "comp_only_surfaced": [],
+    "comp_only_not_surfaced": [
+      {
+        "prompt_id": "COMP_ONLY-001",
+        "category_code": "COMP_ONLY",
+        "target_competitor": "이지케이 (Easy-K) 요실금치료기",
+        "prompt_text": "이지케이 후기 봤는데 가격이 비슷한 다른 EMS 케겔 의자도 보고 싶어",
+        "mention_rate": 0.0,
+        "recommendation_rate": 0.0,
+        "wins": 0,
+        "losses": 0,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 2,
+        "positive_count": 0,
+        "negative_count": 0
+      },
+      {
+        "prompt_id": "COMP_ONLY-002",
+        "category_code": "COMP_ONLY",
+        "target_competitor": "이지케이 (Easy-K) 요실금치료기",
+        "prompt_text": "이지케이 말고 40대 산후 케어용으로 집에서 쓰기 좋은 EMS 케겔 기기 또 뭐 있어?",
+        "mention_rate": 0.0,
+        "recommendation_rate": 0.0,
+        "wins": 0,
+        "losses": 0,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 2,
+        "positive_count": 0,
+        "negative_count": 0
+      },
+      {
+        "prompt_id": "COMP_ONLY-003",
+        "category_code": "COMP_ONLY",
+        "target_competitor": "이지케이 (Easy-K) 요실금치료기",
+        "prompt_text": "요실금 EMS 의자형 기기 중에 이지케이 말고 뭐가 있어?",
+        "mention_rate": 0.0,
+        "recommendation_rate": 0.0,
+        "wins": 0,
+        "losses": 0,
+        "draws": 0,
+        "surfaced_count": 0,
+        "not_surfaced_count": 2,
+        "positive_count": 0,
+        "negative_count": 0
+      }
+    ],
+    "brand_only_negative": []
+  },
+  "neutral_by_subcategory": [
+    {
+      "subcategory": "CAT",
+      "subcategory_label": "카테고리 일반",
+      "total_rows": 92,
+      "mention_count": 1,
+      "mention_rate": 1.09,
+      "recommendation_count": 0,
+      "recommendation_rate": 0.0,
+      "top1_count": 0,
+      "top1_rate": 0.0
+    },
+    {
+      "subcategory": "SYM",
+      "subcategory_label": "증상/상황",
+      "total_rows": 12,
+      "mention_count": 0,
+      "mention_rate": 0.0,
+      "recommendation_count": 0,
+      "recommendation_rate": 0.0,
+      "top1_count": 0,
+      "top1_rate": 0.0
+    },
+    {
+      "subcategory": "ALT",
+      "subcategory_label": "솔루션 대안 비교",
+      "total_rows": 16,
+      "mention_count": 0,
+      "mention_rate": 0.0,
+      "recommendation_count": 0,
+      "recommendation_rate": 0.0,
+      "top1_count": 0,
+      "top1_rate": 0.0
+    },
+    {
+      "subcategory": "PRC",
+      "subcategory_label": "가격 기반",
+      "total_rows": 10,
+      "mention_count": 1,
+      "mention_rate": 10.0,
+      "recommendation_count": 0,
+      "recommendation_rate": 0.0,
+      "top1_count": 0,
+      "top1_rate": 0.0
+    },
+    {
+      "subcategory": "USE",
+      "subcategory_label": "유스케이스",
+      "total_rows": 9,
+      "mention_count": 1,
+      "mention_rate": 11.11,
+      "recommendation_count": 0,
+      "recommendation_rate": 0.0,
+      "top1_count": 0,
+      "top1_rate": 0.0
+    },
+    {
+      "subcategory": "DEC",
+      "subcategory_label": "구매의도 단일선택",
+      "total_rows": 10,
+      "mention_count": 1,
+      "mention_rate": 10.0,
+      "recommendation_count": 1,
+      "recommendation_rate": 10.0,
+      "top1_count": 1,
+      "top1_rate": 10.0
+    }
+  ]
+}

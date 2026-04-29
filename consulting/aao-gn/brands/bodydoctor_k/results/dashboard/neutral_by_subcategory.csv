@@ -1,0 +1,7 @@
+subcategory,subcategory_label,total_rows,mention_count,mention_rate,recommendation_count,recommendation_rate,top1_count,top1_rate
+CAT,카테고리 일반,92,1,1.09,0,0.0,0,0.0
+SYM,증상/상황,12,0,0.0,0,0.0,0,0.0
+ALT,솔루션 대안 비교,16,0,0.0,0,0.0,0,0.0
+PRC,가격 기반,10,1,10.0,0,0.0,0,0.0
+USE,유스케이스,9,1,11.11,0,0.0,0,0.0
+DEC,구매의도 단일선택,10,1,10.0,1,10.0,1,10.0

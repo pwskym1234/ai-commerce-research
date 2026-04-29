@@ -1,0 +1,116 @@
+@import "pretendard/dist/web/variable/pretendardvariable.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light dark;
+  --bg: #ffffff;
+  --bg-elev: #fafafa;
+  --border: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.14);
+  --text: #09090b;
+  --text-muted: #71717a;
+  --text-faint: #a1a1aa;
+  --accent: #ff5c00;
+  --accent-soft: #ffefe6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #09090b;
+    --bg-elev: #18181b;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.14);
+    --text: #fafafa;
+    --text-muted: #a1a1aa;
+    --text-faint: #71717a;
+    --accent: #ff7a33;
+    --accent-soft: rgba(255, 92, 0, 0.12);
+  }
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  border-color: var(--border);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+@media print {
+  /* 페이지 설정 — Chrome/Safari에서 PDF 저장 시 반영 */
+  @page {
+    margin: 14mm 12mm 14mm 12mm;
+    size: A4;
+  }
+
+  /* 헤더(스크린용 배너)는 인쇄 시 숨김 — PrintMeta가 대체 */
+  header { display: none !important; }
+  .no-print { display: none !important; }
+
+  /* 배경·색상 유지 (기본 Chrome은 배경을 벗기므로 강제) */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* 다크모드 무효화 — PDF는 항상 라이트 */
+  :root {
+    --bg: #ffffff !important;
+    --bg-elev: #ffffff !important;
+    --border: #d4d4d8 !important;
+    --border-strong: #a1a1aa !important;
+    --text: #09090b !important;
+    --text-muted: #52525b !important;
+    --text-faint: #71717a !important;
+  }
+  html, body {
+    background: #ffffff !important;
+    color: #09090b !important;
+  }
+
+  main { padding: 0 !important; max-width: none !important; }
+
+  /* 섹션 단위로 페이지 끊기지 않게 */
+  section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 1.25rem;
+  }
+  section h2 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+  /* 카드·테이블 행도 잘림 방지 */
+  .rounded-xl, tr, li, blockquote {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* 큰 숫자는 약간 줄여 공간 효율 */
+  .text-stat, .text-stat-lg { font-size: 1.875rem !important; line-height: 1.1 !important; }
+
+  /* 표 축약 */
+  table { font-size: 11px !important; }
+  th, td { padding: 6px 8px !important; }
+
+  /* 링크는 밑줄 없애고 원문 색 */
+  a { color: inherit !important; text-decoration: none !important; }
+
+  /* 프롬프트 테이블은 길면 여러 페이지 — 헤더 반복 */
+  thead { display: table-header-group; }
+
+  /* 스티키 좌측 네비·드로어·모달 전부 숨김 */
+  aside, [class*="sticky"], .backdrop-blur-sm { display: none !important; }
+}

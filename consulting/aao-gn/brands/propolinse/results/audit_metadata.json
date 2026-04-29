@@ -1,0 +1,17 @@
+{
+  "brand_name": "프로폴린스",
+  "audit_start": "2026-04-27T09:16:30.344012",
+  "audit_end": "2026-04-27T09:18:17.583698",
+  "model": "gpt-4o-search-preview",
+  "temperature": 1.0,
+  "seed_base": 1000,
+  "seed_min": 1000,
+  "seed_max": 1001,
+  "repeat_count": 2,
+  "total_prompts": 149,
+  "total_calls": 298,
+  "total_responses": 294,
+  "total_tokens": 101744,
+  "error_count": 4,
+  "max_workers": 8
+}

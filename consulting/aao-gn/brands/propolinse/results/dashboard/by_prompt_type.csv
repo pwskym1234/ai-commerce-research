@@ -1,0 +1,5 @@
+category_code,category,total_rows,primary_metric_label,primary_metric_value,primary_metric_count,primary_metric_denom,secondary_metric_label,secondary_metric_value,secondary_metric_count,secondary_metric_denom,extra_metric_label,extra_metric_value,clarification_count,off_topic_count,effective_denom,effective_primary_count,effective_primary_value,effective_secondary_count,effective_secondary_value,explain
+NEUTRAL,중립,147,언급률,0.0,0,147,추천률,0.0,0,147,,,0,3,144,0,0.0,0,0.0,브랜드를 모르는 상태의 질문에서 우리 브랜드가 자연스럽게 떠오르는지
+BRAND_ONLY,브랜드 지명,30,긍정 비율,6.67,2,30,부정 비율,6.67,2,30,중립 비율,86.67,0,0,30,2,6.67,2,6.67,브랜드명을 직접 넣어 물었을 때 AI가 우리 브랜드를 어떤 톤으로 말하는지
+COMP_ONLY,경쟁사 대안,57,대안 소환율,0.0,0,57,공동 언급률,0.0,0,57,평균 추천 순위(우리/경쟁사),- / 2,0,2,55,0,0.0,0,0.0,경쟁사 대신 다른 대안을 찾을 때 우리 브랜드가 얼마나 추천되는지
+H2H,직접 비교,60,승률,13.33,8,60,패배율,16.67,10,60,무승부율,70.0,0,0,60,8,13.33,10,16.67,직접 비교 질문에서 경쟁사 대비 얼마나 이기는지

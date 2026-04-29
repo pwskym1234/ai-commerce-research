@@ -1,0 +1,17 @@
+{
+  "brand_name": "바디닥터K",
+  "audit_start": "2026-04-27T09:14:32.076071",
+  "audit_end": "2026-04-27T09:16:29.751927",
+  "model": "gpt-4o-search-preview",
+  "temperature": 1.0,
+  "seed_base": 1000,
+  "seed_min": 1000,
+  "seed_max": 1001,
+  "repeat_count": 2,
+  "total_prompts": 150,
+  "total_calls": 300,
+  "total_responses": 298,
+  "total_tokens": 119842,
+  "error_count": 2,
+  "max_workers": 8
+}

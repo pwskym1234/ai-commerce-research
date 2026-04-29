@@ -1,0 +1,367 @@
+{
+  "brand_name": "프로폴린스",
+  "brand_variants": [
+    "프로폴린스",
+    "Propolinse",
+    "프로폴린스 가글",
+    "프로폴린스 구강청결제",
+    "지앤코스 프로폴린스",
+    "지앤코스"
+  ],
+  "prompt_ids_sampled": [
+    "NEUTRAL-001",
+    "NEUTRAL-002",
+    "NEUTRAL-003",
+    "NEUTRAL-004",
+    "NEUTRAL-005"
+  ],
+  "runs_per_setting": 2,
+  "summary": [
+    {
+      "setting": "A",
+      "label": "현재 기준선 (medium)",
+      "hits": 0,
+      "total": 10,
+      "avg_citations": 0.0,
+      "avg_response_length": 563.0
+    },
+    {
+      "setting": "B",
+      "label": "검색 강도 high",
+      "hits": 0,
+      "total": 10,
+      "avg_citations": 0.0,
+      "avg_response_length": 564.0
+    },
+    {
+      "setting": "C",
+      "label": "구체 추천 유도",
+      "hits": 0,
+      "total": 10,
+      "avg_citations": 0.0,
+      "avg_response_length": 298.0
+    },
+    {
+      "setting": "D",
+      "label": "gpt-4o + Responses",
+      "hits": 0,
+      "total": 10,
+      "avg_citations": 0.0,
+      "avg_response_length": 446.0
+    }
+  ],
+  "details_by_setting": {
+    "A": [
+      {
+        "prompt_id": "NEUTRAL-001",
+        "run": 1,
+        "error": "InternalServerError: Error code: 500 - {'error': {'message': 'The server had an error processing your request. Sorry about that! You can retry your request, or contact us through our help center at help.openai.com if you keep seeing this error. (Please include the request ID req_b23f8fbcb2219913a1053f05491e64f9 in your email.)', 'type': 'server_error', 'param': None, 'code': None}}"
+      },
+      {
+        "prompt_id": "NEUTRAL-001",
+        "run": 2,
+        "error": "InternalServerError: Error code: 500 - {'error': {'message': 'The server had an error processing your request. Sorry about that! You can retry your request, or contact us through our help center at help.openai.com if you keep seeing this error. (Please include the request ID req_94479a6ebe4a46e6a756b3a6053e675f in your email.)', 'type': 'server_error', 'param': None, 'code': None}}"
+      },
+      {
+        "prompt_id": "NEUTRAL-002",
+        "run": 1,
+        "model": "gpt-4o-search-preview-2025-03-11",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 416,
+        "response_preview": "가글을 처음 사용하신다면, 알코올이 함유되지 않은 제품을 선택하시는 것이 좋습니다. 알코올이 포함된 가글은 구강 내 자극을 줄 수 있으므로, 민감한 분들에게는 비알코올 제품이 더 적합합니다.\n\n또한, 불소가 함유된 가글은 충치 예방에 도움이 됩니다. 불소는 치아의 에나멜을 강화하여 충치 발생을 줄여줍니다.\n\n국내에서 쉽게 구할 수 있는 대표적인 비알코올 및 불소 함유 가글로는 '리스테린 토탈케어 제로'와 '가그린 제로'가 있습니다. 이러한 제품들은 구강 청결 유지에 효과적이며, 입문자에게 무난한 선택이 될 수 있습니다.\n\n가글 사용 시에는 제품의 사용법을 잘 읽고, 권장 사용량과 사용 시간을 지키는 것이 중요합니다. 또한, 가글은 양치질을 대체하는 것이 아니라 보조적인 역할을 하므로, 정기적인 양치질과 함께"
+      },
+      {
+        "prompt_id": "NEUTRAL-002",
+        "run": 2,
+        "model": "gpt-4o-search-preview-2025-03-11",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 413,
+        "response_preview": "가글을 처음 사용하신다면, 부드럽고 자극이 적은 제품을 선택하는 것이 좋습니다. 알코올이 함유되지 않은 가글은 구강 내 자극을 최소화하며, 상쾌한 느낌을 제공합니다.\n\n또한, 불소가 포함된 가글은 치아를 강화하고 충치를 예방하는 데 도움이 됩니다. 불소는 치아의 에나멜을 강화하여 산에 대한 저항력을 높여줍니다.\n\n국내에서 쉽게 구할 수 있는 제품 중에는 '리스테린 토탈케어 무알코올'과 '가그린 마일드'가 있습니다. 이 두 제품은 알코올이 함유되지 않아 자극이 적고, 불소가 포함되어 있어 치아 건강에 도움이 됩니다.\n\n가글 사용 시에는 제품의 사용법을 잘 읽고, 권장 사용량과 시간을 지키는 것이 중요합니다. 또한, 가글은 양치질을 대체하는 것이 아니라 보조적인 역할을 하므로, 정기적인 양치질과 치실 사용을 병"
+      },
+      {
+        "prompt_id": "NEUTRAL-003",
+        "run": 1,
+        "model": "gpt-4o-search-preview-2025-03-11",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 648,
+        "response_preview": "가성비 좋은 가글을 선택하려면 다음 요소들을 고려하시는 것이 좋습니다:\n\n1. **주요 성분 확인**: 가글의 주성분은 구강 건강에 직접적인 영향을 미칩니다. 예를 들어, 불소는 충치 예방에 효과적이며, 클로르헥시딘은 잇몸 염증 감소에 도움을 줍니다. 알코올이 포함된 가글은 강한 살균 효과가 있지만, 구강 건조를 유발할 수 있으므로 개인의 구강 상태에 따라 선택해야 합니다.\n\n2. **용량 대비 가격 비교**: 동일한 성분과 효능을 가진 제품이라면, 용량 대비 가격이 저렴한 제품이 경제적입니다. 대용량 제품이 단기적으로는 비용이 높을 수 있지만, 장기적으로는 더 경제적일 수 있습니다.\n\n3. **사용 목적에 맞는 제품 선택**: 구취 제거, 충치 예방, 잇몸 질환 예방 등 본인의 필요에 맞는 기능을 가진 가"
+      },
+      {
+        "prompt_id": "NEUTRAL-003",
+        "run": 2,
+        "model": "gpt-4o-search-preview-2025-03-11",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 594,
+        "response_preview": "가성비 좋은 가글을 선택하려면 다음 요소들을 고려하시는 것이 좋습니다:\n\n1. **주요 성분 확인**: 구강 건강에 도움이 되는 성분이 포함되어 있는지 확인하세요. 예를 들어, 불소는 충치 예방에 효과적이며, 클로르헥시딘은 잇몸 염증 감소에 도움을 줍니다.\n\n2. **알코올 함유 여부**: 알코올이 포함된 가글은 강한 살균 효과가 있지만, 구강 건조를 유발할 수 있습니다. 민감한 분들은 무알코올 제품을 선택하는 것이 좋습니다.\n\n3. **구취 제거 효과**: 구취 제거에 특화된 제품인지 확인하세요. 일부 가글은 일시적인 향만 제공할 뿐, 근본적인 구취 제거에는 효과적이지 않을 수 있습니다.\n\n4. **사용 목적에 맞는 제품 선택**: 충치 예방, 잇몸 건강, 구취 제거 등 본인의 필요에 맞는 제품을 선택하세"
+      },
+      {
+        "prompt_id": "NEUTRAL-004",
+        "run": 1,
+        "model": "gpt-4o-search-preview-2025-03-11",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 481,
+        "response_preview": "집에서 매일 사용할 가글을 선택하실 때는 다음의 요소를 고려하시는 것이 좋습니다:\n\n1. **구강 건강 목표**: 구취 제거, 충치 예방, 잇몸 건강 등 원하는 효과에 따라 제품을 선택하세요.\n\n2. **알코올 함유 여부**: 알코올이 포함된 가글은 강한 청량감을 주지만, 구강 건조를 유발할 수 있습니다. 민감한 분들은 무알코올 제품을 고려해보세요.\n\n3. **성분**: 불소 함유 제품은 충치 예방에 도움이 되며, 항균 성분이 포함된 제품은 잇몸 건강에 유익합니다.\n\n4. **맛과 향**: 개인의 취향에 맞는 맛과 향을 선택하면 꾸준한 사용에 도움이 됩니다.\n\n국내에서 인기 있는 가글 제품으로는 리스테린, 가그린, 페리오 등이 있습니다. 각 제품은 다양한 라인업을 제공하므로, 자신의 필요와 취향에 맞는 제품"
+      },
+      {
+        "prompt_id": "NEUTRAL-004",
+        "run": 2,
+        "error": "InternalServerError: Error code: 500 - {'error': {'message': 'The server had an error processing your request. Sorry about that! You can retry your request, or contact us through our help center at help.openai.com if you keep seeing this error. (Please include the request ID req_193031d3cc594144ba09768067e6b5b0 in your email.)', 'type': 'server_error', 'param': None, 'code': None}}"
+      },
+      {
+        "prompt_id": "NEUTRAL-005",
+        "run": 1,
+        "model": "gpt-4o-search-preview-2025-03-11",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 662,
+        "response_preview": "구강청결제를 처음 선택하신다면, 다음의 요소들을 고려해보시는 것이 좋습니다:\n\n1. **구강 상태에 맞는 제품 선택**: 구강청결제는 다양한 기능을 제공합니다. 예를 들어, 충치 예방, 잇몸 건강 개선, 구취 제거 등 특정한 목적에 맞는 제품이 있으므로, 본인의 구강 상태와 필요에 따라 적합한 제품을 선택하는 것이 중요합니다.\n\n2. **알코올 함유 여부 확인**: 일부 구강청결제는 알코올을 함유하고 있어 사용 시 자극을 느낄 수 있습니다. 민감한 구강을 가지신 분들은 무알코올 제품을 선택하시는 것이 좋습니다.\n\n3. **성분 확인**: 불소(fluoride)는 충치 예방에 도움을 주며, 클로르헥시딘(chlorhexidine)은 잇몸 염증 감소에 효과적입니다. 제품의 성분을 확인하여 본인에게 필요한 효능을 "
+      },
+      {
+        "prompt_id": "NEUTRAL-005",
+        "run": 2,
+        "model": "gpt-4o-search-preview-2025-03-11",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 727,
+        "response_preview": "구강청결제를 처음 선택하신다면, 다음의 요소들을 고려해보시는 것이 좋습니다:\n\n1. **구강 상태에 맞는 제품 선택**: 구강청결제는 다양한 기능을 제공합니다. 예를 들어, 충치 예방, 잇몸 건강 개선, 구취 제거 등 특정 목적에 맞는 제품이 있으므로, 본인의 구강 상태와 필요에 맞는 제품을 선택하는 것이 중요합니다.\n\n2. **알코올 함유 여부 확인**: 일부 구강청결제는 알코올을 함유하고 있어 사용 시 자극을 느낄 수 있습니다. 민감한 구강을 가지셨다면 무알코올 제품을 선택하는 것이 좋습니다.\n\n3. **성분 확인**: 불소(fluoride)는 충치 예방에 도움이 되며, 클로르헥시딘(chlorhexidine)은 잇몸 염증 감소에 효과적입니다. 제품의 성분을 확인하여 원하는 효과를 얻을 수 있는지 확인하세"
+      }
+    ],
+    "B": [
+      {
+        "prompt_id": "NEUTRAL-001",
+        "run": 1,
+        "error": "InternalServerError: Error code: 500 - {'error': {'message': 'The server had an error processing your request. Sorry about that! You can retry your request, or contact us through our help center at help.openai.com if you keep seeing this error. (Please include the request ID req_631ffd51363c48c6820b69caa25dfbc7 in your email.)', 'type': 'server_error', 'param': None, 'code': None}}"
+      },
+      {
+        "prompt_id": "NEUTRAL-001",
+        "run": 2,
+        "error": "InternalServerError: Error code: 500 - {'error': {'message': 'The server had an error processing your request. Sorry about that! You can retry your request, or contact us through our help center at help.openai.com if you keep seeing this error. (Please include the request ID req_7b55c2347b93454cad97418d3dd5988e in your email.)', 'type': 'server_error', 'param': None, 'code': None}}"
+      },
+      {
+        "prompt_id": "NEUTRAL-002",
+        "run": 1,
+        "model": "gpt-4o-search-preview-2025-03-11",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 401,
+        "response_preview": "가글을 처음 사용하신다면, 알코올이 함유되지 않은 제품을 선택하시는 것이 좋습니다. 알코올이 포함된 가글은 구강 내 자극을 줄 수 있어 입문자에게는 부담이 될 수 있습니다.\n\n또한, 불소가 함유된 가글은 충치 예방에 도움이 되며, 항균 성분이 포함된 제품은 구취 제거와 잇몸 건강에 효과적입니다.\n\n국내에서 쉽게 구할 수 있는 대표적인 무알코올 가글로는 '리스테린 토탈케어 제로'와 '가그린 마일드'가 있습니다. 이러한 제품들은 자극이 적어 처음 사용하시는 분들에게 적합합니다.\n\n가글 사용 시에는 제품의 사용법을 잘 읽고, 권장 사용량과 시간을 지키는 것이 중요합니다. 또한, 가글은 양치질을 대체하는 것이 아니라 보조적인 역할을 하므로, 올바른 양치 습관과 함께 사용하시는 것이 구강 건강에 더욱 도움이 됩니다."
+      },
+      {
+        "prompt_id": "NEUTRAL-002",
+        "run": 2,
+        "error": "InternalServerError: Error code: 500 - {'error': {'message': 'The server had an error processing your request. Sorry about that! You can retry your request, or contact us through our help center at help.openai.com if you keep seeing this error. (Please include the request ID req_0ec8afd12d6048f88727bded84054dc2 in your email.)', 'type': 'server_error', 'param': None, 'code': None}}"
+      },
+      {
+        "prompt_id": "NEUTRAL-003",
+        "run": 1,
+        "model": "gpt-4o-search-preview-2025-03-11",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 611,
+        "response_preview": "가성비 좋은 가글을 선택하려면 다음 요소들을 고려하시는 것이 좋습니다:\n\n1. **주요 성분 확인**: 가글의 주성분은 구강 건강에 직접적인 영향을 미칩니다. 항균 효과가 있는 클로르헥시딘, 불소, 에센셜 오일 등이 포함되어 있는지 확인하세요.\n\n2. **구강 문제에 맞는 제품 선택**: 구취 제거, 치은염 예방, 치아 미백 등 개인의 구강 상태와 필요에 맞는 기능을 제공하는 가글을 선택하세요.\n\n3. **알코올 함유 여부**: 알코올이 포함된 가글은 강한 청량감을 주지만, 구강 건조를 유발할 수 있습니다. 민감한 분들은 무알코올 제품을 고려해 보세요.\n\n4. **사용감과 맛**: 가글의 맛과 사용 후 느낌은 개인의 선호도에 따라 다릅니다. 지속적으로 사용하기 위해서는 본인에게 맞는 맛과 사용감을 가진 제품"
+      },
+      {
+        "prompt_id": "NEUTRAL-003",
+        "run": 2,
+        "model": "gpt-4o-search-preview-2025-03-11",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 678,
+        "response_preview": "가성비 좋은 가글을 선택하려면 다음 요소들을 고려하시는 것이 좋습니다:\n\n1. **주요 성분 확인**: 가글의 주성분은 구강 건강에 직접적인 영향을 미칩니다. 예를 들어, 항균 작용을 위한 클로르헥시딘, 불소 함유로 충치 예방을 돕는 제품 등이 있습니다. 자신의 구강 상태와 필요에 맞는 성분이 포함된 제품을 선택하세요.\n\n2. **효능과 효과**: 구취 제거, 치은염 예방, 치아 미백 등 다양한 효능을 가진 가글이 있습니다. 자신에게 필요한 효과를 제공하는 제품을 선택하는 것이 중요합니다.\n\n3. **사용감과 맛**: 가글의 맛이나 사용 후 느낌은 개인의 선호도에 따라 다를 수 있습니다. 너무 강한 자극이 불편하다면 순한 제품을 선택하는 것이 좋습니다.\n\n4. **가격 대비 용량**: 동일한 성능을 가진 제"
+      },
+      {
+        "prompt_id": "NEUTRAL-004",
+        "run": 1,
+        "model": "gpt-4o-search-preview-2025-03-11",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 427,
+        "response_preview": "집에서 매일 사용할 가글을 선택하실 때는 다음 요소를 고려하시는 것이 좋습니다:\n\n1. **구강 건강 목표**: 구취 제거, 충치 예방, 잇몸 건강 등 원하는 효과에 따라 제품을 선택하세요.\n\n2. **알코올 함유 여부**: 알코올이 포함된 가글은 강한 청량감을 주지만, 구강 건조를 유발할 수 있습니다. 민감하신 분들은 무알코올 제품을 고려해 보세요.\n\n3. **성분 확인**: 불소 함유 제품은 충치 예방에 도움이 되며, 클로르헥시딘 성분은 잇몸 염증 완화에 효과적입니다.\n\n4. **사용감과 맛**: 일상적으로 사용하기 위해서는 본인에게 맞는 맛과 사용감을 가진 제품을 선택하는 것이 중요합니다.\n\n국내에서 인기 있는 가글 제품으로는 리스테린, 가그린, 페리오 등이 있습니다. 각 제품마다 특징이 다르므로, 개"
+      },
+      {
+        "prompt_id": "NEUTRAL-004",
+        "run": 2,
+        "model": "gpt-4o-search-preview-2025-03-11",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 514,
+        "response_preview": "집에서 매일 사용할 가글을 선택하실 때는 다음의 요소를 고려하시는 것이 좋습니다:\n\n1. **구강 건강 목표**: 구취 제거, 충치 예방, 잇몸 건강 등 본인의 필요에 맞는 기능을 제공하는 제품을 선택하세요.\n\n2. **알코올 함유 여부**: 알코올이 포함된 가글은 강한 청량감을 주지만, 구강 건조를 유발할 수 있습니다. 민감하신 분들은 무알코올 제품을 고려해 보세요.\n\n3. **성분 확인**: 불소 함유 제품은 충치 예방에 도움이 되며, 항균 성분이 포함된 가글은 잇몸 건강에 유익합니다.\n\n4. **맛과 향**: 정기적으로 사용하기 위해서는 본인에게 맞는 맛과 향을 선택하는 것이 중요합니다.\n\n국내에서 인기 있는 가글 제품으로는 리스테린, 가그린, 페리오 등이 있습니다. 각 제품은 다양한 기능과 맛을 제공"
+      },
+      {
+        "prompt_id": "NEUTRAL-005",
+        "run": 1,
+        "model": "gpt-4o-search-preview-2025-03-11",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 658,
+        "response_preview": "구강청결제를 처음 선택하신다면, 다음의 요소를 고려해보시는 것이 좋습니다:\n\n1. **구강 상태에 맞는 제품 선택**: 구강청결제는 다양한 기능을 제공합니다. 예를 들어, 잇몸 건강을 위한 제품, 충치 예방을 위한 제품, 구취 제거를 위한 제품 등이 있습니다. 자신의 구강 상태와 필요에 맞는 제품을 선택하는 것이 중요합니다.\n\n2. **알코올 함유 여부 확인**: 일부 구강청결제는 알코올을 함유하고 있어 사용 시 자극을 느낄 수 있습니다. 민감한 구강을 가지셨다면 무알코올 제품을 선택하는 것이 좋습니다.\n\n3. **성분 확인**: 불소(fluoride)는 충치 예방에 도움을 주며, 클로르헥시딘(chlorhexidine)은 잇몸 염증 예방에 효과적입니다. 제품의 성분을 확인하여 원하는 효과를 얻을 수 있는지 "
+      },
+      {
+        "prompt_id": "NEUTRAL-005",
+        "run": 2,
+        "model": "gpt-4o-search-preview-2025-03-11",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 656,
+        "response_preview": "구강청결제를 처음 선택하신다면, 다음의 요소를 고려하시는 것이 좋습니다:\n\n1. **구강 상태에 맞는 제품 선택**: 구강청결제는 다양한 기능을 제공합니다. 예를 들어, 잇몸 건강을 위한 제품, 충치 예방을 위한 제품, 구취 제거를 위한 제품 등이 있습니다. 자신의 구강 상태와 필요에 맞는 제품을 선택하는 것이 중요합니다.\n\n2. **알코올 함유 여부 확인**: 일부 구강청결제는 알코올을 함유하고 있어 사용 시 자극을 줄 수 있습니다. 민감한 구강을 가지셨다면 무알코올 제품을 선택하는 것이 좋습니다.\n\n3. **성분 확인**: 불소(fluoride)는 충치 예방에 도움을 주며, 클로르헥시딘(chlorhexidine)은 잇몸 염증 예방에 효과적입니다. 제품의 성분을 확인하여 원하는 효과를 얻을 수 있는지 확인"
+      }
+    ],
+    "C": [
+      {
+        "prompt_id": "NEUTRAL-001",
+        "run": 1,
+        "error": "InternalServerError: Error code: 500 - {'error': {'message': 'The server had an error processing your request. Sorry about that! You can retry your request, or contact us through our help center at help.openai.com if you keep seeing this error. (Please include the request ID req_c05f3afa842d4059972011b41e19c80e in your email.)', 'type': 'server_error', 'param': None, 'code': None}}"
+      },
+      {
+        "prompt_id": "NEUTRAL-001",
+        "run": 2,
+        "error": "InternalServerError: Error code: 500 - {'error': {'message': 'The server had an error processing your request. Sorry about that! You can retry your request, or contact us through our help center at help.openai.com if you keep seeing this error. (Please include the request ID req_72e752e543b34d0eb58714cdb4864b4d in your email.)', 'type': 'server_error', 'param': None, 'code': None}}"
+      },
+      {
+        "prompt_id": "NEUTRAL-002",
+        "run": 1,
+        "error": "InternalServerError: Error code: 500 - {'error': {'message': 'The server had an error processing your request. Sorry about that! You can retry your request, or contact us through our help center at help.openai.com if you keep seeing this error. (Please include the request ID req_9ac389ac3d8343e0b892ecdf05b1aee9 in your email.)', 'type': 'server_error', 'param': None, 'code': None}}"
+      },
+      {
+        "prompt_id": "NEUTRAL-002",
+        "run": 2,
+        "error": "InternalServerError: Error code: 500 - {'error': {'message': 'The server had an error processing your request. Sorry about that! You can retry your request, or contact us through our help center at help.openai.com if you keep seeing this error. (Please include the request ID req_762e0488144541f7bbbdb2d8bcc81eee in your email.)', 'type': 'server_error', 'param': None, 'code': None}}"
+      },
+      {
+        "prompt_id": "NEUTRAL-003",
+        "run": 1,
+        "error": "InternalServerError: Error code: 500 - {'error': {'message': 'The server had an error processing your request. Sorry about that! You can retry your request, or contact us through our help center at help.openai.com if you keep seeing this error. (Please include the request ID req_3efbcc738fe44f7cae6f11df11180ef3 in your email.)', 'type': 'server_error', 'param': None, 'code': None}}"
+      },
+      {
+        "prompt_id": "NEUTRAL-003",
+        "run": 2,
+        "error": "InternalServerError: Error code: 500 - {'error': {'message': 'The server had an error processing your request. Sorry about that! You can retry your request, or contact us through our help center at help.openai.com if you keep seeing this error. (Please include the request ID req_45fae53b195d4b7ebf4c38869d653ce4 in your email.)', 'type': 'server_error', 'param': None, 'code': None}}"
+      },
+      {
+        "prompt_id": "NEUTRAL-004",
+        "run": 1,
+        "model": "gpt-4o-search-preview-2025-03-11",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 359,
+        "response_preview": "집에서 매일 사용하실 수 있는 가글 제품으로 다음의 브랜드를 추천드립니다:\n\n1. **리스테린(Listerine)**: 오랜 역사를 가진 글로벌 브랜드로, 다양한 구강 건강 문제를 해결하는 여러 제품을 제공합니다.\n\n2. **가그린(Garglin)**: 국내에서 널리 알려진 브랜드로, 다양한 맛과 기능의 제품을 선보이고 있습니다.\n\n3. **콜게이트(Colgate)**: 전 세계적으로 신뢰받는 브랜드로, 구강 청결을 위한 다양한 제품을 제공합니다.\n\n이러한 브랜드의 제품은 대부분 약국이나 대형 마트에서 쉽게 구매하실 수 있습니다. 구매 시에는 개인의 구강 상태와 선호하는 맛, 알코올 함유 여부 등을 고려하여 선택하시는 것이 좋습니다. "
+      },
+      {
+        "prompt_id": "NEUTRAL-004",
+        "run": 2,
+        "model": "gpt-4o-search-preview-2025-03-11",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 238,
+        "response_preview": "집에서 매일 사용할 수 있는 가글 제품으로 다음의 두 가지를 추천드립니다:\n\n1. **리스테린 토탈 케어**: 구강 건강을 종합적으로 관리할 수 있는 제품으로, 플라그 제거, 잇몸 건강 증진, 치아 강화 등의 효과를 제공합니다.\n\n2. **가그린 오리지널**: 국내에서 널리 사용되는 가글로, 구취 제거와 구강 청결 유지에 도움을 줍니다.\n\n이 두 제품은 국내에서 쉽게 구입할 수 있으며, 일상적인 구강 관리에 효과적입니다. "
+      },
+      {
+        "prompt_id": "NEUTRAL-005",
+        "run": 1,
+        "error": "InternalServerError: Error code: 500 - {'error': {'message': 'The server had an error processing your request. Sorry about that! You can retry your request, or contact us through our help center at help.openai.com if you keep seeing this error. (Please include the request ID req_bef11248ce0d45818acceae37d12abe8 in your email.)', 'type': 'server_error', 'param': None, 'code': None}}"
+      },
+      {
+        "prompt_id": "NEUTRAL-005",
+        "run": 2,
+        "error": "InternalServerError: Error code: 500 - {'error': {'message': 'The server had an error processing your request. Sorry about that! You can retry your request, or contact us through our help center at help.openai.com if you keep seeing this error. (Please include the request ID req_1ef3c58b32a14dd6b7169f59fa28aa33 in your email.)', 'type': 'server_error', 'param': None, 'code': None}}"
+      }
+    ],
+    "D": [
+      {
+        "prompt_id": "NEUTRAL-001",
+        "run": 1,
+        "model": "gpt-4o-2024-08-06",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 460,
+        "response_preview": "구강청결제를 처음 사용하신다면, 다음과 같은 기준을 고려하시면 좋습니다:\n\n1. **목적에 맞춤**: \n   - 구취 제거: 일반적인 구강청결제 사용\n   - 충치 예방: 불소 함유 구강청결제\n   - 잇몸 건강: 항염증 성분이 있는 제품\n\n2. **성분 확인**:\n   - 알코올이 포함된 제품은 강한 청량감을 줄 수 있지만, 민감한 구강에 자극이 될 수 있습니다.\n   - 무알코올 제품은 자극이 덜합니다.\n\n3. **추천 브랜드**:\n   - 리스테린: 다양한 효과별 제품이 있습니다.\n   - 콜게이트: 잇몸 건강 관련 제품들이 많습니다.\n   - 탑구강: 무알코올 제품으로 부드러운 사용감을 제공합니다.\n\n4. **취향과 필요**:\n   - 휘슬린, 민트, 시트러스 등 다양한 향/flavor가 있으니 취향"
+      },
+      {
+        "prompt_id": "NEUTRAL-001",
+        "run": 2,
+        "model": "gpt-4o-2024-08-06",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 433,
+        "response_preview": "구강청결제를 처음 사용하신다면, 다음과 같은 점들을 고려해서 선택해보세요:\n\n1. **구성 성분**: 알코올 유무를 확인하세요. 알코올이 포함된 제품은 강한 소독 효과가 있지만 자극적일 수 있습니다. 민감한 잇몸을 가진 경우 무알코올 제품을 선택하는 것이 좋습니다.\n\n2. **목적**: 플라크 제거, 구취 제거, 잇몸 건강 등 원하는 효과에 따라 제품이 다릅니다. 특정 효과를 원하시면 그에 맞는 제품을 선택하세요.\n\n3. **상표**: 리스테린, 가그린, 씨놀 등의 믿을 만한 브랜드 제품을 선택하는 것이 안전합니다.\n\n4. **사용감**: 민트, 허브 등 다양한 맛이 있으니, 개인 취향에 맞는 맛을 선택하세요.\n\n5. **의사의 추천**: 치과 의사와 상의하여 추천받는 것도 좋은 방법입니다.\n\n제품을 선택할"
+      },
+      {
+        "prompt_id": "NEUTRAL-002",
+        "run": 1,
+        "model": "gpt-4o-2024-08-06",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 345,
+        "response_preview": "가글 입문자라면 부담 없이 사용하기 좋은 제품들이 몇 가지 있어. 다음과 같은 제품들을 고려해 보면 좋을 것 같아.\n\n1. **리스테린 쿨 민트** - 강한 민트향으로 입안을 상쾌하게 해주고 플라그 제거에도 효과적이야.\n   \n2. **가그린 마일드 민트** - 조금 더 순한 맛을 원한다면 추천해. 자극이 덜해서 초보자도 사용하기 좋아.\n\n3. **콜게이트 플럭스** - 불소가 함유되어 있어 충치 예방에 좋고, 순한 맛이라 입문자에게 적합해.\n\n가글 사용 시 너무 오래 사용하거나 자주 사용하는 것은 피하고, 사용 후에는 물로 헹구지 않는 것이 좋아. 처음에는 하루에 한 번 사용해 보고 반응을 살펴보면서 조절해!"
+      },
+      {
+        "prompt_id": "NEUTRAL-002",
+        "run": 2,
+        "model": "gpt-4o-2024-08-06",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 337,
+        "response_preview": "가글 입문자에게 추천할 만한 제품으로는 다음과 같은 것들이 있어:\n\n1. **리스테린 그린티**: 강한 맛이 부담스러울 수 있는 초보자에게는 부드러운 그린티 버전이 좋아. 강렬한 민트 향이 아니라 부담 없이 시작할 수 있어.\n\n2. **콜게이트 플럭스 주니어**: 비교적 맛이 순하고, 충치 예방에도 효과적이야.\n\n3. **옥시프레쉬 프로바이오틱**: 자연 유래 성분이 들어 있고 맛이 부드러워 입문자에게 적합해.\n\n4. **마우스워시 리플레시**: 알코올이 들어 있지 않아 부드럽고 순한 사용감을 줘.\n\n가글 제품을 처음 사용할 때는 성분을 확인하고, 알레르기가 없는지 주의 깊게 살펴보는 것이 좋아."
+      },
+      {
+        "prompt_id": "NEUTRAL-003",
+        "run": 1,
+        "model": "gpt-4o-2024-08-06",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 494,
+        "response_preview": "가성비 좋은 가글을 선택할 때 고려해야 할 사항은 다음과 같습니다:\n\n1. **성분**: \n   - 구강 건강에 유익한 성분(예: 불소, 항균제)을 포함하고 있는지 확인하세요.\n   - 알코올이 포함되어 있는지 확인하고, 민감한 경우 알코올 프리 제품을 선택하세요.\n\n2. **효과**: \n   - 플라그 제거, 구취 제거, 치아 강화 등 필요한 효과가 있는지 확인하세요.\n\n3. **가격**: \n   - 용량 대비 가격을 비교해서 단위당 비용이 적당한지 확인하세요.\n\n4. **사용 후기**: \n   - 다른 사용자들의 후기를 확인해 실제 효과가 있는지, 부작용은 없는지 알아보세요.\n\n5. **브랜드 신뢰도**: \n   - 신뢰할 수 있는 브랜드의 제품을 선택하면 더 좋습니다.\n\n6. **개인적 필요**: \n "
+      },
+      {
+        "prompt_id": "NEUTRAL-003",
+        "run": 2,
+        "model": "gpt-4o-2024-08-06",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 450,
+        "response_preview": "가성비 좋은 가글을 고르기 위해 다음 요소들을 고려해보세요:\n\n1. **성분**: 플루오라이드, 항균제 등의 주요 성분을 확인하세요. 구강 건강에 효과적인 성분이 있는 제품을 고르는 것이 중요합니다.\n\n2. **가격**: 다양한 브랜드와 제품의 가격을 비교해보세요. 같은 용량 대비 더 저렴한 제품을 고르는 것도 방법입니다.\n\n3. **사용 후기**: 다른 사용자의 리뷰를 통해 제품의 효과와 만족도를 확인하세요.\n\n4. **알코올 유무**: 알코올 성분이 없는 가글은 자극이 덜할 수 있습니다. 개인 취향에 맞춰 선택하세요.\n\n5. **용량과 지속 가능성**: 같은 가격이라도 용량이 클수록 오래 사용할 수 있습니다.\n\n6. **특별한 기능**: 미백 효과, 잇몸 보호 등 추가적인 기능이 필요하다면 그에 맞는 제"
+      },
+      {
+        "prompt_id": "NEUTRAL-004",
+        "run": 1,
+        "model": "gpt-4o-2024-08-06",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 456,
+        "response_preview": "집에서 매일 사용할 가글을 선택할 때 고려해야 할 몇 가지 사항이 있습니다:\n\n1. **구강 건강 목표**: 치은염 예방, 입냄새 제거, 구강건조 해소 등의 목적에 맞는 제품을 선택하세요.\n\n2. **알코올 함유 여부**: 알코올이 들어 있는 가글은 강한 느낌이 있을 수 있습니다. 민감한 잇몸이나 구강건조증이 있는 경우 무알코올 가글을 선택하는 것이 좋습니다.\n\n3. **불소 함유**: 충치 예방을 원한다면 불소가 함유된 제품을 선택하세요.\n\n4. **민감한 구강 상태**: 민감한 입이나 잇몸을 가지고 있다면 '민감용'으로 표시된 제품을 찾으세요.\n\n5. **제품 리뷰**: 사용 후기를 참고하여 자신의 필요에 맞는 제품을 찾는 것도 좋은 방법입니다.\n\n추천 브랜드로는 리스테린, 테라브레스, 콜게이트 등이 있"
+      },
+      {
+        "prompt_id": "NEUTRAL-004",
+        "run": 2,
+        "model": "gpt-4o-2024-08-06",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 508,
+        "response_preview": "매일 사용할 가글을 선택할 때에는 다음과 같은 사항을 고려해보세요:\n\n1. **구강 건강 목표**:\n   - 충치 예방: 불소 함유 가글\n   - 구취 제거: 항박테리아 성분이 있는 가글\n   - 잇몸 건강: 항염증 성분이 포함된 제품\n\n2. **성분 확인**:\n   - 알코올 포함 여부: 알코올이 포함된 가글은 강력한 살균력을 가질 수 있지만, 구강 건조를 유발할 수 있습니다. 알코올 프리 가글도 있습니다.\n   - 천연 성분: 민감한 피부나 향에 민감하다면 천연 성분이나 민감성용 제품을 선택하세요.\n\n3. **맛과 향**:\n   - 민트, 허브, 과일 향 등 본인이 선호하는 향을 선택하면 매일 사용하기 편리합니다.\n\n4. **추천 브랜드**:\n   - 리스테린 (Listerine)\n   - 콜게이트 (C"
+      },
+      {
+        "prompt_id": "NEUTRAL-005",
+        "run": 1,
+        "model": "gpt-4o-2024-08-06",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 619,
+        "response_preview": "구강청결제를 처음 고르시는 거라면 다음을 고려해보세요:\n\n1. **목적 확인**: \n   - **일반적인 구강 청결**: 구취 제거, 일반적인 구강 건강을 원하신다면, 일반 구강청결제를 선택하세요.\n   - **특정 문제 해결**: 잇몸 질환 예방, 치석 방지 등이 필요하다면 기능성 제품을 선택하세요.\n\n2. **알코올 유무**:\n   - **알코올**: 박테리아를 죽이는 데 효과적이지만, 민감한 잇몸에는 자극적일 수 있습니다.\n   - **무알코올**: 민감한 잇몸이나 알코올에 민감한 사람이 사용하기 좋습니다.\n\n3. **플루오라이드 함유**:\n   - 치아를 강화하고 충치를 예방하는 데 도움이 됩니다.\n\n4. **향과 맛**:\n   - 개개인의 취향에 따라 다양한 향과 맛이 있습니다. 민트 향 대부분이지"
+      },
+      {
+        "prompt_id": "NEUTRAL-005",
+        "run": 2,
+        "model": "gpt-4o-2024-08-06",
+        "hit": false,
+        "citations_count": 0,
+        "response_length": 355,
+        "response_preview": "구강청결제를 처음 고르실 때 고려할 만한 몇 가지 요소를 알려드릴게요.\n\n1. **효능**: 자극적인 성분 없이 플라그 제거와 잇몸 건강에 도움이 되는 제품을 고르세요.\n\n2. **알코올 유무**: 민감한 잇몸이거나 자극에 약한 경우 무알코올 제품을 선택하는 것이 좋습니다.\n\n3. **특정한 필요**: 구취 제거, 충치 예방, 잇몸 강화 등 특별한 효능을 원하는 경우 그에 맞는 제품을 선택하세요.\n\n4. **브랜드 및 리뷰**: 신뢰할 수 있는 브랜드의 제품이나 주변의 추천을 참고하세요.\n\n5. **불소 함유량**: 충치 예방을 위해 불소가 포함된 제품이 좋습니다.\n\n약국이나 온라인에서 다양한 제품의 성분과 리뷰를 비교해보세요."
+      }
+    ]
+  }
+}

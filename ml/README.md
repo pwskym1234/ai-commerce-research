@@ -53,6 +53,7 @@
 | 산공통 (보류 중) | `stats/` | 가설검정·로지스틱 회귀 — 데마와 별개 트랙 |
 | 산공통 가상 페이지 | `experiments/synthetic_pages/` | 산공통 통제 실험용 54 페이지 |
 | 컨설팅 산출물 | `consulting/` | GN그룹 컨설팅 — 데마 결과 받아 가공만 |
+| 컨설팅 GEO 감사 도구 | `consulting/aao-gn/` | 상균이 운영 별도 트랙 — gpt-4o-search-preview + Next.js 대시보드. 데마 R1=20과 다른 REPEAT_COUNT=2 정책 (컨설팅 baseline 측정용) |
 | 컨설팅 관련 finding | `consulting/action_roadmap.md`, `consulting/gn_requests.md` 등 | |
 | 마스터 문서 일부 | `docs/PROJECT_MASTER.md` 의 산공통/컨설팅 섹션 | |
 

@@ -300,6 +300,32 @@ def run_query(config: ExperimentConfig, query: str, products: list[Product]) -> 
 
 ---
 
+## 13. Notion 적층 자동화
+
+작업 결과는 노션 워크스페이스 `일`의 3 DB(Work Log / Decision Log / Lessons)에 적층된다.
+DB 스키마와 ID는 메모리 [reference_notion_workspace.md](~/.claude/projects/-Users-mac-Desktop-bodydoctor-project/memory/reference_notion_workspace.md) 참고.
+
+### 13.1 Work Log: 자동
+`git commit` 이 성공하면 PostToolUse hook이 [scripts/notion_log_commit.py](scripts/notion_log_commit.py)를 실행해 Work Log 카드를 자동 생성한다.
+
+- **자동 채워지는 필드**: 제목(commit subject) · 날짜 · 카테고리(파일 경로로 추론: `stats/`→산공통, `ml/`→데마, `consulting/`→컨설팅, 그 외→공통/인프라) · 요약(commit body) · 변경 파일 · commit URL · 상태(Done)
+- **수동 채울 필드**: 작업 종류 · 비용 USD · 소요 분 · 다음 단계 · 키운 스킬 — 노션에서 직접 보강
+- **멱등성**: `.claude/.notion_logged_commits.txt`로 중복 방지 (gitignored)
+- **옵트아웃**: commit message에 `[skip-notion]` 포함 시 skip
+- **실패 정책**: 어떤 실패든 stderr에만 찍고 exit 0 — 에이전트 흐름 절대 안 막음
+
+### 13.2 Decision Log / Lessons: Claude 판단
+큰 결정과 재사용 가능한 패턴/교훈은 commit과 결이 달라서 자동화하지 않는다. Claude가 판단해서 MCP `notion-create-pages`로 적층한다.
+
+- **Decision Log**: 옵션 비교가 있었던 결정, 회복 가능성/비용 평가가 들어간 결정. 작업 끝났을 때 "이건 ADR 감인가?" 자문하고 그렇다면 적층 제안.
+- **Lessons**: 재현 가능한 패턴(예: "Cloudflare 차단은 curl_cffi 먼저"), 실수에서 도출된 휴리스틱. 같은 실수를 두 번 안 하려면 적층.
+- 둘 다 작성 전 메모리의 스키마 확인. 특히 Lessons의 "헤추리스틱" 컬럼은 오타 그대로 운영 — 수정 금지.
+
+### 13.3 통합 / 권한
+통합 이름: `work` (워크스페이스: 일). API 키는 `.env`의 `NOTION_API_KEY`. 새 DB가 생기면 노션에서 `work` 통합을 connections에 추가해야 보임.
+
+---
+
 ## 14. 토큰 효율 & 컨텍스트 자산 운영
 
 > 배경: [docs/trends_2026/APPLICATION.md](docs/trends_2026/APPLICATION.md). 글의 핵심 — "프롬프트 → 컨텍스트 엔지니어링".
@@ -393,3 +419,4 @@ CLAUDE.md 변경은 PR로. 큰 변경(원칙 수정)은 ADR 동반.
 
 - 2026-04-23: 초안 작성. 마스터 문서 v1 기반.
 - 2026-04-23: §14 토큰 효율 & 컨텍스트 자산 운영 추가. 지식베이스/워크플로우/러너 스펙 신설.
+- 2026-04-30: §13 Notion 적층 자동화 추가. PostToolUse hook + scripts/notion_log_commit.py.

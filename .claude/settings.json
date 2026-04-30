@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 ml/scripts/parse_responses_claude.py ml/data/b1_runs/b1_closed_medical_device_20260425_205723 --budget 1.0)",
+      "Bash(python3 ml/scripts/parse_responses_claude.py ml/data/b1_runs/b1_closed_gargle_20260425_205908 --budget 1.0)",
+      "Bash(git restore *)",
+      "Bash(git fetch *)",
+      "Bash(gh pr *)",
+      "Bash(awk '{print $1}')",
+      "Bash(grep -E \"\\\\.py$\")",
+      "Bash(awk '{print $NF}')",
+      "Bash(git mv *)",
+      "Bash(git merge origin/feat/aao-gn-pipeline --no-ff -m 'Merge: consulting/aao-gn — GEO 감사 파이프라인 + Next.js 대시보드 \\(상균이\\) 통합 *)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/scripts/notion_log_commit.py\""
+          }
+        ]
+      }
+    ]
+  }
+}

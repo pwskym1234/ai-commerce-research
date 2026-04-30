@@ -40,10 +40,12 @@ ml/models/*.joblib
 ml/models/*.bin
 !ml/models/.gitkeep
 
-# API 응답 (큰 jsonl)
+# API 응답 (큰 jsonl + 스프레드시트용 csv는 raw 일부 포함하므로 같이 제외)
 experiments/api_runs/**/*.jsonl
+experiments/api_runs/**/*.csv
 !experiments/api_runs/.gitkeep
 !experiments/api_runs/**/sample_*
+# SUMMARY.md / ANOMALIES.md / config.json / summary.json 은 git OK (raw 미포함, 메타·요약만)
 
 # API 캐시 (sha256 키 단위) — 재실험 시 자동 재생성
 experiments/api_runs/_cache/
@@ -65,5 +67,6 @@ Thumbs.db
 *.log
 logs/
 
-# Claude Code 로컬 settings (개인 환경)
-.claude/
+# Claude Code — settings.json은 팀 공유(hook 등), 나머지는 로컬
+.claude/*
+!.claude/settings.json

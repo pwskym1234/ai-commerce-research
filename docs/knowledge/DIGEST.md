@@ -4,7 +4,7 @@
 > 매주 금요일 갱신. Wayne·팀이 재시작 시 가장 먼저 읽는 파일.
 > 모든 발견을 한 줄씩 — 상세는 `findings/`, `competitors/`, `methods/`, `consulting/` 참조.
 
-**마지막 갱신**: 2026-04-30 v2.8 — 경쟁사 풍경 갱신·NAVER 검색 매핑·자동화 인프라(Notion 적층 + 모니터링 cron) 구축·PDP 카피 초안·페르소나 정의·팀 네이밍 규칙 신설. v2.7→v2.8 변경: NAVER 키 *확보* 확정 (이전 "키 대기" 잘못된 표기 정정), Phase B1 결과 반영, 9개 경쟁사 추가 적층, 자동화 hook + 페르소나 정의 신설.
+**마지막 갱신**: 2026-04-30 — 경쟁사 풍경 갱신·NAVER 검색 매핑·자동화 인프라(Notion 적층 + 모니터링 cron) 구축·PDP 카피 초안·페르소나 정의·팀 네이밍 규칙 신설·Rule 6 (최신=최종 라벨) 일괄 적용. NAVER 키 *확보* 확정 (이전 "키 대기" 잘못된 표기 정정), Phase B1 결과 반영, 9개 경쟁사 추가 적층, 자동화 hook + 페르소나 정의 신설.
 
 ---
 
@@ -16,11 +16,13 @@
 
 | 산출물 | 최신 파일 | 상태 | 비고 |
 |---|---|---|---|
-| 의료기기 쿼리셋 | [queries_medical.yaml](../../experiments/prompts/queries_medical.yaml) (v4) — Phase B1 결과 정합성 보존용 | ✅ 동결 (B1 완료) | v4는 데마 B1에 사용된 그대로 |
-| 의료기기 쿼리셋 (NAVER 보강) | [queries_medical_v5.yaml](../../experiments/prompts/queries_medical_v5.yaml) | ✅ 산공통 본실험·모니터링용 | EASY-K 영문·복압성·갱년기·글로벌·산후 회복 보강 |
-| 가글 쿼리셋 | [queries_gargle.yaml](../../experiments/prompts/queries_gargle.yaml) (v2) — B1 보존 | ✅ 동결 | v2는 B1에 사용 |
-| 가글 쿼리셋 (NAVER 보강) | [queries_gargle_v5.yaml](../../experiments/prompts/queries_gargle_v5.yaml) | ✅ 산공통·모니터링용 | 프로폴리스 가글 / 잇몸 가글 / 충치예방 / 2080 비교 보강 |
-| 직교배열 설계 | [methods/orthogonal_array_L54.md](methods/orthogonal_array_L54.md) | ✅ 확정 | L18·L36은 deprecated |
+| **의료기기 쿼리셋 (최종, 본실험 재실행용)** | [queries_medical_최종.yaml](../../experiments/prompts/queries_medical_최종.yaml) | ✅ 페르소나 stratified 32 쿼리 | PRIMARY 16 + SECONDARY 8 + TERTIARY 8 |
+| 의료기기 쿼리셋 (B1 정합 보존) | [queries_medical_B1보존.yaml](../../experiments/prompts/queries_medical_B1보존.yaml) | ✅ 동결 (B1 완료) | 데마 B1에 사용된 그대로, 재현용 보존 |
+| 의료기기 쿼리셋 (NAVER 보강) | [queries_medical_네이버검색반영.yaml](../../experiments/prompts/queries_medical_네이버검색반영.yaml) | ✅ 중간 단계 보존 | EASY-K 영문·복압성·갱년기·글로벌·산후 회복 보강 |
+| **가글 쿼리셋 (최종, 본실험 재실행용)** | [queries_gargle_최종.yaml](../../experiments/prompts/queries_gargle_최종.yaml) | ✅ 페르소나 stratified 32 쿼리 | 잇몸 약함 PRIMARY + 모유수유 SECONDARY + 어린이/흡연자 TERTIARY |
+| 가글 쿼리셋 (B1 정합 보존) | [queries_gargle_B1보존.yaml](../../experiments/prompts/queries_gargle_B1보존.yaml) | ✅ 동결 | B1에 사용된 그대로 |
+| 가글 쿼리셋 (NAVER 보강) | [queries_gargle_네이버검색반영.yaml](../../experiments/prompts/queries_gargle_네이버검색반영.yaml) | ✅ 중간 단계 보존 | 프로폴리스 가글 / 잇몸 가글 / 충치예방 / 2080 비교 보강 |
+| 직교배열 설계 | [methods/orthogonal_array_L54.md](methods/orthogonal_array_L54.md) | ✅ 확정 (현재 사용) | L18·L36은 이전 버전 |
 | 가상 페이지 | `experiments/synthetic_pages/` (54개) | ⚠️ hero rating C 재렌더 필요 | 산공통 보류 해제 시 점검 |
 | 본실험 러너 | [experiments/runner.py](../../experiments/runner.py) | ✅ R1~R10 강제 | OpenAI 키·gpt-5.4 핀 |
 | 본실험 결과 (B1) | `ml/data/b1_runs/` (4 runs) | ✅ 1,920 호출 완료 | [F2026-04-25_phase_b1_main_results.md](findings/F2026-04-25_phase_b1_main_results.md) 참조 |
@@ -30,9 +32,9 @@
 | 산출물 | 최신 파일 | 상태 | 비고 |
 |---|---|---|---|
 | 12주 실행 로드맵 | [consulting/action_roadmap.md](../../consulting/action_roadmap.md) | ✅ 2026-04-30 갱신 | §1.6·§2.5·§4.1 신설 |
-| 바디닥터 PDP 카피 | [bodydoctor_pdp_copy_draft.md](../../consulting/diagnosis/bodydoctor_pdp_copy_draft.md) | ⚠️ v0.1 (TBD 5개) | GN P0 응답 후 v1 |
-| 프로폴린스 PDP + 시딩 | [propolinse_pdp_copy_draft.md](../../consulting/diagnosis/propolinse_pdp_copy_draft.md) | ⚠️ v0.1 | 30/60일 캠페인 포함 |
-| **핵심 페르소나** | [consulting/personas/핵심_페르소나.md](../../consulting/personas/핵심_페르소나.md) | ✅ Wayne 정의 (2026-04-30) | GN 인터뷰 회신 후 v2 |
+| 바디닥터 PDP 카피 | [bodydoctor_pdp_copy_초안.md](../../consulting/diagnosis/bodydoctor_pdp_copy_초안.md) | ⚠️ 초안 (TBD 5개) | GN P0 응답 후 본문 |
+| 프로폴린스 PDP + 시딩 | [propolinse_pdp_copy_초안.md](../../consulting/diagnosis/propolinse_pdp_copy_초안.md) | ⚠️ 초안 | 30/60일 캠페인 포함 |
+| **핵심 페르소나** | [consulting/personas/핵심_페르소나.md](../../consulting/personas/핵심_페르소나.md) | ✅ Wayne 정의 (2026-04-30) | GN 인터뷰 회신 후 갱신 |
 | GN P0 요청 (기존) | [consulting/gn_requests.md](../../consulting/gn_requests.md) | ⏳ 응답 대기 | 허가번호·FDA·임상 |
 | FAQ 자료 요청 메일 | [consulting/gn_requests_FAQ_data.md](../../consulting/gn_requests_FAQ_data.md) | ⏳ 발송 대기 | 회신 목표 2026-05-17 |
 | JSON-LD 풀스키마 | [consulting/diagnosis/bodydoctor_jsonld.json](../../consulting/diagnosis/bodydoctor_jsonld.json) + [snippet.html](../../consulting/diagnosis/bodydoctor_jsonld_snippet.html) | ⚠️ TBD 5개 | GN P0 응답 후 v1 |
@@ -71,7 +73,7 @@
 | Phase B1 본실험 | ✅ 1,920 호출 / $11.48 / 2026-04-25 완료 | ml/data/b1_runs/ | 2026-04-25 |
 | **B1 결과 — 의료기기 페이지 incremental** | **+4.2%p** (open 21% → closed 25%) | F2026-04-25_phase_b1_main_results | 2026-04-25 |
 | **B1 결과 — 가글 페이지 incremental** | **+12.3%p** (open 17% → closed 29%) | (3배 효과 — 가글 시급성 ↑) | 2026-04-25 |
-| 산공통 본실험 예정 비용 (보류) | $108 (gpt-5.4 8,640 호출) + $3.4 파일럿 | experiment_design_v2 | — |
+| 산공통 본실험 예정 비용 (보류) | $108 (gpt-5.4 8,640 호출) + $3.4 파일럿 | experiment_design.md | — |
 | **NAVER 외부 증거 (H14)** | ✅ **키 확보 + 60 키워드 매핑 완료** (이전 "키 대기" 정정) | data/processed/naver_search_volume.json | 2026-04-30 |
 | 노션 자동 적층 | ✅ 11 카드 (PostToolUse hook) | .claude/.notion_logged_commits.txt | 2026-04-30 |
 
@@ -177,9 +179,9 @@
 
 ## 🛠️ 적용된 방법
 
-- [orthogonal_array_L54.md](methods/orthogonal_array_L54.md) ★ — L54 직교배열 v2 확정
-- [experiment_design_v2.md](methods/experiment_design_v2.md) ★ — v2 본실험 설계
-- ~~orthogonal_array_L36.md~~ — L54로 대체됨 (보존만)
+- [orthogonal_array_L54.md](methods/orthogonal_array_L54.md) ★ — L54 직교배열 확정 (현재 사용)
+- [experiment_design.md](methods/experiment_design.md) ★ — 본실험 설계
+- ~~orthogonal_array_L36.md~~ — L54로 대체됨 (이전 버전)
 - [sample_size_justification.md](methods/sample_size_justification.md)
 - [synthetic_pages_design.md](methods/synthetic_pages_design.md)
 

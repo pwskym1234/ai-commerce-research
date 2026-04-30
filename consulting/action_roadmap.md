@@ -63,7 +63,7 @@
 
 ### 1.6 Query Corpus 데이터 기반 보강 (Ahrefs Brand Radar 메서드 차용, 2026-04-30 신설)
 
-**무엇**: 현재 산공통/데마 쿼리셋(Q1×Q2, queries_medical.yaml v4)이 합성 — Wayne·팀이 "사용자가 이렇게 묻겠지" 추정. Ahrefs Brand Radar는 **350M+ 실 검색 행동 데이터**로 prompt corpus 자동 생성. 우리도 부분 차용해서 실제 한국 사용자의 의료기기/가글 정보 탐색 패턴으로 쿼리셋 *외부 타당성* 보강.
+**무엇**: 현재 산공통/데마 쿼리셋(Q1×Q2, queries_medical_B1보존.yaml)이 합성 — Wayne·팀이 "사용자가 이렇게 묻겠지" 추정. Ahrefs Brand Radar는 **350M+ 실 검색 행동 데이터**로 prompt corpus 자동 생성. 우리도 부분 차용해서 실제 한국 사용자의 의료기기/가글 정보 탐색 패턴으로 쿼리셋 *외부 타당성* 보강.
 
 **왜 필요**: 합성 쿼리가 실제 검색 빈도·표현 분포와 어긋나면 본실험 결과의 generalizability 약함. 발표/컨설팅 시 "이 쿼리가 진짜 시장 데이터냐"는 질문에 방어 어려움.
 
@@ -71,9 +71,9 @@
 - 네이버 데이터랩 검색어 트렌드 (요실금 / 케겔 / EMS / 가글 / 프로폴리스 등) 빈도 매핑
 - Google Trends 한국 (보조)
 - (가능하면) 실제 ChatGPT/Perplexity 사용자 panel — 한국엔 panel 없음. 영문은 Profound 트라이얼/Ahrefs Brand Radar 검토
-- 도출된 빈도·표현으로 Q1×Q2 가중치 보정 → queries_medical.yaml v5, queries_gargle.yaml v2
+- 도출된 빈도·표현으로 Q1×Q2 가중치 보정 → queries_medical_네이버검색반영.yaml, queries_gargle_네이버검색반영.yaml
 
-**산출**: queries_*.yaml v5, 데이터 출처·빈도 명시 메타데이터
+**산출**: queries_*_네이버검색반영.yaml, 데이터 출처·빈도 명시 메타데이터
 **소요**: 1주, $0 (네이버 데이터랩 무료) ~ $129 (Ahrefs Brand Radar Lite 1개월)
 **근거**: [F2026-04-30_competitor_landscape_update.md §4](../docs/knowledge/findings/F2026-04-30_competitor_landscape_update.md)
 

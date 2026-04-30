@@ -22,7 +22,7 @@
 
 | 날짜 | 파일 | 한 줄 |
 |-----|----|----|
-| 2026-04-24 | [F2026-04-24_hypothesis_upgrade.md](F2026-04-24_hypothesis_upgrade.md) | 업계 리서치 반영 F/가설 고도화 (→ experiment_design_v2 확정) |
+| 2026-04-24 | [F2026-04-24_hypothesis_upgrade.md](F2026-04-24_hypothesis_upgrade.md) | 업계 리서치 반영 F/가설 고도화 (→ experiment_design 확정) |
 | 2026-04-24 | [F2026-04-24_first_presentation_feedback_analysis.md](F2026-04-24_first_presentation_feedback_analysis.md) | 1차 발표 피드백 50+ 전수 분류 (P0/P1/P2) |
 
 ## 컨설팅 트랙 (consulting/)
@@ -36,7 +36,7 @@
 | 날짜 | 파일 | 한 줄 |
 |-----|----|----|
 | 2026-04-24 | [F2026-04-24_dm_consulting_priority_roadmap.md](F2026-04-24_dm_consulting_priority_roadmap.md) | 데마+컨설팅 우선 로드맵 (산공통 보류 결정) |
-| 2026-04-24 | [F2026-04-24_both_projects_pivot.md](F2026-04-24_both_projects_pivot.md) | v2 설계 후 산공통/데마 두 프로젝트 변경점 |
+| 2026-04-24 | [F2026-04-24_both_projects_pivot.md](F2026-04-24_both_projects_pivot.md) | 본실험 설계 확정 후 산공통/데마 두 프로젝트 변경점 |
 | 2026-04-24 | [F2026-04-24_week3_execution_plan.md](F2026-04-24_week3_execution_plan.md) | Week 3 실행 일정 (파일럿+본실험), critical path |
 
 ## 외부 리서치·landscape

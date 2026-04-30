@@ -35,6 +35,7 @@ import random
 import re
 import sys
 import time
+import uuid
 from dataclasses import dataclass, field, asdict
 from datetime import datetime, timezone
 from pathlib import Path
@@ -59,8 +60,8 @@ CACHE_DIR = EXP_DIR / "api_runs" / "_cache"
 CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
 
-# ========== 쿼리 로드 (YAML, 8유형 × 3개) ==========
-QUERIES_YAML = Path(__file__).resolve().parent / "prompts" / "queries_medical.yaml"
+# ========== 쿼리 로드 (YAML, 페르소나 stratified 32개 = 8유형 × 4) ==========
+QUERIES_YAML = Path(__file__).resolve().parent / "prompts" / "queries_medical_최종.yaml"
 
 def load_queries() -> list[tuple[str, str, str]]:
     """Returns list of (query_id, query_type, query_text).
@@ -179,19 +180,24 @@ class RunConfig:
 
 @dataclass
 class CallResult:
+    response_id: str        # UUID — 스프레드시트 ↔ jsonl 역참조 키 (D2)
     run_id: str
     page_id: str
     query_id: str           # 예: "BRD-1", "CAT-2"
     query_type: str         # 예: "BRD", "CAT"
+    query_text: str         # 쿼리 원문 (검수 시 ID 재조회 불필요)
     repeat_idx: int
     seed: int
     model_version: str
     temperature: Optional[float]
     persona_id: str         # none | gn_buyer
     system_hash: str
+    system_prompt_excerpt: str   # 첫 300자 (페르소나 적용 여부 한눈에)
     user_prompt_hash: str
+    page_text_excerpt: str       # 페이지 본문 첫 300자 (어떤 콘텍스트였는지)
     products_order: list[str]
     raw_response: str
+    response_length: int         # 짧은 응답·회피만 빠르게 필터
     # ── Y2a 5분화 (친구 대시보드 교훈 반영) ────
     y2a_mentioned_brand_ids: list[str]        # 사전 정의 N=6 중 언급
     y2a_our_selected: bool                    # 공통: 우리 언급 여부
@@ -229,9 +235,17 @@ def load_cache(key: str) -> Optional[dict]:
     return None
 
 
-def save_cache(key: str, data: dict) -> None:
+def save_cache(key: str, data: dict, *, meta: Optional[dict] = None) -> None:
+    """
+    캐시 저장. data는 raw_response/tokens_in/tokens_out 핵심,
+    meta는 추적용 메타(model_version/query_id/page_id/seed/cached_at).
+    메타 없으면 raw_response만 저장됨 — 호출 추적 불가능 (legacy 호환).
+    """
     p = CACHE_DIR / f"{key}.json"
-    p.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+    payload = dict(data)
+    if meta:
+        payload["_meta"] = meta
+    p.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
 
 
 # ========== 재현성 가드 ==========
@@ -432,6 +446,13 @@ def call_one(cfg: RunConfig, client: OpenAI, page_html: str, page_id: str,
 
     user_prompt = make_user_prompt(page_html, query, order)
 
+    # 페이지 본문 발췌 (검수용)
+    from bs4 import BeautifulSoup
+    _soup = BeautifulSoup(page_html, "html.parser")
+    for _t in _soup(["script", "style"]):
+        _t.decompose()
+    page_text_excerpt = _soup.get_text(separator=" ", strip=True)[:300]
+
     system_prompt = build_system_prompt(cfg.persona_id)
     sys_hash = hashlib.sha256(system_prompt.encode("utf-8")).hexdigest()[:12]
     usr_hash = hashlib.sha256(user_prompt.encode("utf-8")).hexdigest()[:12]
@@ -460,7 +481,18 @@ def call_one(cfg: RunConfig, client: OpenAI, page_html: str, page_id: str,
         raw = r.choices[0].message.content or ""
         tokens_in = r.usage.prompt_tokens if r.usage else 0
         tokens_out = r.usage.completion_tokens if r.usage else 0
-        save_cache(key, {"raw_response": raw, "tokens_in": tokens_in, "tokens_out": tokens_out})
+        save_cache(
+            key,
+            {"raw_response": raw, "tokens_in": tokens_in, "tokens_out": tokens_out},
+            meta={
+                "model_version": cfg.model_version,
+                "query_id": query_id,
+                "page_id": page_id,
+                "seed": seed,
+                "persona_id": cfg.persona_id,
+                "cached_at": datetime.now(timezone.utc).isoformat(),
+            },
+        )
 
     # Y 변수 추출 (v2.1 — 5분화 + NER)
     mentioned = parse_mentioned_predefined(raw)
@@ -482,19 +514,24 @@ def call_one(cfg: RunConfig, client: OpenAI, page_html: str, page_id: str,
     cost = tokens_in * in_rate / 1_000_000 + tokens_out * out_rate / 1_000_000
 
     return CallResult(
+        response_id=str(uuid.uuid4()),
         run_id=run_id,
         page_id=page_id,
         query_id=query_id,
         query_type=query_id.split("-")[0],
+        query_text=query,
         repeat_idx=repeat_idx,
         seed=seed,
         model_version=cfg.model_version,
         temperature=cfg.temperature,
         persona_id=cfg.persona_id,
         system_hash=sys_hash,
+        system_prompt_excerpt=system_prompt[:300],
         user_prompt_hash=usr_hash,
+        page_text_excerpt=page_text_excerpt,
         products_order=order,
         raw_response=raw,
+        response_length=len(raw),
         y2a_mentioned_brand_ids=mentioned,
         y2a_our_selected=our_selected,
         y2a_mention=y2a_sub["y2a_mention"],
@@ -581,6 +618,16 @@ def run_experiment(cfg: RunConfig) -> dict:
     (out_dir / "summary.json").write_text(
         json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8"
     )
+
+    # ── 자동 후처리 (D4): responses.csv + SUMMARY.md + ANOMALIES.md ──
+    try:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from _postprocess import postprocess_run
+        postprocess_run(out_dir)
+        print(f"   responses.csv / SUMMARY.md / ANOMALIES.md 생성됨")
+    except Exception as e:
+        print(f"   ⚠️ 후처리 실패: {e}")
+
     print(f"\n✅ 실험 완료")
     print(f"   responses.jsonl: {jsonl_path}")
     print(f"   총 비용: ${total_cost:.2f}")

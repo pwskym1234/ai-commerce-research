@@ -8,7 +8,7 @@
 #   4. COM-3 → 글로벌 브랜드 (Perifit) 명시 — 한국 검색 zero지만 LLM 응답 강함. H10 직접 검정용
 #   5. USE-3 → "산후 회복" 일반어 풀 강화 (검색 916k)
 #
-# v4 (queries_medical.yaml) 는 Phase B1 결과와 정합성 위해 보존. v5는 산공통 본실험 + 모니터링 cron용.
+# v4 (queries_medical_B1보존.yaml) 는 Phase B1 결과와 정합성 위해 보존. v5는 산공통 본실험 + 모니터링 cron용.
 #
 # runner.py 가 이 파일을 로드. query_id 패턴: "BRD-1", "BRD-2", "BRD-3" ...
 

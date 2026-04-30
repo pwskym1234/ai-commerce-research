@@ -127,7 +127,7 @@ AiEO 연구 / 컨설팅 팀
 - [ ] CC 라인 (지도교수님 또는 GN 내 컨택 포인트)
 - [ ] [Wayne 연락처] / [Wayne 서명] 자기 정보로 교체
 - [ ] 회신 마감일 자기 일정에 맞게 조정 (현재 2026-05-17 권장)
-- [ ] 첨부 — [bodydoctor_pdp_copy_draft.md](diagnosis/bodydoctor_pdp_copy_draft.md) + [propolinse_pdp_copy_draft.md](diagnosis/propolinse_pdp_copy_draft.md) 의 FAQ 섹션 (placeholder 부분) 발췌해서 컨텍스트로 첨부 가능
+- [ ] 첨부 — [bodydoctor_pdp_copy_초안.md](diagnosis/bodydoctor_pdp_copy_초안.md) + [propolinse_pdp_copy_초안.md](diagnosis/propolinse_pdp_copy_초안.md) 의 FAQ 섹션 (placeholder 부분) 발췌해서 컨텍스트로 첨부 가능
 
 ## 회신받은 후 다음 액션
 
@@ -141,7 +141,7 @@ AiEO 연구 / 컨설팅 팀
 ## 관련 문서
 
 - [gn_requests.md](gn_requests.md) — 기존 GN 요청 리스트 (P0/P1/P2)
-- [bodydoctor_pdp_copy_draft.md](diagnosis/bodydoctor_pdp_copy_draft.md) — 바디닥터 PDP 카피 (FAQ 섹션 placeholder)
-- [propolinse_pdp_copy_draft.md](diagnosis/propolinse_pdp_copy_draft.md) — 프로폴린스 PDP 카피 + 시딩 캠페인
+- [bodydoctor_pdp_copy_초안.md](diagnosis/bodydoctor_pdp_copy_초안.md) — 바디닥터 PDP 카피 (FAQ 섹션 placeholder)
+- [propolinse_pdp_copy_초안.md](diagnosis/propolinse_pdp_copy_초안.md) — 프로폴린스 PDP 카피 + 시딩 캠페인
 - [F2026-04-30_naver_search_insights.md](../docs/knowledge/findings/F2026-04-30_naver_search_insights.md) — NAVER 검색 인사이트 (페르소나·키워드 우선순위 근거)
 - [action_roadmap.md](action_roadmap.md) Stage 3 (Content Enrich) — FAQ는 Goodie/Scrunch/AthenaHQ 공통 패턴

@@ -63,8 +63,8 @@ def check_static():
     # 쿼리 yaml
     import yaml
     for path, label in [
-        (REPO_ROOT / "experiments/prompts/queries_medical.yaml", "queries_medical.yaml"),
-        (REPO_ROOT / "experiments/prompts/queries_gargle.yaml", "queries_gargle.yaml"),
+        (REPO_ROOT / "experiments/prompts/queries_medical_최종.yaml", "queries_medical_최종.yaml"),
+        (REPO_ROOT / "experiments/prompts/queries_gargle_최종.yaml", "queries_gargle_최종.yaml"),
     ]:
         if path.exists():
             with path.open("r", encoding="utf-8") as f:

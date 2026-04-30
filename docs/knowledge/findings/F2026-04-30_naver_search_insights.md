@@ -117,18 +117,18 @@ related:
 - 검색 노출 + LLM 인용 양쪽 효과
 - 효능 카테고리 페이지 (잇몸 가글 365k = 가장 큼) → 프로폴린스 메인 PDP에서 분리해서 별도 colmar 또는 카테고리 게시 가능성
 
-## 2. 산공통/데마 쿼리셋 보강 후보 (queries_*.yaml v5)
+## 2. 산공통/데마 쿼리셋 보강 후보 (queries_*_네이버검색반영.yaml)
 
-검색량 증거 기반 추가 권장 (queries_medical_v5.yaml + queries_gargle_v5.yaml로 별도 작성, v4는 B1 결과와 정합성 위해 보존):
+검색량 증거 기반 추가 권장 (queries_medical_네이버검색반영.yaml + queries_gargle_네이버검색반영.yaml로 별도 작성, B1 정합 쿼리는 _B1보존.yaml로 보존):
 
-### 의료기기 v5 보강 후보
+### 의료기기 보강 후보
 - **"EASY-K"** (영문) — 한글 "이지케이"와 별도 행. 시장 실재 44배 차이
 - **"산후 회복" / "출산 후 회복"** — 1.3M, 0.9M (카테고리 최강). 페르소나·USE 쿼리에 활용
 - **"갱년기 요실금"** — 120k. SYM 쿼리에 신규 페르소나 추가
 - **"복압성 요실금" (48k), "긴장성 요실금" (8.7k)** — 의학 용어 SYM 보강 (LLM이 의학 용어 응답 시 잡히도록)
 - **글로벌 브랜드 (Elvie/Perifit)** — 한국 검색 zero지만 LLM 응답 강함, H10 직접 검정용 1줄
 
-### 가글 v5 보강 후보
+### 가글 보강 후보
 - **"프로폴리스 가글"** — 30k, BRD/CAT에 일반어 차원 추가
 - **"잇몸 가글", "충치예방 가글"** — 365k/186k, USE/SYM 쿼리에 효능 키워드 보강
 - **"2080"** — 가장 큰 경쟁사인데 v4에 없음. CMP/COM에 한 줄 추가
@@ -170,8 +170,8 @@ JSON 파일 (`data/processed/naver_search_volume.json`)의 `datalab_trends` 키 
 
 ## 5. 다음 액션
 
-- [ ] queries_medical_v5.yaml — v4 + NAVER 인사이트 반영 (별도 파일, v4 B1 정합성 보존)
-- [ ] queries_gargle_v5.yaml — 동일
+- [x] queries_medical_네이버검색반영.yaml — B1 정합 보존 + NAVER 인사이트 반영 (완료, 별도 파일)
+- [x] queries_gargle_네이버검색반영.yaml — 동일 (완료)
 - [ ] 바디닥터 PDP 카피 초안 — 위 키워드 우선순위 반영
 - [ ] 프로폴린스 PDP 카피 초안 + 맘카페 시딩 30~60일 캠페인 기획
 - [ ] FAQ 직원 인터뷰 자료 요청서 (GN 발송용)

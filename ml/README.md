@@ -30,8 +30,8 @@
 | 데마 입력 X | `data/processed/brand_brd_features.jsonl` | brand-level "AI prior" 변수 |
 | **데마 입력 Y (B1 응답)** | `ml/data/b1_runs/<run_id>/parsed_claude.jsonl` | Claude 정밀 파싱본 |
 | **쿼리** | `experiments/prompts/queries.yaml` (의료) | 24 쿼리 |
-| 쿼리 | `experiments/prompts/queries_gargle.yaml` (가글) | 24 쿼리 |
-| 쿼리 | `experiments/prompts/queries_kdr.yaml` (바디닥터 K) | 24 쿼리 (신규) |
+| 쿼리 | `experiments/prompts/queries_gargle_B1보존.yaml` (가글) | 24 쿼리 |
+| 쿼리 | `experiments/prompts/queries_kdr_최종.yaml` (바디닥터 K) | 24 쿼리 (신규) |
 | **태깅 가이드** | `docs/knowledge/methods/manual_tagging_guide.md` | 수동 태깅 매뉴얼 (★필독) |
 | 가설 매핑 | `docs/knowledge/methods/h_taxonomy_to_tagging_mapping.md` | H1~H15 ↔ 태깅 차원 |
 | **데마 결과 finding** | `docs/knowledge/findings/F2026-04-25_phase_b1_main_results.md` | B1 본실험 결과 |

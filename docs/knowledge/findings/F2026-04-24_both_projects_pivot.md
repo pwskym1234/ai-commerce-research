@@ -7,7 +7,7 @@ supports: []
 vertical: both
 phase: design
 author: Claude
-sources_summary: methods/experiment_design_v2.md + Wayne 결정 2026-04-24
+sources_summary: methods/experiment_design.md + Wayne 결정 2026-04-24
 ---
 
 # 산공통/데마 할 일 변경점 정리 (v2 설계 적용)

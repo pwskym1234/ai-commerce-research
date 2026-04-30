@@ -14,7 +14,7 @@ sources_summary: http://localhost:3000/propolinse (2026-04-24 감사, 298건 AI 
 
 ## A. 우리 프로젝트 기준 → 친구 대시보드가 바꿔야 할 것 (권고)
 
-우리 기준 = [methods/experiment_design_v2.md](../methods/experiment_design_v2.md) + [CLAUDE.md §4 R1~R10 재현성 룰](../../../CLAUDE.md)
+우리 기준 = [methods/experiment_design.md](../methods/experiment_design.md) + [CLAUDE.md §4 R1~R10 재현성 룰](../../../CLAUDE.md)
 
 ### A.1 반복 횟수 2회 → **20회 이상 (R1 최소 기준)** 🔴 P0
 
@@ -244,7 +244,7 @@ sources_summary: http://localhost:3000/propolinse (2026-04-24 감사, 298건 AI 
 
 ## A. 친구 대시보드가 우리 기준으로 바꿔야 할 것
 
-우리 기준 = [experiment_design_v2.md](docs/knowledge/methods/experiment_design_v2.md) + [CLAUDE.md §4 R1~R10 재현성 룰](CLAUDE.md)
+우리 기준 = [experiment_design.md](docs/knowledge/methods/experiment_design.md) + [CLAUDE.md §4 R1~R10 재현성 룰](CLAUDE.md)
 
 ### 🔴 P0 (즉시)
 

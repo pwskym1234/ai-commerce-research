@@ -1,6 +1,6 @@
 ---
-topic: 본실험 설계 v2 (2026-04-24 Wayne 결정 반영)
-supersedes: methods/orthogonal_array_L36.md (v1)
+topic: 본실험 설계 (2026-04-24 Wayne 결정 반영, 현재 사용)
+supersedes: methods/orthogonal_array_L36.md
 when_to_use: 본실험 가상 페이지 제작 + API 실험 직전 참조
 references:
   - PROJECT_MASTER.md §4.1
@@ -10,11 +10,11 @@ references:
 last_updated: 2026-04-24
 ---
 
-# 본실험 설계 v2
+# 본실험 설계
 
-## 0. v1 → v2 변경점 요약
+## 0. 변경점 요약 (이전 설계 대비)
 
-| 항목 | v1 (2026-04-23) | v2 (2026-04-24) |
+| 항목 | 이전 (2026-04-23) | 현재 확정 (2026-04-24) |
 |------|----------------|----------------|
 | 직교배열 | L36 (36 조합) 고정 | **L54 (54 조합) 채택** — H3·H15 교호작용 검정 폭 확대 |
 | 쿼리 유형 | 4 (정량/정성/비교/DECISION) | **8 (BRD·CAT·SYM·CMP·COM·가격·유스케이스·구매의도)** |

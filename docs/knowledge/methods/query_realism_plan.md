@@ -116,7 +116,7 @@ def classify_query_type(text: str) -> str:
 ## 7. 산출물
 
 - `experiments/prompts/queries.yaml` — 의료기기 24개 (교체)
-- `experiments/prompts/queries_gargle.yaml` — 가글 24개 (신규)
+- `experiments/prompts/queries_gargle_B1보존.yaml` — 가글 24개 (신규)
 - `data/processed/query_pool_raw.jsonl` — 수집 풀 원본 (지식iN/Q&A 등) — 향후 추가 추출 가능
 - `docs/knowledge/methods/query_realism_plan.md` — 이 문서
 
@@ -126,7 +126,7 @@ def classify_query_type(text: str) -> str:
 2. **(자동)** 필터링 + 8유형 자동 분류 → 8유형별 후보 풀
 3. **(반자동)** Wayne 또는 Claude가 각 8유형 × 3변형에 풀에서 1개씩 선별
 4. **(수동)** 팀원 2명 품질 검수
-5. **(자동)** queries.yaml / queries_gargle.yaml 갱신
+5. **(자동)** queries.yaml / queries_gargle_B1보존.yaml 갱신
 6. **(검증)** Phase B1 dry-run으로 새 쿼리로 5 호출 → AI 응답 자연스러운지 눈 검수
 
 총 소요: 자동 30분 + 검수 1시간 = ~1.5시간.

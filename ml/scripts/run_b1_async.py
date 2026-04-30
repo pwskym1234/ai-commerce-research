@@ -72,9 +72,9 @@ CLOSED_INSTRUCTION = (
 
 # ========== 데이터 로드 ==========
 def load_queries(vertical: str) -> list[tuple[str, str, str]]:
-    """8유형 × 3 = 24개 (qid, qtype, text)."""
+    """페르소나 stratified 32 = 8유형 × 4 (qid, qtype, text)."""
     yaml_path = EXP_DIR / "prompts" / (
-        "queries_medical.yaml" if vertical == "medical_device" else "queries_gargle.yaml"
+        "queries_medical_최종.yaml" if vertical == "medical_device" else "queries_gargle_최종.yaml"
     )
     with yaml_path.open("r", encoding="utf-8") as f:
         data = yaml.safe_load(f)

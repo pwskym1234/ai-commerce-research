@@ -1,0 +1,351 @@
+{
+  "collected_at": "2026-04-30",
+  "method": "naver-search-api-4-endpoints + datalab-trends",
+  "limitations": "절대 검색량 아님 — 문서 수 proxy. NaverSearchAd 별도 자격 필요.",
+  "medical_device": {
+    "category_general": {
+      "요실금": {
+        "blog": 453338,
+        "cafearticle": 151246,
+        "news": 33793,
+        "shop": 131058,
+        "total": 769435
+      },
+      "케겔": {
+        "blog": 172185,
+        "cafearticle": 42827,
+        "news": 5523,
+        "shop": 62694,
+        "total": 283229
+      },
+      "골반저근": {
+        "blog": 102141,
+        "cafearticle": 8363,
+        "news": 2656,
+        "shop": 56048,
+        "total": 169208
+      },
+      "케겔운동": {
+        "blog": 172336,
+        "cafearticle": 39590,
+        "news": 5311,
+        "shop": 58741,
+        "total": 275978
+      },
+      "산후 회복": {
+        "blog": 663980,
+        "cafearticle": 217061,
+        "news": 32249,
+        "shop": 3262,
+        "total": 916552
+      },
+      "출산 후 회복": {
+        "blog": 991563,
+        "cafearticle": 287750,
+        "news": 56249,
+        "shop": 750,
+        "total": 1336312
+      }
+    },
+    "category_specific": {
+      "요실금치료기": {
+        "blog": 13604,
+        "cafearticle": 1758,
+        "news": 1265,
+        "shop": 394,
+        "total": 17021
+      },
+      "케겔운동기구": {
+        "blog": 56045,
+        "cafearticle": 8414,
+        "news": 273,
+        "shop": 51867,
+        "total": 116599
+      },
+      "EMS 골반": {
+        "blog": 10834,
+        "cafearticle": 1327,
+        "news": 210,
+        "shop": 876,
+        "total": 13247
+      },
+      "골반저근 강화": {
+        "blog": 68087,
+        "cafearticle": 4342,
+        "news": 1581,
+        "shop": 3153,
+        "total": 77163
+      }
+    },
+    "symptom": {
+      "산후 요실금": {
+        "blog": 32934,
+        "cafearticle": 9673,
+        "news": 935,
+        "shop": 2119,
+        "total": 45661
+      },
+      "갱년기 요실금": {
+        "blog": 100184,
+        "cafearticle": 16853,
+        "news": 2926,
+        "shop": 217,
+        "total": 120180
+      },
+      "복압성 요실금": {
+        "blog": 39209,
+        "cafearticle": 6162,
+        "news": 2631,
+        "shop": 2,
+        "total": 48004
+      },
+      "긴장성 요실금": {
+        "blog": 6960,
+        "cafearticle": 1426,
+        "news": 333,
+        "shop": 0,
+        "total": 8719
+      }
+    },
+    "brand_kr": {
+      "바디닥터 요실금치료기": {
+        "blog": 988,
+        "cafearticle": 206,
+        "news": 220,
+        "shop": 10,
+        "total": 1424
+      },
+      "바디닥터 케겔": {
+        "blog": 1390,
+        "cafearticle": 499,
+        "news": 190,
+        "shop": 2,
+        "total": 2081
+      },
+      "이지케이": {
+        "blog": 2732,
+        "cafearticle": 897,
+        "news": 707,
+        "shop": 10955,
+        "total": 15291
+      },
+      "EASY-K": {
+        "blog": 47668,
+        "cafearticle": 22123,
+        "news": 12059,
+        "shop": 587877,
+        "total": 669727
+      },
+      "코웨이 테라솔": {
+        "blog": 89,
+        "cafearticle": 20,
+        "news": 537,
+        "shop": 27,
+        "total": 673
+      },
+      "세라젬": {
+        "blog": 90231,
+        "cafearticle": 40986,
+        "news": 25121,
+        "shop": 2814,
+        "total": 159152
+      }
+    },
+    "brand_global": {
+      "Elvie Trainer": {
+        "blog": 13,
+        "cafearticle": 1,
+        "news": 3,
+        "shop": 1,
+        "total": 18
+      },
+      "Perifit": {
+        "blog": 27,
+        "cafearticle": 6,
+        "news": 2,
+        "shop": 39,
+        "total": 74
+      },
+      "Kegel8": {
+        "blog": 1153,
+        "cafearticle": 406,
+        "news": 32,
+        "shop": 414,
+        "total": 2005
+      },
+      "kGoal": {
+        "blog": 32,
+        "cafearticle": 4,
+        "news": 3,
+        "shop": 1,
+        "total": 40
+      }
+    },
+    "comparison": {
+      "요실금 추천": {
+        "blog": 94556,
+        "cafearticle": 20520,
+        "news": 1287,
+        "shop": 131061,
+        "total": 247424
+      },
+      "케겔 추천": {
+        "blog": 42802,
+        "cafearticle": 7804,
+        "news": 401,
+        "shop": 62695,
+        "total": 113702
+      },
+      "산후 회복기 추천": {
+        "blog": 5368,
+        "cafearticle": 606,
+        "news": 28,
+        "shop": 30,
+        "total": 6032
+      },
+      "골반저근 운동기구 비교": {
+        "blog": 70788,
+        "cafearticle": 3962,
+        "news": 2,
+        "shop": 6189,
+        "total": 80941
+      }
+    }
+  },
+  "gargle": {
+    "category": {
+      "가글": {
+        "blog": 924090,
+        "cafearticle": 167099,
+        "news": 21159,
+        "shop": 169390,
+        "total": 1281738
+      },
+      "구강청결제": {
+        "blog": 433035,
+        "cafearticle": 23901,
+        "news": 13954,
+        "shop": 120511,
+        "total": 591401
+      },
+      "마우스워시": {
+        "blog": 22991,
+        "cafearticle": 15034,
+        "news": 1428,
+        "shop": 9104,
+        "total": 48557
+      },
+      "입냄새 제거": {
+        "blog": 417732,
+        "cafearticle": 40957,
+        "news": 6846,
+        "shop": 133505,
+        "total": 599040
+      }
+    },
+    "ingredient": {
+      "프로폴리스 가글": {
+        "blog": 19230,
+        "cafearticle": 7002,
+        "news": 528,
+        "shop": 3649,
+        "total": 30409
+      },
+      "치주염 가글": {
+        "blog": 39808,
+        "cafearticle": 2543,
+        "news": 1084,
+        "shop": 6351,
+        "total": 49786
+      },
+      "잇몸 가글": {
+        "blog": 317434,
+        "cafearticle": 21846,
+        "news": 4564,
+        "shop": 21524,
+        "total": 365368
+      },
+      "충치예방 가글": {
+        "blog": 158062,
+        "cafearticle": 6093,
+        "news": 3080,
+        "shop": 19240,
+        "total": 186475
+      }
+    },
+    "brand": {
+      "프로폴린스": {
+        "blog": 1108,
+        "cafearticle": 235,
+        "news": 306,
+        "shop": 436,
+        "total": 2085
+      },
+      "리스테린": {
+        "blog": 46635,
+        "cafearticle": 17494,
+        "news": 2952,
+        "shop": 35959,
+        "total": 103040
+      },
+      "가그린": {
+        "blog": 80036,
+        "cafearticle": 34013,
+        "news": 7931,
+        "shop": 47527,
+        "total": 169507
+      },
+      "2080": {
+        "blog": 166102,
+        "cafearticle": 218294,
+        "news": 42452,
+        "shop": 132447,
+        "total": 559295
+      },
+      "페리오": {
+        "blog": 38288,
+        "cafearticle": 24847,
+        "news": 7974,
+        "shop": 74604,
+        "total": 145713
+      }
+    },
+    "comparison": {
+      "가글 추천": {
+        "blog": 336588,
+        "cafearticle": 30470,
+        "news": 1433,
+        "shop": 169390,
+        "total": 537881
+      },
+      "프로폴리스 가글 추천": {
+        "blog": 10130,
+        "cafearticle": 2401,
+        "news": 54,
+        "shop": 3649,
+        "total": 16234
+      },
+      "구강청결제 비교": {
+        "blog": 17093,
+        "cafearticle": 1540,
+        "news": 760,
+        "shop": 120511,
+        "total": 139904
+      }
+    }
+  },
+  "datalab_trends": {
+    "medical_brand": {
+      "error": 401,
+      "msg": "{\"errorMessage\":\"Scope Status Invalid : Authentication failed. (인증에 실패했습니다.)\",\"errorCode\":\"024\"}"
+    },
+    "medical_category": {
+      "error": 401,
+      "msg": "{\"errorMessage\":\"Scope Status Invalid : Authentication failed. (인증에 실패했습니다.)\",\"errorCode\":\"024\"}"
+    },
+    "gargle_brand": {
+      "error": 401,
+      "msg": "{\"errorMessage\":\"Scope Status Invalid : Authentication failed. (인증에 실패했습니다.)\",\"errorCode\":\"024\"}"
+    }
+  }
+}

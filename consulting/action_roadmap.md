@@ -61,6 +61,22 @@
 
 **GN 요청 사항**: 서버 로그 접근 권한 또는 월간 AI 크롤러 방문 수 요약 제공.
 
+### 1.6 Query Corpus 데이터 기반 보강 (Ahrefs Brand Radar 메서드 차용, 2026-04-30 신설)
+
+**무엇**: 현재 산공통/데마 쿼리셋(Q1×Q2, queries_medical.yaml v4)이 합성 — Wayne·팀이 "사용자가 이렇게 묻겠지" 추정. Ahrefs Brand Radar는 **350M+ 실 검색 행동 데이터**로 prompt corpus 자동 생성. 우리도 부분 차용해서 실제 한국 사용자의 의료기기/가글 정보 탐색 패턴으로 쿼리셋 *외부 타당성* 보강.
+
+**왜 필요**: 합성 쿼리가 실제 검색 빈도·표현 분포와 어긋나면 본실험 결과의 generalizability 약함. 발표/컨설팅 시 "이 쿼리가 진짜 시장 데이터냐"는 질문에 방어 어려움.
+
+**어떻게**:
+- 네이버 데이터랩 검색어 트렌드 (요실금 / 케겔 / EMS / 가글 / 프로폴리스 등) 빈도 매핑
+- Google Trends 한국 (보조)
+- (가능하면) 실제 ChatGPT/Perplexity 사용자 panel — 한국엔 panel 없음. 영문은 Profound 트라이얼/Ahrefs Brand Radar 검토
+- 도출된 빈도·표현으로 Q1×Q2 가중치 보정 → queries_medical.yaml v5, queries_gargle.yaml v2
+
+**산출**: queries_*.yaml v5, 데이터 출처·빈도 명시 메타데이터
+**소요**: 1주, $0 (네이버 데이터랩 무료) ~ $129 (Ahrefs Brand Radar Lite 1개월)
+**근거**: [F2026-04-30_competitor_landscape_update.md §4](../docs/knowledge/findings/F2026-04-30_competitor_landscape_update.md)
+
 ---
 
 ## 2. 개선 (Improvement) — 어떻게 고칠 것인가
@@ -205,6 +221,30 @@
 
 ---
 
+## 2.5 메서드 차별화 framing — 인과 vs 관찰 (2026-04-30 신설)
+
+본 프로젝트의 학술·컨설팅 양쪽 차별축. 발표/제안서 슬라이드 1장으로 별도 제작 권장.
+
+글로벌 GEO 도구 11+ (Profound·Bluefish·Scrunch·Otterly·AthenaHQ·Goodie·Azoma·Daydream·Conductor AgentStack·BrightEdge AI Hyper Cube·Semrush AI Toolkit·Ahrefs Brand Radar) **모두 관찰형 대시보드**. 페이지 요인을 *인과*로 분해하는 곳은 0개.
+
+| 차원 | 글로벌 vendor 99% | 우리 (산공통+데마) | 평가 |
+|------|------------------|---------------------|------|
+| Prompt 측정 | 매일 자동 호출 시계열 | 직교배열(L54) + 15-20반복 + R1-R10 강제 | 동등(우리 더 엄격) |
+| **인과 추론** | **없음** (visibility/SoV/sentiment 대시보드만) | F1~F6 통제 실험 + 로지스틱 회귀 + odds ratio + 교호작용 | **우리 단독 우위** |
+| 예측 모델 | "billions of signals" 마케팅 (블랙박스) | XGBoost + SHAP + 버티컬 분리 | 우리 우위 (해석가능성) |
+| Agent Analytics | Profound만 (서버 로그) | 미구현 | 흡수 후보 (§1.5) |
+| Data 기반 prompt | Ahrefs/Profound | 합성 (보정 권장) | 흡수 후보 (§1.6) |
+| AXP cloaking | Scrunch만 | 안 함 | 의식적 회피 (의료 컴플라이언스 위험) |
+
+**컨설팅·발표 메시지 정렬**:
+1. "글로벌 GEO 도구 11+ 모두 관찰형. 페이지 요인을 *인과*로 분해하는 곳은 0개 — 우리만의 차별축."
+2. "의료기기 vertical 자체 측정 엔진은 글로벌 0개. 한국 GN 컨설팅 = 글로벌 첫 사례."
+3. "AXP cloaking은 의료 컴플라이언스 위험으로 회피. 통제 실험 + 인과 결론으로 방어."
+
+**근거**: [F2026-04-30_competitor_landscape_update.md §6](../docs/knowledge/findings/F2026-04-30_competitor_landscape_update.md)
+
+---
+
 ## 3. GN 본사에 요청할 것 (정리)
 
 위 내용 중 GN 측 입력 필요 항목 최종 정리:
@@ -246,6 +286,19 @@
 
 → **12주 후 유의미한 Before/After 측정 가능**. 본 프로젝트 발표(7주)와 병행해, **발표엔 W1~W6 결과가 포함** → "개선 시작 후 6주 만에 X% 변화" 임팩트.
 
+### 4.1 Watch-list (분기별 모니터, 2026-04-30 신설)
+
+GEO/AiEO 시장 변동 빠름 — Profound가 한 라운드에 $96M 받은 게 두 달 전(2026-02). 분기마다 한 번 점검.
+
+| 항목 | 변동 빈도 | 다음 검토 | 트리거 시 액션 |
+|------|---------|---------|--------------|
+| AMP (Azoma) / ACP (Bluefish) 표준 | 분기 | 2026-07-30 | 의료기기 어댑터 사양 검토, GN 공유 |
+| Conductor AgentStack + MCP 서버 (LLM 안에서 native 도구) | 분기 | 2026-07-30 | 산출물 미래 형태 시사, 컨설팅 산출물 포맷 재고 |
+| Profound Index 신규 산업 (현 12개) — 한국 healthcare 진입 시 | 분기 | 2026-07-30 | 즉시 컨설팅 차별화 메시지 갱신 |
+| 한국 healthcare GEO vendor 진입 (현 0개) | 분기 | 2026-07-30 | 컨설팅 first-mover 윈도우 종료 — 영업 가속 |
+
+**근거**: [F2026-04-30_competitor_landscape_update.md §4-7](../docs/knowledge/findings/F2026-04-30_competitor_landscape_update.md). 자동 분기 모니터링은 background agent 스케줄 검토 중 (Wayne 결정 대기).
+
 ---
 
 ## 5. 예상 효과 크기 (업계 벤치마크)
@@ -286,7 +339,8 @@
 ## 7. 관련 문서
 
 - [gn_requests.md](gn_requests.md) — GN에 전달할 질문 리스트
-- [docs/knowledge/findings/AiEO_경쟁사_리서치.md](../docs/knowledge/findings/AiEO_경쟁사_리서치.md) — 업계 리서치 1
-- [docs/knowledge/findings/ai_product_visibility_landscape_2026-04-24.md](../docs/knowledge/findings/ai_product_visibility_landscape_2026-04-24.md) — 업계 리서치 2
+- [docs/knowledge/findings/AiEO_경쟁사_리서치.md](../docs/knowledge/findings/AiEO_경쟁사_리서치.md) — 업계 리서치 1 (2026-04-24)
+- [docs/knowledge/findings/ai_product_visibility_landscape_2026-04-24.md](../docs/knowledge/findings/ai_product_visibility_landscape_2026-04-24.md) — 업계 리서치 2 (2026-04-24)
+- **[docs/knowledge/findings/F2026-04-30_competitor_landscape_update.md](../docs/knowledge/findings/F2026-04-30_competitor_landscape_update.md) — 경쟁사 풍경 갱신 (delta 5개): Profound Series C, Bluefish Series B, JP/CN 시장, 인과 vs 관찰 framing, healthcare 글로벌 갭**
 - [docs/knowledge/findings/F2026-04-24_hypothesis_upgrade.md](../docs/knowledge/findings/F2026-04-24_hypothesis_upgrade.md) — 가설·F 요인 고도화
 - [docs/knowledge/findings/F2026-04-24_feature_comparison.md](../docs/knowledge/findings/F2026-04-24_feature_comparison.md) — 실측 피처 비교

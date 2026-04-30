@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  주간 AiEO 모니터링 launchd 작업 정의.
+  설치(아직 안 함):
+    cp scripts/com.aieo.monitor.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.aieo.monitor.plist
+  비활성:
+    launchctl unload ~/Library/LaunchAgents/com.aieo.monitor.plist
+  스케줄: 매주 월요일 03:00 (KST 가정 — 시스템 시간대 따름)
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.aieo.monitor</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/env</string>
+        <string>python3</string>
+        <string>/Users/mac/Desktop/bodydoctor_project/scripts/monitor_aieo.py</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/mac/Desktop/bodydoctor_project</string>
+
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Weekday</key>
+        <integer>1</integer>
+        <key>Hour</key>
+        <integer>3</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>/Users/mac/Desktop/bodydoctor_project/experiments/monitoring/_launchd.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/mac/Desktop/bodydoctor_project/experiments/monitoring/_launchd.err</string>
+
+    <key>RunAtLoad</key>
+    <false/>
+</dict>
+</plist>

@@ -311,7 +311,7 @@ DB 스키마와 ID는 메모리 [reference_notion_workspace.md](~/.claude/projec
 - **자동 채워지는 필드**: 제목(commit subject) · 날짜 · 카테고리(파일 경로로 추론: `stats/`→산공통, `ml/`→데마, `consulting/`→컨설팅, 그 외→공통/인프라) · 요약(commit body) · 변경 파일 · commit URL · 상태(Done)
 - **수동 채울 필드**: 작업 종류 · 비용 USD · 소요 분 · 다음 단계 · 키운 스킬 — 노션에서 직접 보강
 - **멱등성**: `.claude/.notion_logged_commits.txt`로 중복 방지 (gitignored)
-- **옵트아웃**: commit message에 `[skip-notion]` 포함 시 skip
+- **옵트아웃**: commit message 본문에 `[skip-notion]` 단독 라인으로 포함 시 skip (인용/설명에서 우연히 매칭되지 않도록 line-anchored)
 - **실패 정책**: 어떤 실패든 stderr에만 찍고 exit 0 — 에이전트 흐름 절대 안 막음
 
 ### 13.2 Decision Log / Lessons: Claude 판단

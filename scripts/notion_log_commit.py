@@ -187,7 +187,7 @@ def main() -> int:
         log(f"git 실패: {e}")
         return 0
 
-    if "[skip-notion]" in (subject + body):
+    if re.search(r"(?m)^\s*\[skip-notion\]\s*$", subject + "\n" + body):
         log(f"[skip-notion] 마커: {sha[:8]}")
         return 0
 

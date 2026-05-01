@@ -77,28 +77,22 @@ def load_queries() -> list[tuple[str, str, str]]:
 
 
 # ========== 경쟁군 N=13 (2026-04-24 v4 — elvie 제외, 의료기기 버티컬 한정) ==========
-# 식약처 등록 여부는 메타 라벨이지 경쟁군 포함 기준 아님.
-# AI가 실제 추천에서 섞어 언급하는 모든 국내 브랜드 포함.
-# 해외 Elvie는 Wayne 결정(2026-04-24)으로 제외 — 한국 AI 추천에 등장 빈도 낮을 것.
+# 본실험 재실행 풀 — 14 SKU (의료 9 + 가글 4) (2026-04-30 Wayne 결정).
+# 같은 효능 기준 (식약처 등급 무관), 자사몰 단독 PDP 확보된 SKU만.
 COMPETITORS = [
     # 우리 anchor
     {"id": "bodydoctor", "name": "바디닥터 요실금치료기", "brand": "GN그룹", "category": "medical_device"},
-    # 의료기기 (식약처 3등급 등록)
+    # 직접 경쟁 — 식약처 등록 의료기기
     {"id": "easyk", "name": "이지케이 EASY-K", "brand": "알파메딕", "category": "medical_device"},
     {"id": "coway_therasol", "name": "코웨이 테라솔 U", "brand": "코웨이", "category": "medical_device"},
-    {"id": "ceragem", "name": "세라젬 요실금치료기", "brand": "세라젬", "category": "medical_device"},
-    {"id": "furenhealth", "name": "퓨런헬스케어 요실금치료기", "brand": "퓨런헬스케어", "category": "medical_device"},
-    # 공산품 (식약처 미등록, 동일 키워드로 경쟁)
-    {"id": "peronian", "name": "페로니언 케겔 훈련기", "brand": "페로니언", "category": "consumer_product"},
-    {"id": "hools", "name": "훌스 음파방석", "brand": "HOOL'S", "category": "consumer_product"},
-    {"id": "wavecare", "name": "웨이브케어 V8 포 맨/우먼", "brand": "웨이브케어", "category": "consumer_product"},
-    {"id": "stopyo", "name": "스탑요 자동 케겔 운동기구", "brand": "스탑요", "category": "consumer_product"},
-    {"id": "ems_vital", "name": "EMS케겔휘트니스 비틀", "brand": "EMS케겔휘트니스", "category": "consumer_product"},
-    {"id": "kegel_magic", "name": "케겔매직", "brand": "케겔매직", "category": "consumer_product"},
-    {"id": "huonsen", "name": "휴온센 EMS 레깅스", "brand": "휴온센", "category": "consumer_product"},
-    {"id": "applehip", "name": "애플힙 2026년형 케겔자동운동기구", "brand": "애플힙", "category": "consumer_product"},
-    # 식약처 등록 의료기기 (Phase A+에서 검증 통과 추가)
-    {"id": "mblab", "name": "엠비랩 ReTens", "brand": "엠비랩(MBLab)", "category": "medical_device"},
+    {"id": "ceragem_innerfit", "name": "세라젬 이너핏 메디테크", "brand": "세라젬", "category": "medical_device"},
+    # 글로벌 경쟁 — 같은 효능, 한국 검색 미미하지만 LLM 응답 강함 (H10/H14 검정용)
+    {"id": "elvie", "name": "Elvie Trainer", "brand": "Elvie (Willow Innovations)", "category": "medical_device"},
+    {"id": "perifit", "name": "Perifit", "brand": "X6 Innovations", "category": "medical_device"},
+    {"id": "kegel8", "name": "Kegel8 Ultra 20 V2", "brand": "Savantini Limited", "category": "medical_device"},
+    {"id": "kgoal", "name": "kGoal Classic", "brand": "Minna Life", "category": "medical_device"},
+    # 비의료 같은 효능 (자사몰 PDP 확보)
+    {"id": "peroneun", "name": "페로니언 케겔 운동기", "brand": "주식회사 에스티", "category": "consumer_product"},
 ]
 
 # ========== 바디닥터 K (케겔 힙머신) anchor 경쟁군 N=8 (2026-04-26 신규) ==========
@@ -115,24 +109,15 @@ COMPETITORS_K = [
     {"id": "wavecare", "name": "웨이브케어 V8 포 맨/우먼", "brand": "웨이브케어", "category": "kegel_exerciser"},
 ]
 
-# ========== 가글 경쟁군 N=12 (2026-04-24 Wayne 결정: 풀 확장) ==========
-# 친구 대시보드 NER 발견 반영. 어썸쿨(프로폴리스 직접경쟁) 반드시 포함.
+# ========== 가글 경쟁군 4 (2026-04-30 Wayne 결정) ==========
+# 자사몰 단독 PDP 확보된 4개. 2080은 자사몰 미운영, 콜게이트 한국 미진출, 어썸쿨 글로벌 가설 거짓 — 모두 제외.
 COMPETITORS_GARGLE = [
     # 우리 anchor
     {"id": "propolinse", "name": "프로폴린스 가글", "brand": "지앤코스/GN그룹", "category": "gargle"},
-    # 국내 대표
-    {"id": "listerine", "name": "리스테린 쿨민트 가글", "brand": "존슨앤존슨", "category": "gargle"},
-    {"id": "garglin", "name": "가그린 제로", "brand": "동아제약", "category": "gargle"},
+    # 직접 경쟁
+    {"id": "listerine", "name": "리스테린 Gum Care 무알코올", "brand": "존슨앤존슨", "category": "gargle"},
+    {"id": "garglin", "name": "가그린 잇몸 케어", "brand": "동아제약", "category": "gargle"},
     {"id": "perio", "name": "페리오 가글", "brand": "LG생활건강", "category": "gargle"},
-    {"id": "gargle_2080", "name": "2080 구강청결제", "brand": "애경산업", "category": "gargle"},
-    # 친구 대시보드 NER 발견 — 풀 확장
-    {"id": "awesomecool", "name": "어썸쿨 프로폴리스 가글 600ml", "brand": "어썸쿨", "category": "gargle"},
-    {"id": "therabreath", "name": "테라브레스 오랄린스", "brand": "TheraBreath", "category": "gargle"},
-    {"id": "usimol", "name": "유시몰 가글", "brand": "유시몰", "category": "gargle"},
-    {"id": "colgate", "name": "콜게이트 플락스", "brand": "Colgate", "category": "gargle"},
-    {"id": "oralb", "name": "오랄비 가글", "brand": "Oral-B/P&G", "category": "gargle"},
-    {"id": "sensodyne", "name": "센소다인 가글", "brand": "Sensodyne", "category": "gargle"},
-    {"id": "kwangdong", "name": "광동 인후엔 가글", "brand": "광동제약", "category": "gargle"},
 ]
 
 

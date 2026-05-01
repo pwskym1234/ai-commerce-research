@@ -98,10 +98,10 @@ def load_pages_with_meta(vertical: str) -> list[dict]:
         allowed_brands = {c["id"] for c in COMPETITORS_GARGLE}
 
     # features.jsonl 의 brand 값 ↔ COMPETITORS id 별칭
-    # (회사 등록명 vs 자사몰 도메인 차이, "gargle_" 접두사 차이 등)
+    # (Phase A 크롤 시점 brand 명 vs 새 풀 표준 id 차이)
     FEATURE_BRAND_ALIAS = {
-        "furun": "furenhealth",      # furun.kr 자사몰 도메인 = (주)퓨런헬스케어
-        "2080": "gargle_2080",       # COMPETITORS_GARGLE id 가독성 위해 접두사 추가
+        "ceragem": "ceragem_innerfit",  # Phase A 'ceragem' (안마의자 본업) ↔ 새 풀 'ceragem_innerfit' (요실금 라인)
+        "peronian": "peroneun",          # Phase A 'peronian' transliteration ↔ 새 풀 'peroneun' 표준
     }
 
     # 1) raw_path → url 매핑 dict 작성

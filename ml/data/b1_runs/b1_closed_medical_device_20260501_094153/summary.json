@@ -1,0 +1,17 @@
+{
+  "run_id": "b1_closed_medical_device_20260501_094153",
+  "mode": "closed",
+  "vertical": "medical_device",
+  "model_version": "gpt-5.4-mini",
+  "n_queries": 32,
+  "n_repeat": 20,
+  "total_calls": 640,
+  "cache_hits": 169,
+  "skipped_budget": 0,
+  "budget_usd": 15.0,
+  "budget_exceeded": false,
+  "total_cost_usd": 3.6547,
+  "elapsed_sec": 51.1,
+  "concurrency": 20,
+  "timestamp": "2026-05-01T00:42:47.865000+00:00"
+}

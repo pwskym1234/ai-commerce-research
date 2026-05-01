@@ -1,0 +1,17 @@
+{
+  "run_id": "b1_open_gargle_20260501_094155",
+  "mode": "open",
+  "vertical": "gargle",
+  "model_version": "gpt-5.4-mini",
+  "n_queries": 32,
+  "n_repeat": 20,
+  "total_calls": 640,
+  "cache_hits": 181,
+  "skipped_budget": 0,
+  "budget_usd": 3.0,
+  "budget_exceeded": false,
+  "total_cost_usd": 1.8325,
+  "elapsed_sec": 121.6,
+  "concurrency": 20,
+  "timestamp": "2026-05-01T00:43:56.987720+00:00"
+}

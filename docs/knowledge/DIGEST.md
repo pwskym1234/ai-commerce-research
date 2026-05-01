@@ -35,8 +35,8 @@
 | 바디닥터 PDP 카피 | [bodydoctor_pdp_copy_초안.md](../../consulting/diagnosis/bodydoctor_pdp_copy_초안.md) | ⚠️ 초안 (TBD 5개) | GN P0 응답 후 본문 |
 | 프로폴린스 PDP + 시딩 | [propolinse_pdp_copy_초안.md](../../consulting/diagnosis/propolinse_pdp_copy_초안.md) | ⚠️ 초안 | 30/60일 캠페인 포함 |
 | **핵심 페르소나** | [consulting/personas/핵심_페르소나.md](../../consulting/personas/핵심_페르소나.md) | ✅ Wayne 정의 (2026-04-30) | GN 인터뷰 회신 후 갱신 |
-| GN P0 요청 (기존) | [consulting/gn_requests.md](../../consulting/gn_requests.md) | ⏳ 응답 대기 | 허가번호·FDA·임상 |
-| FAQ 자료 요청 메일 | [consulting/gn_requests_FAQ_data.md](../../consulting/gn_requests_FAQ_data.md) | ⏳ 발송 대기 | 회신 목표 2026-05-17 |
+| GN P0 요청 (기존) | [consulting/gn_communication/gn_requests.md](../../consulting/gn_communication/gn_requests.md) | ⏳ 응답 대기 | 허가번호·FDA·임상 |
+| FAQ 자료 요청 메일 | [consulting/gn_communication/gn_requests_FAQ_data.md](../../consulting/gn_communication/gn_requests_FAQ_data.md) | ⏳ 발송 대기 | 회신 목표 2026-05-17 |
 | JSON-LD 풀스키마 | [consulting/diagnosis/bodydoctor_jsonld.json](../../consulting/diagnosis/bodydoctor_jsonld.json) + [snippet.html](../../consulting/diagnosis/bodydoctor_jsonld_snippet.html) | ⚠️ TBD 5개 | GN P0 응답 후 v1 |
 
 ### 데이터·인프라
@@ -191,9 +191,9 @@
 
 ### 🔴 P0 — 즉시 (Wayne 24~48시간)
 - [ ] **노션 11개 카드 확인** (이번 세션 자동 적층 결과)
-- [ ] **FAQ 자료 요청 메일 발송** ([gn_requests_FAQ_data.md](../../consulting/gn_requests_FAQ_data.md)) — 모든 컨설팅 후속의 트리거
+- [ ] **FAQ 자료 요청 메일 발송** ([gn_requests_FAQ_data.md](../../consulting/gn_communication/gn_requests_FAQ_data.md)) — 모든 컨설팅 후속의 트리거
 - [ ] **세라젬 이너핏 허가번호 udiportal 재조회** — 30분 작업
-- [ ] **기존 GN P0 응답 follow-up** ([gn_requests.md](../../consulting/gn_requests.md))
+- [ ] **기존 GN P0 응답 follow-up** ([gn_requests.md](../../consulting/gn_communication/gn_requests.md))
 
 ### 🟡 P1 — 1주 내
 - [ ] PDP 카피 v1 (TBD 채워넣기) — GN P0 응답 후
@@ -221,7 +221,7 @@
 - **핵심 페르소나** (NEW): [consulting/personas/핵심_페르소나.md](../../consulting/personas/핵심_페르소나.md) ★
 - **팀 네이밍 규칙** (NEW): [팀_네이밍_규칙.md](팀_네이밍_규칙.md) ★ — 신규 팀원 첫 5분
 - 용어: [glossary.md](glossary.md)
-- GN 요청 리스트: [consulting/gn_requests.md](../../consulting/gn_requests.md) + [gn_requests_FAQ_data.md](../../consulting/gn_requests_FAQ_data.md)
+- GN 요청 리스트: [consulting/gn_communication/gn_requests.md](../../consulting/gn_communication/gn_requests.md) + [gn_requests_FAQ_data.md](../../consulting/gn_communication/gn_requests_FAQ_data.md)
 - 갱신 의식 워크플로우: [workflows/weekly_digest_update.md](../workflows/weekly_digest_update.md)
 - 트렌드 적용 설계: [trends_2026/APPLICATION.md](../trends_2026/APPLICATION.md)
 - 업계 리서치: [F2026-04-30_competitor_landscape_update.md](findings/F2026-04-30_competitor_landscape_update.md) (최신) + [AiEO_경쟁사_리서치.md](findings/AiEO_경쟁사_리서치.md) (선행)
